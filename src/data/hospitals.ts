@@ -11,6 +11,8 @@ export const hospitals: Hospital[] = [
     summary:
       'A waterfront regional center with adult inpatient care, surgery, and a full emergency department.',
     focusAreas: ['Emergency care', 'Surgical services', 'Cardiology'],
+    image: '/images/hospitals/harborlight.jpg',
+    imageAlt: 'Empty, brightly lit procedure room',
   },
   {
     slug: 'northcedar-regional-hospital',
@@ -22,6 +24,8 @@ export const hospitals: Hospital[] = [
     summary:
       'A community hospital for the Twin Cities metro, with inpatient units and outpatient clinics.',
     focusAreas: ['Family medicine', 'Emergency care', 'Orthopedics'],
+    image: '/images/hospitals/northcedar.jpg',
+    imageAlt: 'Quiet inpatient room with a made bed',
   },
   {
     slug: 'ridgeway-community-hospital',
@@ -33,6 +37,8 @@ export const hospitals: Hospital[] = [
     summary:
       'A mountain-region community hospital focused on local acute care and rehabilitation.',
     focusAreas: ['Primary care', 'Rehabilitation', 'Imaging'],
+    image: '/images/hospitals/ridgeway.jpg',
+    imageAlt: 'Open ward with empty beds and privacy curtains',
   },
   {
     slug: 'lakeshore-university-hospital',
@@ -44,6 +50,8 @@ export const hospitals: Hospital[] = [
     summary:
       'An academic medical center with tertiary services, critical care, and teaching programs.',
     focusAreas: ['Critical care', 'Oncology', 'Teaching programs'],
+    image: '/images/hospitals/lakeshore.jpg',
+    imageAlt: 'Empty operating room prepared for a case',
   },
   {
     slug: 'mesa-verde-health',
@@ -55,6 +63,8 @@ export const hospitals: Hospital[] = [
     summary:
       'A desert-metro hospital with acute care, imaging, and outpatient specialty clinics.',
     focusAreas: ['Pulmonary care', 'Imaging', 'Pharmacy'],
+    image: '/images/hospitals/mesa-verde.jpg',
+    imageAlt: 'Two clinicians reviewing images on a monitor',
   },
   {
     slug: 'solace-childrens-hospital',
@@ -66,6 +76,8 @@ export const hospitals: Hospital[] = [
     summary:
       'A pediatric hospital for infants, children, and adolescents, including rehabilitation services.',
     focusAreas: ['Pediatrics', 'Rehabilitation', 'Diagnostic services'],
+    image: '/images/hospitals/solace.jpg',
+    imageAlt: 'Care team gathered around an overhead surgical light',
   },
 ]
 

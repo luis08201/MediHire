@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router'
 import { getHospitalBySlug } from '../../data/hospitals.ts'
-import { jobs } from '../../data/jobs.ts'
+import { featuredJobs as jobs } from '../../data/jobs.ts'
 import { Button } from '../ui/Button.tsx'
 import { Container } from '../layout/Container.tsx'
 import { Section } from '../layout/Section.tsx'
