@@ -6,7 +6,7 @@ import { JobFilterGroups } from '../components/jobs/JobFilterGroups.tsx'
 import { Container } from '../components/layout/Container.tsx'
 import { Button } from '../components/ui/Button.tsx'
 import { jobs } from '../data/jobs.ts'
-import { ArrowIcon, Eyebrow, SearchIcon } from '../components/ui/Marks.tsx'
+import { ArrowIcon } from '../components/ui/Marks.tsx'
 import {
   activeFilterCount,
   cloneFilters,
@@ -180,69 +180,55 @@ export function JobsPage() {
 
   return (
     <>
-      <section className="overflow-hidden bg-accent-surface" aria-labelledby="job-board-heading">
-        <Container className="grid items-center gap-10 py-14 md:py-16 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)] lg:py-20">
-          <div>
-            <Eyebrow>Find your next opportunity</Eyebrow>
-            <h1 id="job-board-heading" className="mt-4 text-balance text-5xl leading-[1.05] sm:text-6xl">
-              Healthcare Jobs
-            </h1>
-            <p className="mt-4 max-w-md text-lg leading-relaxed">
-              Explore opportunities across leading healthcare organizations. These roles are fictional sample listings.
-            </p>
-            <form
-              role="search"
-              className="mt-8 rounded-2xl border border-border bg-white p-3 shadow-sm"
-              onSubmit={applySearch}
-            >
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-                <label htmlFor="job-search" className="sr-only">
-                  Job title, specialty, or keyword
-                </label>
-                <span className="flex min-h-12 flex-1 items-center gap-2 rounded-xl px-3 text-muted">
-                  <SearchIcon />
-                  <input
-                    id="job-search"
-                    name="q"
-                    type="search"
-                    value={queryDraft}
-                    onChange={(event) => setQueryDraft(event.target.value)}
-                    placeholder="Search job title, specialty or keyword"
-                    autoComplete="off"
-                    className="min-h-11 w-full bg-transparent text-base text-heading outline-none placeholder:text-muted"
-                  />
-                </span>
-                <Button type="submit" className="!rounded-xl sm:min-w-28">
-                  Search
-                </Button>
-              </div>
-              <div className="mt-3 flex flex-wrap items-center gap-2 px-2 pb-1">
-                <span className="text-xs font-semibold text-muted">Popular searches:</span>
-                {popularSearches.map((term) => (
-                  <button
-                    key={term}
-                    type="button"
-                    className="min-h-9 rounded-full border border-border bg-white px-3 text-xs font-semibold text-heading hover:bg-accent-surface"
-                    onClick={() => searchFor(term)}
-                  >
-                    {term}
-                  </button>
-                ))}
-              </div>
-            </form>
-          </div>
-          <img
-            src="/images/hospitals/northcedar.jpg"
-            alt="Corner of a modern glass building under a blue sky."
-            className="curve-sweep hidden min-h-80 w-full object-cover object-[center_45%] lg:block"
-          />
+      <section aria-labelledby="job-board-heading">
+        <Container className="py-16 lg:py-24">
+          <h1 id="job-board-heading" className="max-w-3xl text-4xl leading-[1.05] sm:text-5xl lg:text-6xl">
+            Healthcare jobs
+          </h1>
+          <p className="mt-6 max-w-[65ch] text-lg leading-relaxed">
+            Sample roles across the fictional hospitals in this directory. Nothing here starts an
+            application.
+          </p>
+          <form role="search" className="mt-10 max-w-3xl" onSubmit={applySearch}>
+            <label htmlFor="job-search" className="text-sm font-medium">
+              Job title, specialty, or keyword
+            </label>
+            <div className="mt-2 flex flex-col gap-3 sm:flex-row sm:items-center">
+              <input
+                id="job-search"
+                name="q"
+                type="search"
+                value={queryDraft}
+                onChange={(event) => setQueryDraft(event.target.value)}
+                placeholder="Registered nurse, pharmacy, Seattle"
+                autoComplete="off"
+                className="min-h-12 w-full flex-1 border border-border bg-transparent px-3 text-base text-heading placeholder:text-muted"
+              />
+              <Button type="submit" className="sm:min-w-28">
+                Search
+              </Button>
+            </div>
+            <div className="mt-4 flex flex-wrap items-center gap-2">
+              <span className="text-sm text-muted">Popular searches</span>
+              {popularSearches.map((term) => (
+                <button
+                  key={term}
+                  type="button"
+                  className="min-h-11 border border-primary/15 px-3 text-sm hover:bg-accent-surface"
+                  onClick={() => searchFor(term)}
+                >
+                  {term}
+                </button>
+              ))}
+            </div>
+          </form>
         </Container>
       </section>
 
       <section
         ref={resultsRef}
         aria-labelledby="job-results-heading"
-        className="scroll-mt-24 border-t border-border"
+        className="scroll-mt-24 border-t border-primary/10"
       >
         <Container className="py-10 lg:py-14">
           <div className="mb-6 lg:hidden">
@@ -258,21 +244,24 @@ export function JobsPage() {
           </div>
 
           <div className="grid items-start gap-10 lg:grid-cols-[17rem_minmax(0,1fr)]">
-            <aside aria-labelledby="job-filters-heading" className="hidden lg:block">
-              <div className="rounded-2xl border border-border bg-white p-5 shadow-sm">
+            <aside
+              aria-labelledby="job-filters-heading"
+              className="hidden lg:sticky lg:top-24 lg:block lg:max-h-[calc(100svh-6rem)] lg:overflow-y-auto lg:bg-accent-surface lg:p-6"
+            >
+              <div>
                 <div className="flex items-center justify-between gap-3">
-                  <h2 id="job-filters-heading" className="font-sans text-lg font-semibold">
+                  <h2 id="job-filters-heading" className="font-sans text-lg">
                     Filters
                   </h2>
                   <button
                     type="button"
-                    className="text-sm font-semibold text-primary hover:text-primary-hover"
+                    className="min-h-11 text-sm underline-offset-4 hover:underline"
                     onClick={resetBoard}
                   >
-                    Clear All
+                    Clear all
                   </button>
                 </div>
-                <div className="mt-5 border-t border-border pt-5">
+                <div className="mt-5 border-t border-primary/10 pt-5">
                   <JobFilterGroups
                     idPrefix="desktop"
                     values={filters}
@@ -289,18 +278,18 @@ export function JobsPage() {
                 <h2 id="job-results-heading" className="sr-only">
                   Open roles
                 </h2>
-                <p aria-live="polite" aria-atomic="true" className="text-sm font-semibold text-heading">
+                <p aria-live="polite" aria-atomic="true" className="text-sm">
                   {filtered.length} sample {filtered.length === 1 ? 'role' : 'roles'}
                   <span className="sr-only">. {countText}</span>
                 </p>
-                <label htmlFor="job-sort" className="inline-flex items-center gap-2 text-sm font-semibold text-heading">
+                <label htmlFor="job-sort" className="inline-flex items-center gap-2 text-sm">
                   Sort
                   <select
                     id="job-sort"
                     name="sort"
                     value={sort}
                     onChange={(event) => commit({ sort: event.target.value as JobSort, page: 1 })}
-                    className="min-h-10 rounded-lg border border-border bg-white px-3 text-sm font-medium text-heading"
+                    className="min-h-11 rounded border border-border bg-transparent px-3 text-sm text-heading"
                   >
                     <option value="recommended">Recommended</option>
                     <option value="title">Title A–Z</option>
@@ -318,7 +307,7 @@ export function JobsPage() {
                         <button
                           type="button"
                           aria-label={chip.removeLabel}
-                          className="inline-flex min-h-11 items-center gap-2 rounded-full border border-border bg-accent-surface px-3 text-sm font-semibold text-heading"
+                          className="inline-flex min-h-11 items-center gap-2 border border-primary/15 bg-accent-surface px-3 text-sm"
                           onClick={chip.remove}
                         >
                           <span aria-hidden="true">{chip.label}</span>
@@ -329,7 +318,7 @@ export function JobsPage() {
                   </ul>
                   <button
                     type="button"
-                    className="min-h-11 px-2 text-sm font-semibold text-primary hover:text-primary-hover"
+                    className="min-h-11 px-2 text-sm underline-offset-4 hover:underline"
                     onClick={resetBoard}
                   >
                     Clear all
@@ -338,9 +327,9 @@ export function JobsPage() {
               ) : null}
 
               {paged.items.length === 0 ? (
-                <div className="mt-8 rounded-2xl border border-border bg-white px-6 py-14 text-center shadow-sm">
+                <div className="mt-8 border-t border-primary/10 py-14">
                   <h3 className="text-3xl">No matching roles</h3>
-                  <p className="mx-auto mt-3 max-w-md leading-relaxed">
+                  <p className="mt-3 max-w-md leading-relaxed">
                     Nothing in the sample board matches this search. Try another keyword, or
                     reset the filters to see every listing.
                   </p>
@@ -349,7 +338,7 @@ export function JobsPage() {
                   </Button>
                 </div>
               ) : (
-                <ul className="mt-6 space-y-4">
+                <ul className="mt-6 border-t border-primary/10">
                   {paged.items.map((job) => (
                     <li key={job.slug}>
                       <HorizontalJobCard job={job} />
@@ -359,11 +348,10 @@ export function JobsPage() {
               )}
 
               {paged.pageCount > 1 ? (
-                <nav aria-label="Job results pages" className="mt-8 flex items-center justify-center gap-2">
+                <nav aria-label="Job results pages" className="mt-8 flex items-center gap-2">
                   <Button
                     variant="secondary"
                     size="icon"
-                    className="!rounded-full"
                     aria-label="Previous page"
                     disabled={paged.current <= 1}
                     onClick={() => commit({ page: paged.current - 1 })}
@@ -379,7 +367,6 @@ export function JobsPage() {
                         key={pageNumber}
                         variant={current ? 'primary' : 'secondary'}
                         size="icon"
-                        className="!rounded-lg"
                         aria-current={current ? 'page' : undefined}
                         aria-label={`Page ${pageNumber}`}
                         onClick={() => commit({ page: pageNumber })}
@@ -391,7 +378,6 @@ export function JobsPage() {
                   <Button
                     variant="secondary"
                     size="icon"
-                    className="!rounded-full"
                     aria-label="Next page"
                     disabled={paged.current >= paged.pageCount}
                     onClick={() => commit({ page: paged.current + 1 })}

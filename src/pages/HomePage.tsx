@@ -10,8 +10,8 @@ export function HomePage() {
   return (
     <>
       <HeroSection />
-      <PlatformSection />
       <FeaturedJobsSection />
+      <PlatformSection />
       <FinalCtaSection />
     </>
   )

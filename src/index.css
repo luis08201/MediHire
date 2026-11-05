@@ -1,35 +1,32 @@
 @import "tailwindcss";
 
 /*
-  Premium Health
-  Primary #174E63
-  Primary hover #103C4D
-  Accent #247C77
-  Heading #142D35
-  Body #40545C
-  Muted #4A6168
-  Background #FAFAF7
-  White #FFFFFF
-  Accent surface #E9F3F0
-  Border #D9E3E0
+  Editorial Healthcare
+  Ink #163C45
+  Tide #3D8C82
+  Paper #F8F7F2
+  Mist #E8F1EB
+  Gold #D9A56D
+  Muted #3A5560
 */
 
 @theme {
-  --color-primary: #174e63;
-  --color-primary-hover: #103c4d;
-  --color-accent: #247c77;
-  --color-heading: #142d35;
-  --color-body: #40545c;
-  --color-muted: #4a6168;
-  --color-background: #fafaf7;
+  --color-primary: #163c45;
+  --color-primary-hover: #0e2c34;
+  --color-accent: #3d8c82;
+  --color-gold: #d9a56d;
+  --color-heading: #163c45;
+  --color-body: #163c45;
+  --color-muted: #3a5560;
+  --color-background: #f8f7f2;
   --color-white: #ffffff;
-  --color-accent-surface: #e9f3f0;
-  --color-border: #d9e3e0;
+  --color-accent-surface: #e8f1eb;
+  --color-border: #5c757c;
 
   --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
   --font-serif: "DM Serif Display", georgia, "Times New Roman", serif;
 
-  --container-content: 75rem;
+  --container-content: 72rem;
 }
 
 @layer base {
@@ -43,6 +40,8 @@
     background: var(--color-background);
     color: var(--color-body);
     font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.5;
     font-synthesis: none;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
@@ -54,6 +53,7 @@
     font-family: var(--font-serif);
     font-weight: 400;
     color: var(--color-heading);
+    text-wrap: balance;
   }
 
   :focus-visible {
@@ -75,7 +75,7 @@
   }
 
   .section-space {
-    padding-block: 4rem;
+    padding-block: 3rem;
   }
 
   @media (min-width: 48rem) {
@@ -84,64 +84,33 @@
     }
 
     .section-space {
-      padding-block: 6rem;
+      padding-block: 4rem;
     }
   }
 
   @media (min-width: 64rem) {
     .section-space {
-      padding-block: 10rem;
+      padding-block: 6rem;
     }
   }
 
-  .carousel-bleed {
-    display: flex;
-    gap: 1.25rem;
-    margin: 0;
-    padding-top: 0.25rem;
-    padding-bottom: 1.75rem;
-    padding-left: max(1.25rem, calc((100% - var(--container-content)) / 2));
-    padding-right: 1.25rem;
-    overflow-x: auto;
-    overscroll-behavior-x: contain;
-    scroll-snap-type: x mandatory;
-    scroll-padding-left: max(1.25rem, calc((100% - var(--container-content)) / 2));
-    scroll-behavior: smooth;
-    list-style: none;
-    scrollbar-width: thin;
-    scrollbar-color: var(--color-border) transparent;
+  .hero-photo {
+    animation: hero-fade 400ms ease both;
   }
 
-  @media (min-width: 48rem) {
-    .carousel-bleed {
-      padding-left: max(2rem, calc((100% - var(--container-content)) / 2));
-      padding-right: 2rem;
-      scroll-padding-left: max(2rem, calc((100% - var(--container-content)) / 2));
+  @keyframes hero-fade {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
     }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .carousel-bleed {
-      scroll-behavior: auto;
+    .hero-photo {
+      animation: none;
     }
-  }
-
-  .curve-photo {
-    border-radius: 48% 42% 46% 40% / 44% 48% 42% 50%;
-  }
-
-  .curve-sweep {
-    border-radius: 40% 8% 10% 12% / 46% 10% 12% 38%;
-  }
-
-  .curve-photo-left {
-    border-radius: 46% 0 0 46% / 50% 0 0 50%;
-  }
-
-  .soft-card {
-    border: 1px solid var(--color-border);
-    background: #fff;
-    border-radius: 1rem;
-    box-shadow: 0 14px 32px -22px rgba(20, 45, 53, 0.45);
   }
 }

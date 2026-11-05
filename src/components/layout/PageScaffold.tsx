@@ -17,8 +17,8 @@ export function PageScaffold({ eyebrow, title, description, children }: PageScaf
     <Section>
       <Container>
         <header className="max-w-3xl">
-          {eyebrow ? <p className="text-sm font-semibold text-accent">{eyebrow}</p> : null}
-          <h1 className={eyebrow ? 'mt-3 text-4xl sm:text-5xl' : 'text-4xl sm:text-5xl'}>
+          {eyebrow ? <p className="text-sm text-muted">{eyebrow}</p> : null}
+          <h1 className={eyebrow ? 'mt-3 text-4xl sm:text-5xl' : 'text-4xl leading-[1.05] sm:text-5xl'}>
             {title}
           </h1>
           <p className="mt-4 text-lg leading-relaxed">{description}</p>

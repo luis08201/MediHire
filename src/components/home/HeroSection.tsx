@@ -1,51 +1,42 @@
-import { Link } from 'react-router'
-import { ArrowIcon, Eyebrow } from '../ui/Marks.tsx'
+import { ButtonLink } from '../ui/Button.tsx'
 
 export function HeroSection() {
   return (
-    <section className="overflow-hidden bg-[#f3f6f5]" aria-labelledby="home-heading">
-      <div className="mx-auto grid w-[min(78rem,calc(100%-2.5rem))] items-center gap-10 py-16 md:w-[min(78rem,calc(100%-4rem))] md:py-20 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:py-24">
-        <div className="max-w-xl">
-          <Eyebrow>Healthcare recruitment, reimagined</Eyebrow>
-          <h1
-            id="home-heading"
-            className="mt-5 text-balance text-5xl leading-[1.05] sm:text-6xl lg:text-[4.25rem]"
-          >
-            Where better care
-            <br />
-            begins with
-            <br />
-            better hiring.
-          </h1>
-          <p className="mt-5 max-w-md text-lg leading-relaxed">
-            Connecting healthcare professionals with the organizations that need them.
-          </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <Link
-              to="/jobs"
-              className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-primary px-5 text-sm font-semibold text-white hover:bg-primary-hover"
+    <section className="overflow-hidden" aria-labelledby="home-heading">
+      <div className="lg:grid lg:min-h-[calc(100svh-4rem)] lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
+        <div className="flex items-center px-5 py-16 sm:px-8 lg:py-24 lg:pr-16 lg:pl-[max(2rem,calc((100vw-72rem)/2))]">
+          <div className="max-w-xl">
+            <h1
+              id="home-heading"
+              className="text-[2.5rem] leading-[1.02] sm:text-6xl lg:text-[5.75rem]"
             >
-              Explore Jobs
-              <ArrowIcon />
-            </Link>
-            <Link
-              to="/hospitals"
-              className="inline-flex min-h-11 items-center justify-center rounded-full border border-border bg-white px-5 text-sm font-semibold text-heading hover:bg-accent-surface"
-            >
-              For Organizations
-            </Link>
+              The next role
+              <br />
+              is already
+              <br />
+              on the ward.
+            </h1>
+            <span className="mt-8 block h-px w-12 bg-gold" aria-hidden="true" />
+            <p className="mt-8 max-w-[42ch] text-lg leading-relaxed">
+              Eighteen sample roles across six fictional hospitals. Search the board, or read a
+              hospital the way you would a profile.
+            </p>
+            <div className="mt-10 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
+              <ButtonLink to="/jobs">Explore the job board</ButtonLink>
+              <ButtonLink to="/hospitals" variant="ghost">
+                Read the hospitals
+              </ButtonLink>
+            </div>
+            <p className="mt-6 max-w-[42ch] text-sm text-muted">
+              Sample listings. Nothing here starts an application.
+            </p>
           </div>
-          <p className="mt-4 text-sm text-muted">
-            Eight fictional featured roles. Nothing here is an application.
-          </p>
         </div>
-        <div className="relative min-h-80 lg:min-h-[34rem]">
-          <img
-            src="/images/nurse-teal.jpg"
-            alt="A clinician in teal scrubs smiles toward the camera."
-            className="curve-photo h-80 w-full object-cover object-[center_38%] shadow-[0_18px_40px_-28px_rgba(20,45,53,0.55)] lg:absolute lg:inset-y-0 lg:h-full"
-          />
-        </div>
+        <img
+          src="/images/hospitals/northcedar.jpg"
+          alt="Corner of a modern glass building under a blue sky."
+          className="hero-photo aspect-[3/2] w-full object-cover object-[22%_42%] lg:aspect-auto lg:h-full lg:min-h-[32rem]"
+        />
       </div>
     </section>
   )

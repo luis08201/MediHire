@@ -24,11 +24,11 @@ export function Card({
   return (
     <article
       className={cn(
-        'flex h-full flex-col rounded-xl border border-border bg-white p-6',
+        'flex h-full flex-col border-t border-primary/15 py-6',
         className,
       )}
     >
-      {eyebrow ? <p className="text-sm font-semibold text-accent">{eyebrow}</p> : null}
+      {eyebrow ? <p className="text-sm text-muted">{eyebrow}</p> : null}
       <h3 className={cn('text-2xl', eyebrow && 'mt-2')}>
         {href ? (
           <Link

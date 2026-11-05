@@ -1,6 +1,8 @@
 import { Link, useParams } from 'react-router'
+import { HorizontalJobCard } from '../components/jobs/HorizontalJobCard.tsx'
 import { Container } from '../components/layout/Container.tsx'
-import { ArrowIcon, CheckIcon, CircleArrow, Eyebrow, PinIcon } from '../components/ui/Marks.tsx'
+import { ButtonLink } from '../components/ui/Button.tsx'
+import { CheckIcon } from '../components/ui/Marks.tsx'
 import { getHospitalBySlug } from '../data/hospitals.ts'
 import { getJobBySlug, getRelatedJobs } from '../data/jobs.ts'
 import type { JobListing } from '../data/types.ts'
@@ -18,23 +20,20 @@ export function JobDetailsPage() {
 
   if (!job) {
     return (
-      <section className="bg-background">
+      <section>
         <Container className="py-16 md:py-24">
           <nav aria-label="Breadcrumb">
-            <Link to="/jobs" className="text-sm font-semibold text-primary">
+            <Link to="/jobs" className="text-sm underline-offset-4 hover:underline">
               Find Jobs
             </Link>
           </nav>
           <h1 className="mt-8 text-4xl sm:text-5xl">Role not found</h1>
-          <p className="mt-4 max-w-xl text-lg leading-relaxed">
+          <p className="mt-4 max-w-[65ch] text-lg leading-relaxed">
             This address is not one of the sample listings. Open the job board to browse the fictional roles.
           </p>
-          <Link
-            to="/jobs"
-            className="mt-8 inline-flex min-h-11 items-center rounded-full bg-primary px-5 text-sm font-semibold text-white"
-          >
-            Explore Jobs
-          </Link>
+          <div className="mt-8">
+            <ButtonLink to="/jobs">Explore the job board</ButtonLink>
+          </div>
         </Container>
       </section>
     )
@@ -49,87 +48,67 @@ export function JobDetailsPage() {
 
   return (
     <>
-      <section className="overflow-hidden bg-accent-surface" aria-labelledby="job-title">
-        <Container className="grid items-center gap-10 py-12 md:py-16 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)] lg:py-20">
-          <div>
-            <nav aria-label="Breadcrumb" className="text-sm text-body">
-              <ol className="flex flex-wrap items-center gap-2">
-                <li>
-                  <Link to="/jobs" className="font-medium hover:text-primary">
-                    Find Jobs
-                  </Link>
-                </li>
-                <li aria-hidden="true">/</li>
-                <li aria-current="page" className="font-medium text-heading">
-                  {job.title}
-                </li>
-              </ol>
-            </nav>
-            <ul className="mt-6 flex flex-wrap gap-2" aria-label="Role details">
-              {[job.employmentType, job.workArrangement].map((item) => (
-                <li key={item} className="rounded-full bg-white px-3 py-1 text-xs font-semibold text-accent">
-                  {item}
-                </li>
-              ))}
-            </ul>
-            <h1 id="job-title" className="mt-4 text-balance text-5xl leading-[1.05] sm:text-6xl">
-              {job.title}
-            </h1>
-            <p className="mt-4 text-lg font-semibold text-heading">
-              {hospital ? (
-                <Link to={`/hospitals/${hospital.slug}`} className="hover:text-primary">
-                  {hospital.name}
+      <section aria-labelledby="job-title">
+        <Container className="py-16 lg:py-24">
+          <nav aria-label="Breadcrumb" className="text-sm">
+            <ol className="flex flex-wrap items-center gap-2">
+              <li>
+                <Link to="/jobs" className="underline-offset-4 hover:underline">
+                  Find Jobs
                 </Link>
-              ) : (
-                'Sample hospital'
-              )}
-            </p>
-            <p className="mt-2 flex flex-wrap items-center gap-2 text-sm text-body">
-              <PinIcon />
-              {job.location}
-              {job.salary ? <span className="font-semibold text-heading">{job.salary}</span> : null}
-              <span className="text-muted">Sample listing</span>
-            </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Link
-                to="/jobs"
-                className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-primary px-5 text-sm font-semibold text-white hover:bg-primary-hover"
-              >
-                Explore Jobs
-                <ArrowIcon />
+              </li>
+              <li aria-hidden="true" className="text-muted">
+                /
+              </li>
+              <li aria-current="page">{job.title}</li>
+            </ol>
+          </nav>
+          <h1 id="job-title" className="mt-8 max-w-4xl text-4xl leading-[1.05] sm:text-5xl lg:text-6xl">
+            {job.title}
+          </h1>
+          <p className="mt-5 text-lg">
+            {hospital ? (
+              <Link to={`/hospitals/${hospital.slug}`} className="underline-offset-4 hover:underline">
+                {hospital.name}
               </Link>
-              {hospital ? (
-                <Link
-                  to={`/hospitals/${hospital.slug}`}
-                  className="inline-flex min-h-11 items-center justify-center rounded-full border border-border bg-white px-5 text-sm font-semibold text-heading hover:bg-accent-surface"
-                >
-                  View Hospital
-                </Link>
-              ) : null}
-            </div>
-            <p className="mt-3 text-sm text-muted">Sample listing. This page does not take applications.</p>
+            ) : (
+              'Sample hospital'
+            )}
+          </p>
+          <p className="mt-2 text-sm text-muted">
+            {job.location}
+            {job.salary ? ` · ${job.salary}` : ''} · Sample listing
+          </p>
+          <div className="mt-8 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
+            <ButtonLink to="/jobs">Explore the job board</ButtonLink>
+            {hospital ? (
+              <ButtonLink to={`/hospitals/${hospital.slug}`} variant="ghost">
+                View the hospital
+              </ButtonLink>
+            ) : null}
           </div>
+          <p className="mt-4 text-sm text-muted">This page does not take applications.</p>
+        </Container>
+        <div className="content-wrap pb-12">
           <img
             src={hospital?.image ?? '/images/hospitals/lakeshore.jpg'}
             alt={hospital?.imageAlt ?? 'Healthcare setting used for atmosphere'}
-            className="curve-sweep min-h-72 w-full object-cover object-[center_40%]"
+            className="aspect-[3/2] w-full object-cover object-[center_40%] lg:aspect-[2.4/1]"
           />
-        </Container>
+        </div>
       </section>
 
-      <section className="border-t border-border" aria-labelledby="job-overview">
-        <Container className="grid items-start gap-8 py-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:py-16">
-          <div>
-            <h2 id="job-overview" className="text-3xl sm:text-4xl">
-              Job Overview
-            </h2>
-            <p className="mt-4 max-w-xl text-lg leading-relaxed">{overview}</p>
-          </div>
-          <dl className="grid grid-cols-1 gap-px overflow-hidden rounded-2xl bg-border sm:grid-cols-2 xl:grid-cols-[minmax(11.5rem,1.4fr)_repeat(3,minmax(0,1fr))]">
+      <section className="border-t border-primary/10" aria-labelledby="job-overview">
+        <Container className="py-16">
+          <h2 id="job-overview" className="text-3xl sm:text-4xl">
+            Job overview
+          </h2>
+          <p className="mt-5 max-w-[65ch] text-lg leading-relaxed">{overview}</p>
+          <dl className="mt-10 flex flex-col gap-6 sm:flex-row sm:flex-wrap sm:gap-x-12">
             {facts.map((fact) => (
-              <div key={fact.label} className="bg-accent-surface px-4 py-5">
-                <dt className="text-xs font-semibold text-muted">{fact.label}</dt>
-                <dd className="mt-2 text-sm font-semibold text-heading">{fact.value}</dd>
+              <div key={fact.label}>
+                <dt className="text-sm text-muted">{fact.label}</dt>
+                <dd className="mt-1">{fact.value}</dd>
               </div>
             ))}
           </dl>
@@ -137,15 +116,15 @@ export function JobDetailsPage() {
       </section>
 
       <section aria-labelledby="job-description">
-        <Container className="grid items-start gap-8 pb-12 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:pb-16">
+        <Container className="grid items-start gap-12 pb-16 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
           <div>
             <h2 id="job-description" className="text-3xl sm:text-4xl">
-              Job Description
+              Job description
             </h2>
-            <p className="mt-4 max-w-2xl leading-relaxed">{job.summary}</p>
+            <p className="mt-5 max-w-[65ch] leading-relaxed">{job.summary}</p>
             {job.responsibilities.length > 0 ? (
               <>
-                <h3 className="mt-8 font-sans text-lg font-semibold">Key Responsibilities</h3>
+                <h3 className="mt-8 font-sans text-lg">Key responsibilities</h3>
                 <ul className="mt-4 space-y-3">
                   {job.responsibilities.map((item) => (
                     <li key={item} className="flex gap-3 leading-relaxed">
@@ -157,9 +136,9 @@ export function JobDetailsPage() {
               </>
             ) : null}
           </div>
-          <div className="rounded-3xl bg-accent-surface p-6 sm:p-8">
+          <div className="bg-accent-surface p-6 sm:p-8">
             <h2 id="job-qualifications" className="text-3xl">
-              Requirements & Qualifications
+              Requirements and qualifications
             </h2>
             {qualifications.length > 0 ? (
               <ul className="mt-6 space-y-3">
@@ -180,105 +159,48 @@ export function JobDetailsPage() {
       </section>
 
       {hospital ? (
-        <section className="bg-accent-surface" aria-labelledby="about-hospital">
-          <Container className="grid items-center gap-8 py-12 lg:grid-cols-[16rem_minmax(0,1fr)_auto] lg:py-16">
-            <img
-              src={hospital.image}
-              alt={hospital.imageAlt}
-              loading="lazy"
-              className="h-44 w-full rounded-2xl object-cover"
-            />
-            <div>
-              <Eyebrow>About the hospital</Eyebrow>
-              <h2 id="about-hospital" className="mt-3 text-3xl sm:text-4xl">
-                {hospital.name}
-              </h2>
-              <p className="mt-3 max-w-xl leading-relaxed">{hospital.summary}</p>
-              <p className="mt-3 text-sm font-semibold text-heading">
-                {hospital.city}, {hospital.region} · {hospital.bedCount} beds · {hospital.focusAreas.length} listed specialties
-              </p>
-            </div>
+        <section className="border-t border-primary/10" aria-labelledby="about-hospital">
+          <Container className="py-16">
+            <h2 id="about-hospital" className="text-3xl sm:text-4xl">
+              {hospital.name}
+            </h2>
+            <p className="mt-5 max-w-[65ch] leading-relaxed">{hospital.summary}</p>
+            <p className="mt-3 text-sm text-muted">
+              {hospital.city}, {hospital.region} · {hospital.bedCount} beds · {hospital.focusAreas.length} listed specialties
+            </p>
             <Link
               to={`/hospitals/${hospital.slug}`}
-              className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-border bg-white px-5 text-sm font-semibold text-heading hover:bg-white/80"
+              className="mt-6 inline-flex min-h-11 items-center text-sm underline-offset-4 hover:underline"
             >
-              View Hospital Profile
-              <ArrowIcon />
+              View the hospital
             </Link>
           </Container>
         </section>
       ) : null}
 
       {related.length > 0 ? <RelatedJobs jobs={related} /> : null}
-
-      <section className="bg-background" aria-labelledby="more-opportunities">
-        <Container className="py-12 lg:py-16">
-          <div className="overflow-hidden rounded-[1.75rem] bg-primary px-8 py-12 text-white sm:px-12">
-            <h2 id="more-opportunities" className="max-w-xl text-balance text-4xl leading-[1.1] text-white sm:text-5xl">
-              Explore more healthcare opportunities.
-            </h2>
-            <p className="mt-4 max-w-xl text-lg text-accent-surface">
-              Discover roles at the fictional hospitals in this sample directory.
-            </p>
-            <Link
-              to="/jobs"
-              className="mt-8 inline-flex min-h-11 items-center gap-2 rounded-full bg-white px-5 text-sm font-semibold text-primary"
-            >
-              Browse All Jobs
-              <ArrowIcon />
-            </Link>
-          </div>
-        </Container>
-      </section>
     </>
   )
 }
 
 function RelatedJobs({ jobs }: { jobs: JobListing[] }) {
   return (
-    <section aria-labelledby="related-jobs">
-      <Container className="py-12 lg:py-16">
+    <section aria-labelledby="related-jobs" className="border-t border-primary/10">
+      <Container className="py-16">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-          <h2 id="related-jobs" className="text-4xl">
-            Related Opportunities
+          <h2 id="related-jobs" className="text-3xl sm:text-4xl">
+            Related roles
           </h2>
-          <Link to="/jobs" className="inline-flex items-center gap-2 text-sm font-semibold text-primary">
-            View All Jobs
-            <ArrowIcon />
+          <Link to="/jobs" className="text-sm underline-offset-4 hover:underline">
+            View all jobs
           </Link>
         </div>
-        <ul className="mt-8 grid gap-4 lg:grid-cols-3">
-          {jobs.map((role) => {
-            const workplace = getHospitalBySlug(role.hospitalSlug)
-            return (
-              <li key={role.slug}>
-                <article className="soft-card flex items-center gap-4 p-4">
-                  <img
-                    src={workplace?.image ?? '/images/hospitals/harborlight.jpg'}
-                    alt=""
-                    loading="lazy"
-                    className="size-20 rounded-xl object-cover"
-                  />
-                  <div className="min-w-0 flex-1">
-                    <h3 className="text-xl leading-tight">
-                      <Link to={`/jobs/${role.slug}`} className="hover:text-primary">
-                        {role.title}
-                      </Link>
-                    </h3>
-                    <p className="mt-1 text-sm text-heading">{workplace?.name}</p>
-                    <p className="mt-1 flex items-center gap-1 text-xs text-body">
-                      <PinIcon />
-                      {role.location}
-                    </p>
-                    <p className="mt-2 text-xs font-semibold text-accent">
-                      {role.employmentType} · {role.workArrangement}
-                    </p>
-                  </div>
-                  <CircleArrow to={`/jobs/${role.slug}`} label={`View ${role.title}`} />
-                </article>
-              </li>
-            )
-          })}
+        <ul className="mt-8 border-t border-primary/10">
+          {jobs.map((role) => (
+            <li key={role.slug}>
+              <HorizontalJobCard job={role} />
+            </li>
+          ))}
         </ul>
       </Container>
     </section>

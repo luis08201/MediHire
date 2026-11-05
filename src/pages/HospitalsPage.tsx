@@ -4,7 +4,6 @@ import { HospitalFilterGroups } from '../components/hospitals/HospitalFilterGrou
 import { Container } from '../components/layout/Container.tsx'
 import { FilterDrawer } from '../components/jobs/FilterDrawer.tsx'
 import { Button, ButtonLink } from '../components/ui/Button.tsx'
-import { ArrowIcon, Eyebrow, PinIcon, SearchIcon } from '../components/ui/Marks.tsx'
 import { hospitals } from '../data/hospitals.ts'
 import { jobs } from '../data/jobs.ts'
 import {
@@ -126,53 +125,39 @@ export function HospitalsPage() {
 
   return (
     <>
-      <section className="overflow-hidden bg-accent-surface" aria-labelledby="hospitals-heading">
-        <Container className="grid items-center gap-10 py-14 md:py-16 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)] lg:py-20">
-          <div>
-            <Eyebrow>Hospital directory</Eyebrow>
-            <h1 id="hospitals-heading" className="mt-4 text-balance text-5xl leading-[1.05] sm:text-6xl">
-              Discover hospitals shaping the future of care
-            </h1>
-            <p className="mt-4 max-w-md text-lg leading-relaxed">
-              Browse six fictional hospitals and the sample roles attached to each site. These are not partner health systems.
-            </p>
-            <form
-              role="search"
-              className="mt-8 rounded-2xl border border-border bg-white p-3 shadow-sm"
-              onSubmit={applySearch}
-            >
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-                <label htmlFor="hospital-search" className="sr-only">
-                  Hospital name, city, or specialty
-                </label>
-                <span className="flex min-h-12 flex-1 items-center gap-2 px-3 text-muted">
-                  <SearchIcon />
-                  <input
-                    id="hospital-search"
-                    name="q"
-                    type="search"
-                    value={queryDraft}
-                    onChange={(event) => setQueryDraft(event.target.value)}
-                    placeholder="Search hospital, city, or specialty"
-                    autoComplete="off"
-                    className="min-h-11 w-full bg-transparent text-base text-heading outline-none placeholder:text-muted"
-                  />
-                </span>
-                <Button type="submit" className="!rounded-xl sm:min-w-28">
-                  Search
-                </Button>
-              </div>
-            </form>
-          </div>
-          <img
-            src="/images/hospitals/northcedar.jpg"
-            alt="Corner of a modern glass building under a blue sky."
-            className="curve-sweep hidden min-h-80 w-full object-cover object-[center_40%] lg:block"
-          />
+      <section aria-labelledby="hospitals-heading">
+        <Container className="py-16 lg:py-24">
+          <h1 id="hospitals-heading" className="max-w-3xl text-4xl leading-[1.05] sm:text-5xl lg:text-6xl">
+            The hospital directory
+          </h1>
+          <p className="mt-6 max-w-[65ch] text-lg leading-relaxed">
+            Fictional hospitals, and the sample roles attached to each one. These are not partner
+            health systems.
+          </p>
+          <form role="search" className="mt-10 max-w-3xl" onSubmit={applySearch}>
+            <label htmlFor="hospital-search" className="text-sm font-medium">
+              Hospital name, city, or specialty
+            </label>
+            <div className="mt-2 flex flex-col gap-3 sm:flex-row sm:items-center">
+              <input
+                id="hospital-search"
+                name="q"
+                type="search"
+                value={queryDraft}
+                onChange={(event) => setQueryDraft(event.target.value)}
+                placeholder="Seattle, pediatrics, imaging"
+                autoComplete="off"
+                className="min-h-12 w-full flex-1 border border-border bg-transparent px-3 text-base text-heading placeholder:text-muted"
+              />
+              <Button type="submit" className="sm:min-w-28">
+                Search
+              </Button>
+            </div>
+          </form>
         </Container>
       </section>
 
-      <section aria-labelledby="hospital-results-heading" className="border-t border-border">
+      <section aria-labelledby="hospital-results-heading" className="border-t border-primary/10">
         <Container className="py-10 lg:py-14">
           <div className="mb-6 lg:hidden">
             <Button
@@ -186,36 +171,51 @@ export function HospitalsPage() {
             </Button>
           </div>
 
-          <div className="hidden rounded-2xl border border-border bg-white p-6 shadow-sm lg:block">
-            <h2 className="font-sans text-lg font-semibold">Filters</h2>
-            <div className="mt-6">
-              <HospitalFilterGroups
-                idPrefix="hospital-desktop"
-                values={filters}
-                locations={locations}
-                specialties={specialties}
-                onChange={(next) => commit({ filters: next })}
-              />
-            </div>
-          </div>
-
-          <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+          <div className="grid items-start gap-10 lg:grid-cols-[16rem_minmax(0,1fr)]">
+            <aside
+              aria-labelledby="hospital-filters-heading"
+              className="hidden lg:sticky lg:top-24 lg:block lg:max-h-[calc(100svh-6rem)] lg:overflow-y-auto lg:bg-accent-surface lg:p-6"
+            >
+              <div className="flex items-center justify-between gap-3">
+                <h2 id="hospital-filters-heading" className="font-sans text-lg">
+                  Filters
+                </h2>
+                <button
+                  type="button"
+                  className="min-h-11 text-sm underline-offset-4 hover:underline"
+                  onClick={resetDirectory}
+                >
+                  Clear all
+                </button>
+              </div>
+              <div className="mt-5 border-t border-primary/10 pt-5">
+                <HospitalFilterGroups
+                  idPrefix="hospital-desktop"
+                  values={filters}
+                  locations={locations}
+                  specialties={specialties}
+                  onChange={(next) => commit({ filters: next })}
+                />
+              </div>
+            </aside>
             <div>
-              <h2 id="hospital-results-heading" className="text-3xl">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <h2 id="hospital-results-heading" className="sr-only">
                 Hospitals
               </h2>
               <p aria-live="polite" aria-atomic="true" className="mt-2">
                 {countText}
               </p>
             </div>
-            <label htmlFor="hospital-sort" className="inline-flex items-center gap-2 text-sm font-semibold text-heading">
+            <label htmlFor="hospital-sort" className="inline-flex items-center gap-2 text-sm">
               Sort
               <select
                 id="hospital-sort"
                 name="sort"
                 value={sort}
                 onChange={(event) => commit({ sort: event.target.value as HospitalSort })}
-                className="min-h-11 rounded-lg border border-border bg-white px-3 text-sm font-medium text-heading"
+                className="min-h-11 rounded border border-border bg-transparent px-3 text-sm text-heading"
               >
                 <option value="recommended">Recommended</option>
                 <option value="name">Name A–Z</option>
@@ -233,7 +233,7 @@ export function HospitalsPage() {
                     <button
                       type="button"
                       aria-label={chip.removeLabel}
-                      className="inline-flex min-h-11 items-center gap-2 rounded-full border border-border bg-accent-surface px-3 text-sm font-semibold text-heading"
+                      className="inline-flex min-h-11 items-center gap-2 border border-primary/15 bg-accent-surface px-3 text-sm"
                       onClick={chip.remove}
                     >
                       <span aria-hidden="true">{chip.label}</span>
@@ -244,7 +244,7 @@ export function HospitalsPage() {
               </ul>
               <button
                 type="button"
-                className="min-h-11 px-2 text-sm font-semibold text-primary hover:text-primary-hover"
+                className="min-h-11 px-2 text-sm underline-offset-4 hover:underline"
                 onClick={resetDirectory}
               >
                 Clear all
@@ -253,9 +253,9 @@ export function HospitalsPage() {
           ) : null}
 
           {results.length === 0 ? (
-            <div className="mt-8 rounded-2xl border border-border bg-white px-6 py-14 text-center shadow-sm">
+            <div className="mt-8 border-t border-primary/10 py-14">
               <h3 className="text-3xl">No matching hospitals</h3>
-              <p className="mx-auto mt-3 max-w-md leading-relaxed">
+              <p className="mt-3 max-w-md leading-relaxed">
                 Nothing in the sample directory matches this search. Try another city or specialty,
                 or clear the filters to see every hospital.
               </p>
@@ -264,70 +264,53 @@ export function HospitalsPage() {
               </Button>
             </div>
           ) : (
-            <ul className="mt-8 grid gap-6 md:grid-cols-2">
+            <ul className="mt-8 border-t border-primary/10">
               {results.map((hospital) => (
-                <li key={hospital.slug}>
-                  <article className="flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-white shadow-sm">
+                <li key={hospital.slug} className="border-b border-primary/10 py-10">
+                  <article className="grid gap-6 md:grid-cols-[minmax(0,0.42fr)_minmax(0,1fr)] md:items-center">
                     <img
                       src={hospital.image}
                       alt={hospital.imageAlt}
                       loading="lazy"
                       className="aspect-[16/10] w-full object-cover"
                     />
-                    <div className="flex flex-1 flex-col p-5">
-                      <p className="text-xs font-semibold tracking-[0.14em] text-primary uppercase">
-                        {hospital.type}
-                      </p>
-                      <h3 className="mt-2 text-2xl leading-tight">
-                        <Link to={`/hospitals/${hospital.slug}`} className="hover:text-primary">
+                    <div>
+                      <p className="text-sm text-muted">{hospital.type}</p>
+                      <h3 className="mt-2 text-3xl leading-tight">
+                        <Link
+                          to={`/hospitals/${hospital.slug}`}
+                          className="underline-offset-4 hover:underline"
+                        >
                           {hospital.name}
                         </Link>
                       </h3>
-                      <p className="mt-2 flex items-center gap-1.5 text-sm text-body">
-                        <PinIcon />
-                        {locationLabel(hospital)}
+                      <p className="mt-2 text-sm">{locationLabel(hospital)}</p>
+                      <p className="mt-4 max-w-[65ch] leading-relaxed">{hospital.summary}</p>
+                      <p className="mt-3 text-sm text-muted">{hospital.focusAreas.join(', ')}</p>
+                      <p className="mt-4 text-sm">
+                        {hospital.openJobs} open {hospital.openJobs === 1 ? 'role' : 'roles'}
                       </p>
-                      <p className="mt-3 line-clamp-3 text-sm leading-relaxed">{hospital.summary}</p>
-                      <ul className="mt-4 flex flex-wrap gap-2" aria-label="Specialties">
-                        {hospital.focusAreas.map((area) => (
-                          <li
-                            key={area}
-                            className="rounded-full bg-accent-surface px-2.5 py-1 text-xs font-semibold text-primary"
-                          >
-                            {area}
-                          </li>
-                        ))}
-                      </ul>
-                      <div className="mt-auto flex items-center justify-between gap-3 pt-5">
-                        <p className="text-sm font-semibold text-heading">
-                          {hospital.openJobs} open {hospital.openJobs === 1 ? 'role' : 'roles'}
-                        </p>
-                        <ButtonLink to={`/hospitals/${hospital.slug}`} variant="secondary" size="sm" className="!rounded-full">
-                          View Hospital
-                          <ArrowIcon />
-                        </ButtonLink>
-                      </div>
                     </div>
                   </article>
                 </li>
               ))}
             </ul>
           )}
+            </div>
+          </div>
         </Container>
       </section>
 
-      <section className="bg-background" aria-labelledby="hospital-jobs-cta">
-        <Container className="py-12 lg:py-16">
-          <div className="overflow-hidden rounded-[1.75rem] bg-primary px-8 py-12 sm:px-12">
-            <h2 id="hospital-jobs-cta" className="max-w-xl text-balance text-4xl leading-[1.1] text-white sm:text-5xl">
-              See the roles at these hospitals
-            </h2>
-            <p className="mt-4 max-w-xl text-lg leading-relaxed text-accent-surface">
-              Every open-role count comes from the sample job board.
-            </p>
-            <ButtonLink to="/jobs" variant="inverse" className="mt-8 !rounded-full">
-              Explore Opportunities
-            </ButtonLink>
+      <section className="bg-accent-surface" aria-labelledby="hospital-jobs-cta">
+        <Container className="py-16">
+          <h2 id="hospital-jobs-cta" className="max-w-xl text-4xl leading-[1.08] sm:text-5xl">
+            See the roles at these hospitals
+          </h2>
+          <p className="mt-4 max-w-[65ch] text-lg leading-relaxed">
+            Every open-role count comes from the sample job board.
+          </p>
+          <div className="mt-8">
+            <ButtonLink to="/jobs">Explore the job board</ButtonLink>
           </div>
         </Container>
       </section>

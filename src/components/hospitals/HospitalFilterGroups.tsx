@@ -23,7 +23,7 @@ export function HospitalFilterGroups({
     <div className="grid gap-8">
       <fieldset className="border-0 p-0">
         <legend className="mb-2 text-sm font-semibold text-heading">Location</legend>
-        <div className="grid gap-1 sm:grid-cols-2">
+        <div className="grid gap-1">
           {locations.map((location) => {
             const id = fieldId(idPrefix, 'location', location)
             return (
@@ -46,7 +46,7 @@ export function HospitalFilterGroups({
       </fieldset>
       <fieldset className="border-0 p-0">
         <legend className="mb-2 text-sm font-semibold text-heading">Specialty</legend>
-        <div className="grid gap-1 sm:grid-cols-2">
+        <div className="grid gap-1">
           {specialties.map((specialty) => {
             const id = fieldId(idPrefix, 'specialty', specialty)
             return (

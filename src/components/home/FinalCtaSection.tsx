@@ -1,36 +1,24 @@
 import { Link } from 'react-router'
-import { Section } from '../layout/Section.tsx'
+import { Container } from '../layout/Container.tsx'
 
 export function FinalCtaSection() {
   return (
-    <Section id="demo" labelledBy="final-cta-heading" className="bg-background">
-      <div className="relative overflow-hidden rounded-[1.75rem] bg-primary text-white">
-        <div className="grid items-center lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
-          <div className="px-8 py-12 sm:px-12 sm:py-16">
-            <h2 id="final-cta-heading" className="max-w-md text-balance text-4xl leading-[1.1] text-white sm:text-5xl">
-              Build stronger healthcare teams.
-            </h2>
-            <p className="mt-4 max-w-md text-lg leading-relaxed text-accent-surface">
-              Explore a better approach to healthcare recruitment.
-            </p>
-            <Link
-              to="/#pricing"
-              className="mt-8 inline-flex min-h-11 items-center rounded-full bg-white px-5 text-sm font-semibold text-primary hover:bg-accent-surface"
-            >
-              About This Preview
-            </Link>
-            <p id="pricing" className="mt-5 max-w-md scroll-mt-28 text-sm leading-relaxed text-accent-surface">
-              There is nothing to buy and no demo to schedule. This fictional preview has no plans, invoices, or contact form.
-            </p>
-          </div>
-          <img
-            src="/images/hospitals/ridgeway.jpg"
-            alt="A glass tower with a pale panel facade."
-            loading="lazy"
-            className="curve-photo-left hidden h-full min-h-64 w-full object-cover lg:block"
-          />
-        </div>
-      </div>
-    </Section>
+    <section id="features" className="section-space scroll-mt-24 bg-accent-surface" aria-labelledby="preview-heading">
+      <div id="solutions" className="scroll-mt-24" />
+      <div id="pricing" className="scroll-mt-24" />
+      <div id="demo" className="scroll-mt-24" />
+      <Container>
+        <h2 id="preview-heading" className="max-w-xl text-4xl leading-[1.08] sm:text-5xl">
+          A note on this preview.
+        </h2>
+        <p className="mt-6 max-w-[65ch] text-lg leading-relaxed">
+          There is nothing to buy and no demo to book. Hospitals and roles are sample data.
+          Photography is atmosphere, not a partner facility. No personal information is collected.
+        </p>
+        <Link to="/jobs" className="mt-8 inline-flex min-h-11 items-center text-sm underline-offset-4 hover:underline">
+          Explore the job board
+        </Link>
+      </Container>
+    </section>
   )
 }

@@ -47,8 +47,8 @@ export function SiteHeader() {
   }
 
   return (
-    <header className="sticky top-0 z-40 border-b border-border/80 bg-white">
-      <div className="mx-auto flex h-16 w-[min(78rem,calc(100%-2.5rem))] items-center justify-between gap-4 md:w-[min(78rem,calc(100%-4rem))]">
+    <header className="sticky top-0 z-40 border-b border-primary/10 bg-background">
+      <div className="content-wrap flex h-16 items-center justify-between gap-4">
         <BrandMark />
         <div className="hidden items-center gap-8 lg:flex">
           <nav aria-label="Primary" className="flex items-center gap-6">
@@ -58,13 +58,6 @@ export function SiteHeader() {
               </PrimaryLink>
             ))}
           </nav>
-          <Link
-            to="/#pricing"
-            onClick={() => handleHashClick('/#pricing')}
-            className="inline-flex min-h-10 items-center rounded-full bg-primary px-4 text-sm font-semibold text-white hover:bg-primary-hover"
-          >
-            About This Preview
-          </Link>
         </div>
         <button
           type="button"
@@ -80,7 +73,11 @@ export function SiteHeader() {
       <nav
         id={menuId}
         aria-label="Primary"
-        className={open ? 'border-t border-border bg-white px-5 py-3 lg:hidden' : 'hidden'}
+        className={
+          open
+            ? 'border-t border-primary/10 bg-background px-5 py-3 shadow-[0_16px_40px_-24px_rgba(22,60,69,0.45)] lg:hidden'
+            : 'hidden'
+        }
       >
         <ul className="flex flex-col">
           {links.map((link) => (
@@ -91,13 +88,6 @@ export function SiteHeader() {
             </li>
           ))}
         </ul>
-        <Link
-          to="/#pricing"
-          onClick={() => handleHashClick('/#pricing')}
-          className="mt-2 inline-flex min-h-11 w-full items-center justify-center rounded-full bg-primary text-sm font-semibold text-white"
-        >
-          About This Preview
-        </Link>
       </nav>
     </header>
   )
@@ -116,8 +106,8 @@ function PrimaryLink({
 }) {
   const className = (isActive: boolean) =>
     cn(
-      'text-sm font-medium text-body hover:text-heading',
-      isActive && 'text-heading',
+      'text-sm text-body underline-offset-4 hover:underline',
+      isActive && 'text-heading underline',
       block && 'flex min-h-11 items-center',
     )
 
