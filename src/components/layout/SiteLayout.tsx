@@ -1,8 +1,21 @@
-import { Outlet } from 'react-router'
+import { useEffect } from 'react'
+import { Outlet, useLocation } from 'react-router'
+import { scrollToId } from '../../lib/scrollToId.ts'
 import { SiteFooter } from './SiteFooter.tsx'
 import { SiteHeader } from './SiteHeader.tsx'
 
 export function SiteLayout() {
+  const location = useLocation()
+
+  useEffect(() => {
+    if (location.hash) {
+      scrollToId(decodeURIComponent(location.hash.slice(1)))
+      return
+    }
+
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+  }, [location.hash, location.pathname])
+
   return (
     <div className="flex min-h-svh flex-col bg-background text-body">
       <a
@@ -12,7 +25,7 @@ export function SiteLayout() {
         Skip to content
       </a>
       <SiteHeader />
-      <main id="main" tabIndex={-1} className="flex-1">
+      <main id="main" tabIndex={-1} className="flex-1 overflow-x-clip">
         <Outlet />
       </main>
       <SiteFooter />

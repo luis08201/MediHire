@@ -1,12 +1,16 @@
 import { useEffect, useId, useState } from 'react'
-import { Link, NavLink } from 'react-router'
+import { Link, NavLink, useLocation } from 'react-router'
+import { scrollToId } from '../../lib/scrollToId.ts'
 import { cn } from '../../lib/cn.ts'
+import { ButtonLink } from '../ui/Button.tsx'
 import { Container } from './Container.tsx'
 
 const links = [
   { to: '/', label: 'Home', end: true },
-  { to: '/jobs', label: 'Job board', end: false },
-  { to: '/hospitals', label: 'Hospitals', end: false },
+  { to: '/#features', label: 'Features' },
+  { to: '/jobs', label: 'Jobs' },
+  { to: '/hospitals', label: 'Hospitals' },
+  { to: '/#pricing', label: 'Pricing' },
 ] as const
 
 function linkClass(isActive: boolean) {
@@ -20,6 +24,7 @@ function linkClass(isActive: boolean) {
 
 export function SiteHeader() {
   const menuId = useId()
+  const location = useLocation()
   const [open, setOpen] = useState(false)
 
   useEffect(() => {
@@ -34,7 +39,7 @@ export function SiteHeader() {
   }, [open])
 
   useEffect(() => {
-    const media = window.matchMedia('(min-width: 48rem)')
+    const media = window.matchMedia('(min-width: 64rem)')
 
     function onChange() {
       if (media.matches) setOpen(false)
@@ -44,28 +49,35 @@ export function SiteHeader() {
     return () => media.removeEventListener('change', onChange)
   }, [])
 
+  function handleHashClick(to: string) {
+    setOpen(false)
+    const hashIndex = to.indexOf('#')
+    if (hashIndex === -1 || location.pathname !== '/') return
+    scrollToId(to.slice(hashIndex + 1))
+  }
+
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-white">
       <Container>
-        <div className="flex h-16 items-center justify-between gap-4">
+        <div className="flex h-16 items-center justify-between gap-4 lg:h-[4.5rem]">
           <Link to="/" className="font-serif text-2xl text-heading">
             MediHire
           </Link>
-          <nav aria-label="Primary" className="hidden items-center gap-1 md:flex">
-            {links.map((link) => (
-              <NavLink
-                key={link.to}
-                to={link.to}
-                end={link.end}
-                className={({ isActive }) => linkClass(isActive)}
-              >
-                {link.label}
-              </NavLink>
-            ))}
-          </nav>
+          <div className="hidden items-center gap-6 lg:flex">
+            <nav aria-label="Primary" className="flex items-center gap-1">
+              {links.map((link) => (
+                <PrimaryLink key={link.to} to={link.to} end={'end' in link ? link.end : false} onNavigate={handleHashClick}>
+                  {link.label}
+                </PrimaryLink>
+              ))}
+            </nav>
+            <ButtonLink to="/#demo" onClick={() => handleHashClick('/#demo')}>
+              Book a Demo
+            </ButtonLink>
+          </div>
           <button
             type="button"
-            className="inline-flex size-11 items-center justify-center rounded-md text-heading md:hidden"
+            className="inline-flex size-11 items-center justify-center rounded-md text-heading lg:hidden"
             aria-expanded={open}
             aria-controls={menuId}
             onClick={() => setOpen((value) => !value)}
@@ -77,25 +89,63 @@ export function SiteHeader() {
         <nav
           id={menuId}
           aria-label="Primary"
-          className={open ? 'border-t border-border py-3 md:hidden' : 'hidden'}
+          className={open ? 'border-t border-border py-3 lg:hidden' : 'hidden'}
         >
           <ul className="flex flex-col gap-1">
             {links.map((link) => (
               <li key={link.to}>
-                <NavLink
+                <PrimaryLink
                   to={link.to}
-                  end={link.end}
-                  className={({ isActive }) => cn(linkClass(isActive), 'block')}
-                  onClick={() => setOpen(false)}
+                  end={'end' in link ? link.end : false}
+                  block
+                  onNavigate={handleHashClick}
                 >
                   {link.label}
-                </NavLink>
+                </PrimaryLink>
               </li>
             ))}
           </ul>
+          <ButtonLink
+            to="/#demo"
+            className="mt-3 w-full"
+            onClick={() => handleHashClick('/#demo')}
+          >
+            Book a Demo
+          </ButtonLink>
         </nav>
       </Container>
     </header>
+  )
+}
+
+function PrimaryLink({
+  to,
+  end,
+  block = false,
+  onNavigate,
+  children,
+}: {
+  to: string
+  end?: boolean
+  block?: boolean
+  onNavigate: (to: string) => void
+  children: string
+}) {
+  const className = (isActive: boolean) =>
+    cn(linkClass(isActive), block && 'flex min-h-11 items-center')
+
+  if (to.includes('#')) {
+    return (
+      <Link to={to} className={className(false)} onClick={() => onNavigate(to)}>
+        {children}
+      </Link>
+    )
+  }
+
+  return (
+    <NavLink to={to} end={end} className={({ isActive }) => className(isActive)} onClick={() => onNavigate(to)}>
+      {children}
+    </NavLink>
   )
 }
 

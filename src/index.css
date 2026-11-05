@@ -93,4 +93,36 @@
       padding-block: 10rem;
     }
   }
+
+  .carousel-bleed {
+    display: flex;
+    gap: 1.25rem;
+    margin: 0;
+    padding-top: 0.25rem;
+    padding-bottom: 1.75rem;
+    padding-left: max(1.25rem, calc((100% - var(--container-content)) / 2));
+    padding-right: 1.25rem;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: max(1.25rem, calc((100% - var(--container-content)) / 2));
+    scroll-behavior: smooth;
+    list-style: none;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-border) transparent;
+  }
+
+  @media (min-width: 48rem) {
+    .carousel-bleed {
+      padding-left: max(2rem, calc((100% - var(--container-content)) / 2));
+      padding-right: 2rem;
+      scroll-padding-left: max(2rem, calc((100% - var(--container-content)) / 2));
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .carousel-bleed {
+      scroll-behavior: auto;
+    }
+  }
 }

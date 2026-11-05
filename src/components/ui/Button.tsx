@@ -2,8 +2,8 @@ import { type ButtonHTMLAttributes, type ComponentProps, type ReactNode } from '
 import { Link } from 'react-router'
 import { cn } from '../../lib/cn.ts'
 
-type Variant = 'primary' | 'secondary' | 'ghost'
-type Size = 'md' | 'sm'
+type Variant = 'primary' | 'secondary' | 'ghost' | 'inverse' | 'inverseQuiet'
+type Size = 'md' | 'sm' | 'icon'
 
 type ButtonStyleProps = {
   variant?: Variant
@@ -13,17 +13,20 @@ type ButtonStyleProps = {
 }
 
 const base =
-  'inline-flex items-center justify-center rounded-lg font-semibold transition-colors'
+  'inline-flex items-center justify-center rounded-lg font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-40'
 
 const variantClass: Record<Variant, string> = {
   primary: 'bg-primary text-white hover:bg-primary-hover',
   secondary: 'border border-border bg-white text-heading hover:bg-accent-surface',
   ghost: 'text-primary hover:bg-accent-surface',
+  inverse: 'bg-white text-primary hover:bg-accent-surface',
+  inverseQuiet: 'border border-white bg-transparent text-white hover:bg-white hover:text-primary',
 }
 
 const sizeClass: Record<Size, string> = {
   md: 'min-h-11 px-5 text-sm',
   sm: 'min-h-10 px-4 text-sm',
+  icon: 'size-11 p-0',
 }
 
 function classes(variant: Variant, size: Size, className?: string) {

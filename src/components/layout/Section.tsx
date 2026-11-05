@@ -5,11 +5,12 @@ type SectionProps = {
   children: ReactNode
   className?: string
   id?: string
+  labelledBy?: string
 }
 
-export function Section({ children, className, id }: SectionProps) {
+export function Section({ children, className, id, labelledBy }: SectionProps) {
   return (
-    <section id={id} className={cn('section-space', className)}>
+    <section id={id} aria-labelledby={labelledBy} className={cn('section-space scroll-mt-20', className)}>
       {children}
     </section>
   )
