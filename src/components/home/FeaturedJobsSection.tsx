@@ -2,9 +2,8 @@ import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router'
 import { getHospitalBySlug } from '../../data/hospitals.ts'
 import { featuredJobs as jobs } from '../../data/jobs.ts'
-import { Button } from '../ui/Button.tsx'
-import { Container } from '../layout/Container.tsx'
 import { Section } from '../layout/Section.tsx'
+import { ArrowIcon, CircleArrow, Eyebrow, PinIcon } from '../ui/Marks.tsx'
 
 const listId = 'featured-jobs'
 
@@ -49,92 +48,82 @@ export function FeaturedJobsSection() {
 
   return (
     <Section labelledBy="featured-jobs-heading">
-      <Container>
-        <div className="flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
-          <div className="max-w-2xl">
-            <p className="text-sm font-semibold text-accent">Featured jobs</p>
-            <h2 id="featured-jobs-heading" className="mt-4 text-balance text-4xl sm:text-5xl">
-              Explore opportunities that move care forward.
-            </h2>
-            <p className="mt-4 text-lg leading-relaxed">
-              Fictional roles from the bedside to the pharmacy. Swipe the row, or
-              use the controls.
-            </p>
-          </div>
-          <div className="flex gap-2">
-            <Button
-              type="button"
-              variant="secondary"
-              size="icon"
-              aria-label="Show previous roles"
-              aria-controls={listId}
-              disabled={atStart}
-              onClick={() => scrollByCard(-1)}
-            >
-              <Chevron direction="left" />
-            </Button>
-            <Button
-              type="button"
-              variant="secondary"
-              size="icon"
-              aria-label="Show next roles"
-              aria-controls={listId}
-              disabled={atEnd}
-              onClick={() => scrollByCard(1)}
-            >
-              <Chevron direction="right" />
-            </Button>
-          </div>
+      <div className="mx-auto flex w-[min(75rem,100%)] flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+        <div className="max-w-2xl">
+          <Eyebrow>Featured jobs</Eyebrow>
+          <h2 id="featured-jobs-heading" className="mt-4 text-balance text-4xl leading-[1.1] sm:text-5xl">
+            Current opportunities in top healthcare organizations.
+          </h2>
         </div>
-      </Container>
-      <p className="sr-only">Role cards extend past the right edge and scroll sideways.</p>
-      <ul id={listId} ref={scrollerRef} aria-label="Featured jobs" className="carousel-bleed mt-12">
+        <Link to="/jobs" className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary-hover">
+          View All Jobs
+          <ArrowIcon />
+        </Link>
+      </div>
+      <ul id={listId} ref={scrollerRef} className="carousel-bleed mt-10" aria-label="Featured fictional roles">
         {jobs.map((job) => {
           const hospital = getHospitalBySlug(job.hospitalSlug)
-
           return (
-            <li key={job.slug} className="w-[min(84vw,34rem)] shrink-0 snap-start">
-              <article className="relative flex h-full min-h-[26rem] flex-col rounded-3xl border border-border bg-white p-8 shadow-[0_18px_50px_-28px_rgba(20,45,53,0.5)] focus-within:outline focus-within:outline-2 focus-within:outline-offset-4 focus-within:outline-accent">
-                <div className="flex items-start justify-between gap-4">
-                  <p className="text-sm font-semibold text-accent">{job.department}</p>
-                  <p className="text-sm text-muted">{job.employmentType}</p>
+            <li key={job.slug} className="w-[min(20rem,78vw)] shrink-0 snap-start">
+              <article className="overflow-hidden rounded-2xl border border-border bg-white shadow-sm">
+                <img
+                  src={hospital?.image ?? '/images/hospitals/harborlight.jpg'}
+                  alt={hospital?.imageAlt ?? ''}
+                  loading="lazy"
+                  className="aspect-[16/10] w-full object-cover"
+                />
+                <div className="p-5">
+                  <div className="flex items-start justify-between gap-3">
+                    <h3 className="text-2xl leading-tight">
+                      <Link to={`/jobs/${job.slug}`} className="hover:text-primary">
+                        {job.title}
+                      </Link>
+                    </h3>
+                  </div>
+                  <p className="mt-2 text-sm font-semibold text-heading">{hospital?.name}</p>
+                  <p className="mt-2 flex items-center gap-1.5 text-sm text-body">
+                    <PinIcon />
+                    {job.location}
+                  </p>
+                  <div className="mt-4 flex items-center justify-between gap-3">
+                    <ul className="flex flex-wrap gap-2" aria-label="Role details">
+                      <li className="rounded-full bg-accent-surface px-2.5 py-1 text-xs font-semibold text-primary">
+                        {job.employmentType}
+                      </li>
+                      <li className="rounded-full bg-accent-surface px-2.5 py-1 text-xs font-semibold text-primary">
+                        {job.workArrangement}
+                      </li>
+                    </ul>
+                    <CircleArrow to={`/jobs/${job.slug}`} label={`View ${job.title}`} />
+                  </div>
                 </div>
-                <h3 className="mt-8 text-3xl leading-tight">
-                  <Link
-                    to={`/jobs/${job.slug}`}
-                    className="text-heading after:absolute after:inset-0 after:rounded-3xl focus-visible:outline-none"
-                  >
-                    {job.title}
-                  </Link>
-                </h3>
-                <p className="mt-5 font-medium text-heading">
-                  {hospital?.name ?? 'Sample hospital'}
-                </p>
-                <p className="mt-1 text-sm text-muted">
-                  {job.location} · {job.schedule}
-                </p>
-                <p className="mt-6 leading-relaxed">{job.summary}</p>
-                <p className="mt-auto pt-8 text-sm font-semibold text-primary">View role</p>
               </article>
             </li>
           )
         })}
       </ul>
+      <div className="mx-auto mt-4 flex w-[min(75rem,100%)] justify-end gap-2">
+        <button
+          type="button"
+          className="inline-flex size-11 items-center justify-center rounded-full border border-border bg-white text-heading disabled:opacity-40"
+          aria-label="Show previous roles"
+          aria-controls={listId}
+          disabled={atStart}
+          onClick={() => scrollByCard(-1)}
+        >
+          <ArrowIcon className="rotate-180" />
+        </button>
+        <button
+          type="button"
+          className="inline-flex size-11 items-center justify-center rounded-full border border-border bg-white text-heading disabled:opacity-40"
+          aria-label="Show next roles"
+          aria-controls={listId}
+          disabled={atEnd}
+          onClick={() => scrollByCard(1)}
+        >
+          <ArrowIcon />
+        </button>
+      </div>
     </Section>
-  )
-}
-
-function Chevron({ direction }: { direction: 'left' | 'right' }) {
-  return (
-    <svg viewBox="0 0 24 24" className="size-5" aria-hidden="true">
-      <path
-        d={direction === 'left' ? 'M14.5 6.5 9 12l5.5 5.5' : 'M9.5 6.5 15 12l-5.5 5.5'}
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.75"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
   )
 }

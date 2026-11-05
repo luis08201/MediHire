@@ -85,19 +85,8 @@ export function JobFilterGroups({
           onChange({ ...values, specialties: toggleInList(values.specialties, value) })
         }
       />
-      <CheckGroup
-        legend="Location"
-        name={`${idPrefix}-location`}
-        options={locations}
-        selected={values.locations}
-        idPrefix={idPrefix}
-        group="location"
-        onToggle={(value) =>
-          onChange({ ...values, locations: toggleInList(values.locations, value) })
-        }
-      />
       <CheckGroup<WorkArrangement>
-        legend="Work Arrangement"
+        legend="Work Type"
         name={`${idPrefix}-arrangement`}
         options={workArrangements}
         selected={values.arrangements}
@@ -108,7 +97,7 @@ export function JobFilterGroups({
         }
       />
       <CheckGroup<EmploymentType>
-        legend="Employment Type"
+        legend="Employment"
         name={`${idPrefix}-employment`}
         options={employmentTypes}
         selected={values.employmentTypes}
@@ -119,6 +108,17 @@ export function JobFilterGroups({
             ...values,
             employmentTypes: toggleInList(values.employmentTypes, value),
           })
+        }
+      />
+      <CheckGroup
+        legend="Location"
+        name={`${idPrefix}-location`}
+        options={locations}
+        selected={values.locations}
+        idPrefix={idPrefix}
+        group="location"
+        onToggle={(value) =>
+          onChange({ ...values, locations: toggleInList(values.locations, value) })
         }
       />
     </div>

@@ -2,25 +2,15 @@ import { useEffect, useId, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router'
 import { scrollToId } from '../../lib/scrollToId.ts'
 import { cn } from '../../lib/cn.ts'
-import { ButtonLink } from '../ui/Button.tsx'
-import { Container } from './Container.tsx'
+import { BrandMark } from '../ui/Marks.tsx'
 
 const links = [
-  { to: '/', label: 'Home', end: true },
-  { to: '/#features', label: 'Features' },
-  { to: '/jobs', label: 'Jobs' },
+  { to: '/jobs', label: 'Find Jobs' },
   { to: '/hospitals', label: 'Hospitals' },
+  { to: '/#features', label: 'Features' },
+  { to: '/#solutions', label: 'Solutions' },
   { to: '/#pricing', label: 'Pricing' },
 ] as const
-
-function linkClass(isActive: boolean) {
-  return cn(
-    'rounded-md px-3 py-2 text-sm font-semibold',
-    isActive
-      ? 'bg-accent-surface text-primary'
-      : 'text-body hover:bg-accent-surface hover:text-heading',
-  )
-}
 
 export function SiteHeader() {
   const menuId = useId()
@@ -57,82 +47,79 @@ export function SiteHeader() {
   }
 
   return (
-    <header className="sticky top-0 z-40 border-b border-border bg-white">
-      <Container>
-        <div className="flex h-16 items-center justify-between gap-4 lg:h-[4.5rem]">
-          <Link to="/" className="font-serif text-2xl text-heading">
-            MediHire
-          </Link>
-          <div className="hidden items-center gap-6 lg:flex">
-            <nav aria-label="Primary" className="flex items-center gap-1">
-              {links.map((link) => (
-                <PrimaryLink key={link.to} to={link.to} end={'end' in link ? link.end : false} onNavigate={handleHashClick}>
-                  {link.label}
-                </PrimaryLink>
-              ))}
-            </nav>
-            <ButtonLink to="/#demo" onClick={() => handleHashClick('/#demo')}>
-              Book a Demo
-            </ButtonLink>
-          </div>
-          <button
-            type="button"
-            className="inline-flex size-11 items-center justify-center rounded-md text-heading lg:hidden"
-            aria-expanded={open}
-            aria-controls={menuId}
-            onClick={() => setOpen((value) => !value)}
-          >
-            <span className="sr-only">{open ? 'Close menu' : 'Open menu'}</span>
-            {open ? <CloseIcon /> : <MenuIcon />}
-          </button>
-        </div>
-        <nav
-          id={menuId}
-          aria-label="Primary"
-          className={open ? 'border-t border-border py-3 lg:hidden' : 'hidden'}
-        >
-          <ul className="flex flex-col gap-1">
+    <header className="sticky top-0 z-40 border-b border-border/80 bg-white">
+      <div className="mx-auto flex h-16 w-[min(78rem,calc(100%-2.5rem))] items-center justify-between gap-4 md:w-[min(78rem,calc(100%-4rem))]">
+        <BrandMark />
+        <div className="hidden items-center gap-8 lg:flex">
+          <nav aria-label="Primary" className="flex items-center gap-6">
             {links.map((link) => (
-              <li key={link.to}>
-                <PrimaryLink
-                  to={link.to}
-                  end={'end' in link ? link.end : false}
-                  block
-                  onNavigate={handleHashClick}
-                >
-                  {link.label}
-                </PrimaryLink>
-              </li>
+              <PrimaryLink key={link.to} to={link.to} onNavigate={handleHashClick}>
+                {link.label}
+              </PrimaryLink>
             ))}
-          </ul>
-          <ButtonLink
+          </nav>
+          <Link
             to="/#demo"
-            className="mt-3 w-full"
             onClick={() => handleHashClick('/#demo')}
+            className="inline-flex min-h-10 items-center rounded-full bg-primary px-4 text-sm font-semibold text-white hover:bg-primary-hover"
           >
             Book a Demo
-          </ButtonLink>
-        </nav>
-      </Container>
+          </Link>
+        </div>
+        <button
+          type="button"
+          className="inline-flex size-11 items-center justify-center rounded-md text-heading lg:hidden"
+          aria-expanded={open}
+          aria-controls={menuId}
+          onClick={() => setOpen((value) => !value)}
+        >
+          <span className="sr-only">{open ? 'Close menu' : 'Open menu'}</span>
+          {open ? <CloseIcon /> : <MenuIcon />}
+        </button>
+      </div>
+      <nav
+        id={menuId}
+        aria-label="Primary"
+        className={open ? 'border-t border-border bg-white px-5 py-3 lg:hidden' : 'hidden'}
+      >
+        <ul className="flex flex-col">
+          {links.map((link) => (
+            <li key={link.to}>
+              <PrimaryLink to={link.to} block onNavigate={handleHashClick}>
+                {link.label}
+              </PrimaryLink>
+            </li>
+          ))}
+        </ul>
+        <Link
+          to="/#demo"
+          onClick={() => handleHashClick('/#demo')}
+          className="mt-2 inline-flex min-h-11 w-full items-center justify-center rounded-full bg-primary text-sm font-semibold text-white"
+        >
+          Book a Demo
+        </Link>
+      </nav>
     </header>
   )
 }
 
 function PrimaryLink({
   to,
-  end,
   block = false,
   onNavigate,
   children,
 }: {
   to: string
-  end?: boolean
   block?: boolean
   onNavigate: (to: string) => void
   children: string
 }) {
   const className = (isActive: boolean) =>
-    cn(linkClass(isActive), block && 'flex min-h-11 items-center')
+    cn(
+      'text-sm font-medium text-body hover:text-heading',
+      isActive && 'text-heading',
+      block && 'flex min-h-11 items-center',
+    )
 
   if (to.includes('#')) {
     return (
@@ -143,7 +130,11 @@ function PrimaryLink({
   }
 
   return (
-    <NavLink to={to} end={end} className={({ isActive }) => className(isActive)} onClick={() => onNavigate(to)}>
+    <NavLink
+      to={to}
+      className={({ isActive }) => className(isActive)}
+      onClick={() => onNavigate(to)}
+    >
       {children}
     </NavLink>
   )

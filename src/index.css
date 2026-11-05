@@ -125,4 +125,12 @@
       scroll-behavior: auto;
     }
   }
+
+  .curve-photo {
+    border-radius: 42% 18% 18% 42% / 46% 18% 18% 46%;
+  }
+
+  .curve-photo-left {
+    border-radius: 46% 0 0 46% / 50% 0 0 50%;
+  }
 }

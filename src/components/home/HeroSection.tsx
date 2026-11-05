@@ -1,51 +1,52 @@
-import { ButtonLink } from '../ui/Button.tsx'
-import { Container } from '../layout/Container.tsx'
-import { Section } from '../layout/Section.tsx'
+import { Link } from 'react-router'
+import { ArrowIcon, Eyebrow } from '../ui/Marks.tsx'
 
 export function HeroSection() {
   return (
-    <Section labelledBy="home-heading">
-      <Container>
-        <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-16">
-          <div className="max-w-xl">
-            <p className="text-sm font-semibold text-accent">Healthcare recruitment, simplified.</p>
-            <h1
-              id="home-heading"
-              className="mt-5 text-balance text-4xl leading-[1.12] sm:text-5xl lg:text-6xl lg:leading-[1.08]"
+    <section className="overflow-hidden bg-[#f3f6f5]" aria-labelledby="home-heading">
+      <div className="mx-auto grid w-[min(78rem,calc(100%-2.5rem))] items-center gap-10 py-16 md:w-[min(78rem,calc(100%-4rem))] md:py-20 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:py-24">
+        <div className="max-w-xl">
+          <Eyebrow>Healthcare recruitment, reimagined</Eyebrow>
+          <h1
+            id="home-heading"
+            className="mt-5 text-balance text-5xl leading-[1.05] sm:text-6xl lg:text-[4.25rem]"
+          >
+            Where better care
+            <br />
+            begins with
+            <br />
+            better hiring.
+          </h1>
+          <p className="mt-5 max-w-md text-lg leading-relaxed">
+            Connecting healthcare professionals with the organizations that need them.
+          </p>
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <Link
+              to="/jobs"
+              className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-primary px-5 text-sm font-semibold text-white hover:bg-primary-hover"
             >
-              Connecting exceptional care with exceptional careers.
-            </h1>
-            <p className="mt-6 text-lg leading-relaxed">
-              MediHire gives clinicians a clear view of the unit, the schedule,
-              and the hospital, and gives hiring teams one place to present open
-              roles beside the facts that describe their site.
-            </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <ButtonLink to="/jobs" className="w-full sm:w-auto">
-                Explore Jobs
-              </ButtonLink>
-              <ButtonLink to="/hospitals" variant="secondary" className="w-full sm:w-auto">
-                For Hospitals
-              </ButtonLink>
-            </div>
+              Explore Jobs
+              <ArrowIcon />
+            </Link>
+            <Link
+              to="/hospitals"
+              className="inline-flex min-h-11 items-center justify-center rounded-full border border-border bg-white px-5 text-sm font-semibold text-heading hover:bg-accent-surface"
+            >
+              For Organizations
+            </Link>
           </div>
-          <figure className="relative">
-            <img
-              src="/images/clinicians-review.jpg"
-              alt="Two clinicians in white coats review a scan together in a bright office."
-              width="1600"
-              height="1067"
-              className="aspect-[4/5] w-full rounded-3xl object-cover shadow-[0_24px_60px_-36px_rgba(20,45,53,0.55)] sm:aspect-[5/4] lg:aspect-[4/5]"
-            />
-            <figcaption className="absolute inset-x-4 bottom-4 rounded-2xl border border-border bg-white p-5 shadow-[0_12px_30px_-24px_rgba(20,45,53,0.6)] sm:inset-x-auto sm:right-auto sm:left-5 sm:max-w-xs">
-              <p className="text-sm font-semibold text-heading">Sample directory</p>
-              <p className="mt-1 text-sm leading-relaxed">
-                Eight fictional roles across six hospitals. Nothing here is an application.
-              </p>
-            </figcaption>
-          </figure>
+          <p className="mt-4 text-sm text-muted">
+            Eight fictional featured roles. Nothing here is an application.
+          </p>
         </div>
-      </Container>
-    </Section>
+        <div className="relative min-h-80 lg:min-h-[34rem]">
+          <img
+            src="/images/clinician-portrait.jpg"
+            alt="A physician in a white coat stands outdoors and faces the camera."
+            className="curve-photo h-80 w-full object-cover object-[center_20%] shadow-sm lg:absolute lg:inset-y-0 lg:h-full"
+          />
+        </div>
+      </div>
+    </section>
   )
 }

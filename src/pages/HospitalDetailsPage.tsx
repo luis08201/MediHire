@@ -149,26 +149,25 @@ export function HospitalDetailsPage() {
 
   return (
     <>
-      <section className="bg-accent-surface" aria-labelledby="hospital-title">
-        <Container className="py-16 md:py-20 lg:py-24">
+      <section className="overflow-hidden bg-accent-surface" aria-labelledby="hospital-title">
+        <Container className="py-12 md:py-16 lg:py-20">
           <Breadcrumb current={hospital.name} />
-          <div className="mt-8 grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
-            <div className="order-2 lg:order-1">
-              <p className="text-sm font-semibold text-accent">{hospital.type}</p>
-              <h1
-                id="hospital-title"
-                className="mt-4 text-balance text-4xl sm:text-5xl lg:text-6xl"
-              >
+          <div className="mt-8 grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)]">
+            <div>
+              <p className="text-xs font-semibold tracking-[0.16em] text-primary uppercase">
+                {hospital.type}
+              </p>
+              <h1 id="hospital-title" className="mt-4 text-balance text-5xl leading-[1.05] sm:text-6xl">
                 {hospital.name}
               </h1>
-              <p className="mt-5 text-lg text-heading">
+              <p className="mt-4 text-lg text-heading">
                 {hospital.city}, {hospital.region}
               </p>
-              <ul className="mt-6 flex flex-wrap gap-2" aria-label="Specialties">
+              <ul className="mt-5 flex flex-wrap gap-2" aria-label="Specialties">
                 {hospital.focusAreas.map((area) => (
                   <li
                     key={area}
-                    className="rounded-full border border-border bg-white px-3 py-1 text-sm text-heading"
+                    className="rounded-full bg-white px-3 py-1 text-xs font-semibold text-accent"
                   >
                     {area}
                   </li>
@@ -178,7 +177,7 @@ export function HospitalDetailsPage() {
                 <ButtonLink
                   to={{ hash: 'open-positions' }}
                   onClick={focusOpenPositions}
-                  className="w-full sm:w-auto"
+                  className="w-full !rounded-full sm:w-auto"
                 >
                   View Open Positions
                 </ButtonLink>
@@ -187,16 +186,11 @@ export function HospitalDetailsPage() {
                 </p>
               </div>
             </div>
-            <figure className="order-1 lg:order-2">
-              <img
-                src={hospital.image}
-                alt={hospital.imageAlt}
-                className="aspect-[16/10] w-full rounded-2xl border border-border object-cover shadow-sm lg:aspect-[4/5]"
-              />
-              <figcaption className="mt-3 text-sm text-muted">
-                Photograph for atmosphere only.
-              </figcaption>
-            </figure>
+            <img
+              src={hospital.image}
+              alt={hospital.imageAlt}
+              className="curve-photo min-h-72 w-full object-cover"
+            />
           </div>
         </Container>
       </section>
@@ -297,21 +291,20 @@ export function HospitalDetailsPage() {
         </Container>
       </section>
 
-      <section className="bg-primary" aria-labelledby="hospital-cta">
-        <Container className="py-16 md:py-20 lg:py-28">
-          <div className="max-w-3xl">
-            <h2 id="hospital-cta" className="text-balance text-4xl text-white sm:text-5xl">
+      <section className="bg-background" aria-labelledby="hospital-cta">
+        <Container className="py-12 lg:py-16">
+          <div className="overflow-hidden rounded-[1.75rem] bg-primary px-8 py-12 sm:px-12">
+            <h2 id="hospital-cta" className="max-w-xl text-balance text-4xl leading-[1.1] text-white sm:text-5xl">
               Find your place in better care.
             </h2>
-            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-accent-surface">
-              Browse the sample job board, or return to the fictional hospital directory. Nothing
-              on this page starts an application.
+            <p className="mt-4 max-w-xl text-lg leading-relaxed text-accent-surface">
+              Browse the sample job board, or return to the fictional hospital directory. Nothing on this page starts an application.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <ButtonLink to="/jobs" variant="inverse" className="w-full sm:w-auto">
+              <ButtonLink to="/jobs" variant="inverse" className="!rounded-full">
                 Explore Opportunities
               </ButtonLink>
-              <ButtonLink to="/hospitals" variant="inverseQuiet" className="w-full sm:w-auto">
+              <ButtonLink to="/hospitals" variant="inverseQuiet" className="!rounded-full">
                 Browse hospitals
               </ButtonLink>
             </div>
