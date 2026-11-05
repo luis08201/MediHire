@@ -1,18 +1,22 @@
-import { useMemo, useState, type FormEvent } from 'react'
-import { Link } from 'react-router'
+import { useEffect, useMemo, useState, type FormEvent } from 'react'
+import { Link, useSearchParams } from 'react-router'
+import { HospitalFilterGroups } from '../components/hospitals/HospitalFilterGroups.tsx'
 import { Container } from '../components/layout/Container.tsx'
+import { FilterDrawer } from '../components/jobs/FilterDrawer.tsx'
 import { Button, ButtonLink } from '../components/ui/Button.tsx'
 import { ArrowIcon, Eyebrow, PinIcon, SearchIcon } from '../components/ui/Marks.tsx'
 import { hospitals } from '../data/hospitals.ts'
 import { jobs } from '../data/jobs.ts'
 import {
+  cloneHospitalFilters,
   emptyHospitalFilters,
   filterHospitals,
   locationLabel,
+  readHospitalSearch,
   sortHospitals,
   toDirectory,
-  toggleInList,
   uniqueSorted,
+  writeHospitalSearch,
   type HospitalFilters,
   type HospitalSort,
 } from '../lib/hospitalDirectory.ts'
@@ -22,15 +26,16 @@ const directory = toDirectory(hospitals, jobs)
 const locations = uniqueSorted(directory.map((hospital) => locationLabel(hospital)))
 const specialties = uniqueSorted(directory.flatMap((hospital) => hospital.focusAreas))
 
-function fieldId(group: string, value: string) {
-  return `hospital-${group}-${value.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`
-}
-
 export function HospitalsPage() {
-  const [queryDraft, setQueryDraft] = useState('')
-  const [query, setQuery] = useState('')
-  const [filters, setFilters] = useState<HospitalFilters>(emptyHospitalFilters)
-  const [sort, setSort] = useState<HospitalSort>('recommended')
+  const [searchParams, setSearchParams] = useSearchParams()
+  const directoryState = useMemo(
+    () => readHospitalSearch(searchParams, { locations, specialties }),
+    [searchParams],
+  )
+  const { query, filters, sort } = directoryState
+  const [queryDraft, setQueryDraft] = useState(query)
+  const [draftFilters, setDraftFilters] = useState<HospitalFilters>(emptyHospitalFilters)
+  const [drawerOpen, setDrawerOpen] = useState(false)
 
   useDocumentTitle('Hospitals · MediHire')
 
@@ -38,18 +43,40 @@ export function HospitalsPage() {
     () => sortHospitals(filterHospitals(directory, query, filters), sort),
     [query, filters, sort],
   )
+  const selectedCount = filters.locations.length + filters.specialties.length
+
+  useEffect(() => {
+    setQueryDraft(query)
+  }, [query])
+
+  function commit(next: { query?: string; filters?: HospitalFilters; sort?: HospitalSort }) {
+    setSearchParams(
+      writeHospitalSearch({
+        query: next.query ?? query,
+        filters: next.filters ?? filters,
+        sort: next.sort ?? sort,
+      }),
+      { preventScrollReset: true },
+    )
+  }
 
   function applySearch(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
-    setQuery(queryDraft.trim())
-    setQueryDraft(queryDraft.trim())
+    const next = queryDraft.trim()
+    setQueryDraft(next)
+    commit({ query: next })
   }
 
   function resetDirectory() {
-    setQuery('')
     setQueryDraft('')
-    setFilters(emptyHospitalFilters)
-    setSort('recommended')
+    setDraftFilters(emptyHospitalFilters)
+    setDrawerOpen(false)
+    setSearchParams(new URLSearchParams(), { preventScrollReset: true })
+  }
+
+  function openDrawer() {
+    setDraftFilters(cloneHospitalFilters(filters))
+    setDrawerOpen(true)
   }
 
   const chips = [
@@ -60,8 +87,8 @@ export function HospitalsPage() {
             label: `Search: ${query}`,
             removeLabel: `Remove search for ${query}`,
             remove: () => {
-              setQuery('')
               setQueryDraft('')
+              commit({ query: '' })
             },
           },
         ]
@@ -71,20 +98,24 @@ export function HospitalsPage() {
       label: value,
       removeLabel: `Remove ${value}`,
       remove: () =>
-        setFilters((current) => ({
-          ...current,
-          locations: current.locations.filter((item) => item !== value),
-        })),
+        commit({
+          filters: {
+            ...filters,
+            locations: filters.locations.filter((item) => item !== value),
+          },
+        }),
     })),
     ...filters.specialties.map((value) => ({
       id: `specialty-${value}`,
       label: value,
       removeLabel: `Remove ${value}`,
       remove: () =>
-        setFilters((current) => ({
-          ...current,
-          specialties: current.specialties.filter((item) => item !== value),
-        })),
+        commit({
+          filters: {
+            ...filters,
+            specialties: filters.specialties.filter((item) => item !== value),
+          },
+        }),
     })),
   ]
 
@@ -135,77 +166,36 @@ export function HospitalsPage() {
           </div>
           <img
             src="/images/hospitals/northcedar.jpg"
-            alt="Quiet inpatient room with a made bed"
-            className="curve-photo hidden min-h-80 w-full object-cover lg:block"
+            alt="Corner of a modern glass building under a blue sky."
+            className="curve-sweep hidden min-h-80 w-full object-cover object-[center_40%] lg:block"
           />
         </Container>
       </section>
 
       <section aria-labelledby="hospital-results-heading" className="border-t border-border">
         <Container className="py-10 lg:py-14">
-          <div className="rounded-2xl border border-border bg-white p-6 shadow-sm">
+          <div className="mb-6 lg:hidden">
+            <Button
+              variant="secondary"
+              className="w-full sm:w-auto"
+              aria-expanded={drawerOpen}
+              aria-controls={drawerOpen ? 'hospital-filter-drawer' : undefined}
+              onClick={openDrawer}
+            >
+              Filters{selectedCount > 0 ? ` (${selectedCount})` : ''}
+            </Button>
+          </div>
+
+          <div className="hidden rounded-2xl border border-border bg-white p-6 shadow-sm lg:block">
             <h2 className="font-sans text-lg font-semibold">Filters</h2>
-            <div className="mt-6 grid gap-8 lg:grid-cols-2">
-              <fieldset className="border-0 p-0">
-                <legend className="mb-2 text-sm font-semibold text-heading">Location</legend>
-                <div className="grid gap-1 sm:grid-cols-2">
-                  {locations.map((location) => {
-                    const id = fieldId('location', location)
-                    return (
-                      <label
-                        key={location}
-                        htmlFor={id}
-                        className="flex min-h-11 cursor-pointer items-center gap-3 text-sm"
-                      >
-                        <input
-                          id={id}
-                          name="hospital-location"
-                          type="checkbox"
-                          className="size-4 accent-primary"
-                          checked={filters.locations.includes(location)}
-                          onChange={() =>
-                            setFilters((current) => ({
-                              ...current,
-                              locations: toggleInList(current.locations, location),
-                            }))
-                          }
-                        />
-                        <span>{location}</span>
-                      </label>
-                    )
-                  })}
-                </div>
-              </fieldset>
-              <fieldset className="border-0 p-0">
-                <legend className="mb-2 text-sm font-semibold text-heading">Specialty</legend>
-                <div className="grid gap-1 sm:grid-cols-2">
-                  {specialties.map((specialty) => {
-                    const id = fieldId('specialty', specialty)
-                    return (
-                      <label
-                        key={specialty}
-                        htmlFor={id}
-                        className="flex min-h-11 cursor-pointer items-center gap-3 text-sm"
-                      >
-                        <input
-                          id={id}
-                          name="hospital-specialty"
-                          type="checkbox"
-                          className="size-4 accent-primary"
-                          checked={filters.specialties.includes(specialty)}
-                          onChange={() =>
-                            setFilters((current) => ({
-                              ...current,
-                              specialties: toggleInList(current.specialties, specialty),
-                            }))
-                          }
-                        />
-                        <span>{specialty}</span>
-                      </label>
-                    )
-                  })}
-                </div>
-              </fieldset>
+            <div className="mt-6">
+              <HospitalFilterGroups
+                idPrefix="hospital-desktop"
+                values={filters}
+                locations={locations}
+                specialties={specialties}
+                onChange={(next) => commit({ filters: next })}
+              />
             </div>
           </div>
 
@@ -218,14 +208,14 @@ export function HospitalsPage() {
                 {countText}
               </p>
             </div>
-            <label htmlFor="hospital-sort" className="text-sm font-semibold text-heading">
+            <label htmlFor="hospital-sort" className="inline-flex items-center gap-2 text-sm font-semibold text-heading">
               Sort
               <select
                 id="hospital-sort"
                 name="sort"
                 value={sort}
-                onChange={(event) => setSort(event.target.value as HospitalSort)}
-                className="mt-2 block min-h-11 w-full rounded-lg border border-border bg-white px-3 text-sm font-medium text-heading sm:w-56"
+                onChange={(event) => commit({ sort: event.target.value as HospitalSort })}
+                className="min-h-11 rounded-lg border border-border bg-white px-3 text-sm font-medium text-heading"
               >
                 <option value="recommended">Recommended</option>
                 <option value="name">Name A–Z</option>
@@ -341,6 +331,24 @@ export function HospitalsPage() {
           </div>
         </Container>
       </section>
+      <FilterDrawer
+        open={drawerOpen}
+        dialogId="hospital-filter-drawer"
+        onApply={() => {
+          commit({ filters: cloneHospitalFilters(draftFilters) })
+          setDrawerOpen(false)
+        }}
+        onClear={() => setDraftFilters(emptyHospitalFilters)}
+        onClose={() => setDrawerOpen(false)}
+      >
+        <HospitalFilterGroups
+          idPrefix="hospital-drawer"
+          values={draftFilters}
+          locations={locations}
+          specialties={specialties}
+          onChange={setDraftFilters}
+        />
+      </FilterDrawer>
     </>
   )
 }

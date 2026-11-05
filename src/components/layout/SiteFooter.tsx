@@ -7,7 +7,7 @@ const columns = [
     links: [
       { to: '/', label: 'Home' },
       { to: '/#solutions', label: 'Solutions' },
-      { to: '/jobs', label: 'Jobs' },
+      { to: '/jobs', label: 'Find Jobs' },
       { to: '/hospitals', label: 'Hospitals' },
     ],
   },
@@ -16,7 +16,7 @@ const columns = [
     links: [
       { to: '/#features', label: 'Features' },
       { to: '/#pricing', label: 'Pricing' },
-      { to: '/#demo', label: 'Book a demo' },
+      { to: '/#pricing', label: 'About This Preview' },
     ],
   },
 ]

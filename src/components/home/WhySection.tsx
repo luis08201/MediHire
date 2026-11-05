@@ -66,10 +66,10 @@ export function WhySection() {
           </div>
           <figure>
             <img
-              src="/images/clinician-portrait.jpg"
-              alt="A physician in a white coat stands outdoors and faces the camera."
-              width="1400"
-              height="1750"
+              src="/images/nurse-teal.jpg"
+              alt="A clinician in teal scrubs smiles toward the camera."
+              width="1080"
+              height="900"
               loading="lazy"
               className="aspect-[4/5] w-full rounded-3xl object-cover object-top shadow-[0_24px_60px_-36px_rgba(20,45,53,0.5)]"
             />

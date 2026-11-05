@@ -92,6 +92,51 @@ export function sortHospitals(hospitals: DirectoryHospital[], sort: HospitalSort
   return copy
 }
 
+const hospitalSorts = new Set<HospitalSort>(['recommended', 'name', 'location', 'jobs'])
+
+export function cloneHospitalFilters(filters: HospitalFilters): HospitalFilters {
+  return {
+    locations: [...filters.locations],
+    specialties: [...filters.specialties],
+  }
+}
+
+export function readHospitalSearch(
+  params: URLSearchParams,
+  options: { locations: string[]; specialties: string[] },
+) {
+  const sortValue = params.get('sort')
+  const sort: HospitalSort =
+    sortValue && hospitalSorts.has(sortValue as HospitalSort)
+      ? (sortValue as HospitalSort)
+      : 'recommended'
+  const locations = new Set(options.locations)
+  const specialties = new Set(options.specialties)
+
+  return {
+    query: params.get('q') ?? '',
+    sort,
+    filters: {
+      locations: params.getAll('location').filter((value) => locations.has(value)),
+      specialties: params.getAll('specialty').filter((value) => specialties.has(value)),
+    } satisfies HospitalFilters,
+  }
+}
+
+export function writeHospitalSearch(state: {
+  query: string
+  filters: HospitalFilters
+  sort: HospitalSort
+}) {
+  const params = new URLSearchParams()
+  const query = state.query.trim()
+  if (query) params.set('q', query)
+  for (const value of state.filters.locations) params.append('location', value)
+  for (const value of state.filters.specialties) params.append('specialty', value)
+  if (state.sort !== 'recommended') params.set('sort', state.sort)
+  return params
+}
+
 export function toggleInList<T>(list: readonly T[], value: T): T[] {
   return list.includes(value) ? list.filter((item) => item !== value) : [...list, value]
 }

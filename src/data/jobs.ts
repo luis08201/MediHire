@@ -373,6 +373,55 @@ export function getJobsForHospital(hospitalSlug: string) {
   return jobs.filter((job) => job.hospitalSlug === hospitalSlug)
 }
 
+const titleStopWords = new Set([
+  'and',
+  'the',
+  'for',
+  'with',
+  'from',
+  'medical',
+  'registered',
+  'hospital',
+  'care',
+  'patient',
+  'patients',
+  'clinical',
+  'inpatient',
+  'pediatric',
+  'adult',
+  'health',
+  'center',
+  'unit',
+  'role',
+  'nurse',
+  'therapist',
+])
+
+function roleFamily(title: string) {
+  const text = title.toLowerCase()
+  if (/\b(nurse|rn)\b/.test(text)) return 'nurse'
+  if (/\btherapist\b/.test(text)) return 'therapist'
+  if (/\bpharmacist\b/.test(text)) return 'pharmacist'
+  if (/\btechnologist\b/.test(text)) return 'technologist'
+  return ''
+}
+
+function titleTokens(title: string) {
+  return title
+    .toLowerCase()
+    .split(/[^a-z0-9]+/)
+    .filter((word) => word.length > 2 && !titleStopWords.has(word))
+}
+
+function titleSimilarity(left: string, right: string) {
+  const words = new Set(titleTokens(left))
+  let shared = 0
+  for (const word of titleTokens(right)) {
+    if (words.has(word)) shared += 1
+  }
+  return shared
+}
+
 export function getRelatedJobs(slug: string, limit = 3) {
   const current = jobs.find((job) => job.slug === slug)
   if (!current) return []
@@ -382,13 +431,13 @@ export function getRelatedJobs(slug: string, limit = 3) {
     .map((job) => ({
       job,
       rank:
-        (job.specialty === current.specialty ? 4 : 0) +
-        (job.hospitalSlug === current.hospitalSlug ? 2 : 0) +
-        (job.department === current.department ? 1 : 0),
+        (job.specialty === current.specialty ? 100 : 0) +
+        (roleFamily(job.title) !== '' && roleFamily(job.title) === roleFamily(current.title) ? 40 : 0) +
+        titleSimilarity(current.title, job.title) * 8 +
+        (job.hospitalSlug === current.hospitalSlug ? 4 : 0) +
+        (job.department === current.department ? 2 : 0),
     }))
-    .sort(
-      (a, b) => b.rank - a.rank || a.job.title.localeCompare(b.job.title),
-    )
+    .sort((a, b) => b.rank - a.rank || a.job.title.localeCompare(b.job.title))
     .slice(0, limit)
     .map((item) => item.job)
 }

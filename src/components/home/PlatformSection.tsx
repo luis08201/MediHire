@@ -33,24 +33,24 @@ export function PlatformSection() {
               A modern recruitment platform designed for healthcare organizations and professionals.
             </p>
           </div>
-          <div className="grid grid-cols-3 items-end gap-3">
+          <div className="relative mx-auto h-64 w-full max-w-md sm:h-72">
             <img
               src="/images/hospitals/ridgeway.jpg"
-              alt="Open ward with empty beds and privacy curtains"
+              alt="A glass tower with a pale panel facade."
               loading="lazy"
-              className="col-span-1 aspect-[3/4] w-full rounded-2xl object-cover"
+              className="absolute top-8 left-0 z-0 h-40 w-[48%] rounded-2xl object-cover shadow-[0_16px_30px_-18px_rgba(20,45,53,0.55)] sm:h-48"
             />
             <img
-              src="/images/clinicians-review.jpg"
-              alt="Two clinicians in white coats review a scan together in a bright office."
+              src="/images/nurse-teal.jpg"
+              alt="A clinician in teal scrubs smiles toward the camera."
               loading="lazy"
-              className="col-span-1 aspect-[3/4] w-full translate-y-6 rounded-2xl object-cover"
+              className="absolute top-0 left-1/2 z-20 h-48 w-[44%] -translate-x-1/2 rounded-2xl object-cover object-[center_30%] shadow-[0_18px_36px_-16px_rgba(20,45,53,0.55)] sm:h-56"
             />
             <img
-              src="/images/hospitals/harborlight.jpg"
-              alt="Empty, brightly lit procedure room"
+              src="/images/hospitals/northcedar.jpg"
+              alt="Corner of a modern glass building under a blue sky."
               loading="lazy"
-              className="col-span-1 aspect-[3/4] w-full rounded-2xl object-cover"
+              className="absolute right-0 bottom-0 z-10 h-40 w-[48%] rounded-2xl object-cover object-[78%_22%] shadow-[0_16px_30px_-18px_rgba(20,45,53,0.55)] sm:h-48"
             />
           </div>
         </div>

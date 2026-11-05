@@ -1,11 +1,11 @@
 import { type MouseEvent } from 'react'
 import { Link, useParams } from 'react-router'
+import { HorizontalJobCard } from '../components/jobs/HorizontalJobCard.tsx'
 import { Container } from '../components/layout/Container.tsx'
 import { ButtonLink } from '../components/ui/Button.tsx'
-import { Card } from '../components/ui/Card.tsx'
 import { getHospitalBySlug } from '../data/hospitals.ts'
 import { getJobsForHospital } from '../data/jobs.ts'
-import type { Hospital, JobListing } from '../data/types.ts'
+import type { Hospital } from '../data/types.ts'
 import { scrollToId } from '../lib/scrollToId.ts'
 import { useDocumentTitle } from '../lib/useDocumentTitle.ts'
 
@@ -41,64 +41,8 @@ function Breadcrumb({ current }: { current?: string }) {
   )
 }
 
-function formatList(items: string[]) {
-  if (items.length <= 1) return items[0] ?? ''
-  if (items.length === 2) return `${items[0]} and ${items[1]}`
-  return `${items.slice(0, -1).join(', ')}, and ${items[items.length - 1]}`
-}
-
-function withArticle(phrase: string) {
-  const article = /^[aeiou]/i.test(phrase) ? 'an' : 'a'
-  return `${article} ${phrase}`
-}
-
 function overview(hospital: Hospital) {
-  return [
-    `${hospital.name} is a fictional ${hospital.type.toLowerCase()} in ${hospital.city}, ${hospital.region}. The sample profile lists ${hospital.bedCount} beds. ${hospital.summary}`,
-    `The approach to care on this profile follows the specialties already recorded for the site: ${formatList(hospital.focusAreas)}. Open roles below are the only positions attached to this hospital in the MediHire preview.`,
-  ]
-}
-
-function highlights(hospital: Hospital) {
-  return [
-    {
-      label: 'Kind of hospital',
-      title: hospital.type,
-      text: `${hospital.name} is recorded as ${withArticle(hospital.type.toLowerCase())} in the sample directory.`,
-    },
-    {
-      label: 'Setting',
-      title: `${hospital.city}, ${hospital.region}`,
-      text: `The sample profile places this hospital in ${hospital.city}, ${hospital.region}.`,
-    },
-    {
-      label: 'Listed capacity',
-      title: `${hospital.bedCount} beds`,
-      text: 'The sample directory records this bed count for the site.',
-    },
-    {
-      label: 'Clinical focus',
-      title: 'Listed specialties',
-      text: `Care on this profile is organized around ${formatList(hospital.focusAreas)}.`,
-    },
-  ]
-}
-
-function jobMeta(role: JobListing) {
-  const arrangement =
-    role.workArrangement.toLowerCase() === role.location.toLowerCase()
-      ? undefined
-      : role.workArrangement
-
-  return [role.location, role.employmentType, arrangement, role.salary]
-    .filter((item): item is string => Boolean(item))
-    .join(' · ')
-}
-
-function jobEyebrow(role: JobListing) {
-  return role.specialty === role.department
-    ? role.specialty
-    : `${role.specialty} · ${role.department}`
+  return `${hospital.name} is a fictional ${hospital.type.toLowerCase()} in ${hospital.city}, ${hospital.region}, with ${hospital.bedCount} beds. ${hospital.summary}`
 }
 
 function focusOpenPositions(event: MouseEvent<HTMLAnchorElement>) {
@@ -145,8 +89,6 @@ export function HospitalDetailsPage() {
     )
   }
 
-  const paragraphs = overview(hospital)
-
   return (
     <>
       <section className="overflow-hidden bg-accent-surface" aria-labelledby="hospital-title">
@@ -189,7 +131,7 @@ export function HospitalDetailsPage() {
             <img
               src={hospital.image}
               alt={hospital.imageAlt}
-              className="curve-photo min-h-72 w-full object-cover"
+              className="curve-sweep min-h-72 w-full object-cover object-[center_40%]"
             />
           </div>
         </Container>
@@ -202,44 +144,7 @@ export function HospitalDetailsPage() {
               <h2 id="about-hospital" className="text-3xl sm:text-4xl">
                 About the hospital
               </h2>
-              <div className="mt-5 max-w-3xl space-y-5 text-lg leading-relaxed">
-                {paragraphs.map((paragraph) => (
-                  <p key={paragraph}>{paragraph}</p>
-                ))}
-              </div>
-            </section>
-
-            <section aria-labelledby="hospital-highlights">
-              <h2 id="hospital-highlights" className="text-3xl sm:text-4xl">
-                Hospital highlights
-              </h2>
-              <ul className="mt-6 grid gap-5 md:grid-cols-2">
-                {highlights(hospital).map((item) => (
-                  <li key={item.label}>
-                    <Card title={item.title} eyebrow={item.label} description={item.text} />
-                  </li>
-                ))}
-              </ul>
-            </section>
-
-            <section aria-labelledby="hospital-specialties">
-              <h2 id="hospital-specialties" className="text-3xl sm:text-4xl">
-                Specialties
-              </h2>
-              <p className="mt-5 max-w-3xl text-lg leading-relaxed">
-                These are the clinical focus areas recorded for this fictional hospital.
-              </p>
-              <ul className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-                {hospital.focusAreas.map((area) => (
-                  <li key={area}>
-                    <Card
-                      title={area}
-                      eyebrow="Specialty"
-                      description="Listed on this sample hospital profile."
-                    />
-                  </li>
-                ))}
-              </ul>
+              <p className="mt-5 max-w-3xl text-lg leading-relaxed">{overview(hospital)}</p>
             </section>
 
             <section aria-labelledby="open-positions">
@@ -268,20 +173,10 @@ export function HospitalDetailsPage() {
                   </div>
                 </div>
               ) : (
-                <ul className="mt-6 grid gap-5 md:grid-cols-2">
+                <ul className="mt-6 space-y-4">
                   {roles.map((role) => (
                     <li key={role.slug}>
-                      <Card
-                        title={role.title}
-                        href={`/jobs/${role.slug}`}
-                        eyebrow={jobEyebrow(role)}
-                        description={role.summary}
-                        meta={jobMeta(role)}
-                      >
-                        <ButtonLink to={`/jobs/${role.slug}`} variant="secondary" size="sm">
-                          View role
-                        </ButtonLink>
-                      </Card>
+                      <HorizontalJobCard job={role} />
                     </li>
                   ))}
                 </ul>

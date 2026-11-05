@@ -41,9 +41,9 @@ export function HeroSection() {
         </div>
         <div className="relative min-h-80 lg:min-h-[34rem]">
           <img
-            src="/images/clinician-portrait.jpg"
-            alt="A physician in a white coat stands outdoors and faces the camera."
-            className="curve-photo h-80 w-full object-cover object-[center_20%] shadow-sm lg:absolute lg:inset-y-0 lg:h-full"
+            src="/images/nurse-teal.jpg"
+            alt="A clinician in teal scrubs smiles toward the camera."
+            className="curve-photo h-80 w-full object-cover object-[center_38%] shadow-[0_18px_40px_-28px_rgba(20,45,53,0.55)] lg:absolute lg:inset-y-0 lg:h-full"
           />
         </div>
       </div>

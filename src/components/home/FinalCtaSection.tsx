@@ -17,15 +17,15 @@ export function FinalCtaSection() {
               to="/#pricing"
               className="mt-8 inline-flex min-h-11 items-center rounded-full bg-white px-5 text-sm font-semibold text-primary hover:bg-accent-surface"
             >
-              Book a Demo
+              About This Preview
             </Link>
             <p id="pricing" className="mt-5 max-w-md scroll-mt-28 text-sm leading-relaxed text-accent-surface">
               There is nothing to buy and no demo to schedule. This fictional preview has no plans, invoices, or contact form.
             </p>
           </div>
           <img
-            src="/images/hospitals/lakeshore.jpg"
-            alt="Empty operating room prepared for a case"
+            src="/images/hospitals/ridgeway.jpg"
+            alt="A glass tower with a pale panel facade."
             loading="lazy"
             className="curve-photo-left hidden h-full min-h-64 w-full object-cover lg:block"
           />

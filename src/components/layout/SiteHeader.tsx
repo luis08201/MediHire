@@ -59,11 +59,11 @@ export function SiteHeader() {
             ))}
           </nav>
           <Link
-            to="/#demo"
-            onClick={() => handleHashClick('/#demo')}
+            to="/#pricing"
+            onClick={() => handleHashClick('/#pricing')}
             className="inline-flex min-h-10 items-center rounded-full bg-primary px-4 text-sm font-semibold text-white hover:bg-primary-hover"
           >
-            Book a Demo
+            About This Preview
           </Link>
         </div>
         <button
@@ -92,11 +92,11 @@ export function SiteHeader() {
           ))}
         </ul>
         <Link
-          to="/#demo"
-          onClick={() => handleHashClick('/#demo')}
+          to="/#pricing"
+          onClick={() => handleHashClick('/#pricing')}
           className="mt-2 inline-flex min-h-11 w-full items-center justify-center rounded-full bg-primary text-sm font-semibold text-white"
         >
-          Book a Demo
+          About This Preview
         </Link>
       </nav>
     </header>

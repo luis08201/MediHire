@@ -1,28 +1,22 @@
-import { useEffect, useId, useRef } from 'react'
-import type { JobFilters } from '../../lib/jobBoard.ts'
+import { useEffect, useId, useRef, type ReactNode } from 'react'
 import { Button } from '../ui/Button.tsx'
-import { JobFilterGroups } from './JobFilterGroups.tsx'
 
 type FilterDrawerProps = {
   open: boolean
-  values: JobFilters
-  specialties: string[]
-  locations: string[]
-  onChange: (next: JobFilters) => void
+  dialogId: string
   onApply: () => void
   onClear: () => void
   onClose: () => void
+  children: ReactNode
 }
 
 export function FilterDrawer({
   open,
-  values,
-  specialties,
-  locations,
-  onChange,
+  dialogId,
   onApply,
   onClear,
   onClose,
+  children,
 }: FilterDrawerProps) {
   const titleId = useId()
   const dialogRef = useRef<HTMLDivElement>(null)
@@ -98,7 +92,7 @@ export function FilterDrawer({
       />
       <div
         ref={dialogRef}
-        id="job-filter-drawer"
+        id={dialogId}
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
@@ -112,15 +106,7 @@ export function FilterDrawer({
             Close
           </Button>
         </div>
-        <div className="flex-1 overflow-y-auto px-5 py-6">
-          <JobFilterGroups
-            idPrefix="drawer"
-            values={values}
-            specialties={specialties}
-            locations={locations}
-            onChange={onChange}
-          />
-        </div>
+        <div className="flex-1 overflow-y-auto px-5 py-6">{children}</div>
         <div className="flex gap-3 border-t border-border px-5 py-4">
           <Button variant="secondary" className="flex-1" onClick={onClear}>
             Clear

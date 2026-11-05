@@ -1,21 +1,24 @@
 import { useEffect, useMemo, useRef, useState, type FormEvent } from 'react'
-import { Link } from 'react-router'
+import { useSearchParams } from 'react-router'
 import { FilterDrawer } from '../components/jobs/FilterDrawer.tsx'
+import { HorizontalJobCard } from '../components/jobs/HorizontalJobCard.tsx'
 import { JobFilterGroups } from '../components/jobs/JobFilterGroups.tsx'
 import { Container } from '../components/layout/Container.tsx'
 import { Button } from '../components/ui/Button.tsx'
-import { getHospitalBySlug } from '../data/hospitals.ts'
 import { jobs } from '../data/jobs.ts'
-import { ArrowIcon, CircleArrow, Eyebrow, PinIcon, SearchIcon } from '../components/ui/Marks.tsx'
+import { ArrowIcon, Eyebrow, SearchIcon } from '../components/ui/Marks.tsx'
 import {
   activeFilterCount,
   cloneFilters,
   emptyFilters,
   filterBoardJobs,
   pageOf,
+  popularSearches,
+  readJobSearch,
   sortBoardJobs,
   toBoardJobs,
   uniqueSorted,
+  writeJobSearch,
   type JobFilters,
   type JobSort,
 } from '../lib/jobBoard.ts'
@@ -24,17 +27,18 @@ import { useDocumentTitle } from '../lib/useDocumentTitle.ts'
 const catalog = toBoardJobs(jobs)
 const specialties = uniqueSorted(catalog.map((job) => job.specialty))
 const locations = uniqueSorted(catalog.map((job) => job.location))
-const popularSearches = ['Nursing', 'Physician', 'Therapy', 'Administration']
 
 export function JobsPage() {
   const resultsRef = useRef<HTMLElement>(null)
   const didMount = useRef(false)
-  const [queryDraft, setQueryDraft] = useState('')
-  const [query, setQuery] = useState('')
-  const [filters, setFilters] = useState<JobFilters>(emptyFilters)
+  const [searchParams, setSearchParams] = useSearchParams()
+  const board = useMemo(
+    () => readJobSearch(searchParams, { specialties, locations }),
+    [searchParams],
+  )
+  const { query, filters, sort, page } = board
+  const [queryDraft, setQueryDraft] = useState(query)
   const [draftFilters, setDraftFilters] = useState<JobFilters>(emptyFilters)
-  const [sort, setSort] = useState<JobSort>('recommended')
-  const [page, setPage] = useState(1)
   const [drawerOpen, setDrawerOpen] = useState(false)
 
   useDocumentTitle('Job board · MediHire')
@@ -55,27 +59,47 @@ export function JobsPage() {
     resultsRef.current?.scrollIntoView({ block: 'start' })
   }, [page])
 
+  useEffect(() => {
+    setQueryDraft(query)
+  }, [query])
+
+  useEffect(() => {
+    if (page > 1 && (paged.pageCount === 0 || page > paged.pageCount)) {
+      setSearchParams(
+        writeJobSearch({ query, filters, sort, page: Math.max(paged.pageCount, 1) }),
+        { replace: true, preventScrollReset: true },
+      )
+    }
+  }, [page, paged.pageCount, query, filters, sort, setSearchParams])
+
+  function commit(next: { query?: string; filters?: JobFilters; sort?: JobSort; page?: number }) {
+    setSearchParams(
+      writeJobSearch({
+        query: next.query ?? query,
+        filters: next.filters ?? filters,
+        sort: next.sort ?? sort,
+        page: next.page ?? 1,
+      }),
+      { preventScrollReset: true },
+    )
+  }
+
   function applySearch(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     const next = queryDraft.trim()
     setQueryDraft(next)
-    setQuery(next)
-    setPage(1)
+    commit({ query: next, page: 1 })
   }
 
   function applyFilters(next: JobFilters) {
-    setFilters(next)
-    setPage(1)
+    commit({ filters: next, page: 1 })
   }
 
   function resetBoard() {
-    setQuery('')
     setQueryDraft('')
-    setFilters(emptyFilters)
     setDraftFilters(emptyFilters)
-    setSort('recommended')
-    setPage(1)
     setDrawerOpen(false)
+    setSearchParams(new URLSearchParams(), { preventScrollReset: true })
   }
 
   function openDrawer() {
@@ -96,9 +120,8 @@ export function JobsPage() {
             label: `Search: ${query}`,
             removeLabel: `Remove search for ${query}`,
             remove: () => {
-              setQuery('')
               setQueryDraft('')
-              setPage(1)
+              commit({ query: '', page: 1 })
             },
           },
         ]
@@ -151,9 +174,8 @@ export function JobsPage() {
       : `Showing ${paged.start}–${paged.end} of ${filtered.length} roles`
 
   function searchFor(term: string) {
-    setQuery(term)
     setQueryDraft(term)
-    setPage(1)
+    commit({ query: term, page: 1 })
   }
 
   return (
@@ -210,9 +232,9 @@ export function JobsPage() {
             </form>
           </div>
           <img
-            src="/images/hospitals/mesa-verde.jpg"
-            alt="Two clinicians reviewing images on a monitor"
-            className="curve-photo hidden min-h-80 w-full object-cover lg:block"
+            src="/images/hospitals/northcedar.jpg"
+            alt="Corner of a modern glass building under a blue sky."
+            className="curve-sweep hidden min-h-80 w-full object-cover object-[center_45%] lg:block"
           />
         </Container>
       </section>
@@ -259,12 +281,6 @@ export function JobsPage() {
                     onChange={applyFilters}
                   />
                 </div>
-                <Button
-                  className="mt-6 w-full !rounded-xl"
-                  onClick={() => resultsRef.current?.scrollIntoView({ block: 'start' })}
-                >
-                  Apply Filters
-                </Button>
               </div>
             </aside>
 
@@ -277,16 +293,13 @@ export function JobsPage() {
                   {filtered.length} sample {filtered.length === 1 ? 'role' : 'roles'}
                   <span className="sr-only">. {countText}</span>
                 </p>
-                <label htmlFor="job-sort" className="text-sm text-body">
-                  <span className="sr-only">Sort</span>
+                <label htmlFor="job-sort" className="inline-flex items-center gap-2 text-sm font-semibold text-heading">
+                  Sort
                   <select
                     id="job-sort"
                     name="sort"
                     value={sort}
-                    onChange={(event) => {
-                      setSort(event.target.value as JobSort)
-                      setPage(1)
-                    }}
+                    onChange={(event) => commit({ sort: event.target.value as JobSort, page: 1 })}
                     className="min-h-10 rounded-lg border border-border bg-white px-3 text-sm font-medium text-heading"
                   >
                     <option value="recommended">Recommended</option>
@@ -337,49 +350,11 @@ export function JobsPage() {
                 </div>
               ) : (
                 <ul className="mt-6 space-y-4">
-                  {paged.items.map((job) => {
-                    const hospital = getHospitalBySlug(job.hospitalSlug)
-                    return (
-                      <li key={job.slug}>
-                        <article className="flex flex-col gap-4 rounded-2xl border border-border bg-white p-4 shadow-sm sm:flex-row sm:items-center">
-                          <img
-                            src={hospital?.image ?? '/images/hospitals/harborlight.jpg'}
-                            alt=""
-                            className="h-28 w-full rounded-xl object-cover sm:h-24 sm:w-32"
-                          />
-                          <div className="min-w-0 flex-1">
-                            <h3 className="text-2xl leading-tight">
-                              <Link to={`/jobs/${job.slug}`} className="hover:text-primary">
-                                {job.title}
-                              </Link>
-                            </h3>
-                            <p className="mt-1 text-sm font-semibold text-heading">
-                              <Link to={`/hospitals/${job.hospitalSlug}`} className="hover:text-primary">
-                                {job.hospitalName}
-                              </Link>
-                            </p>
-                            <p className="mt-2 flex items-center gap-1.5 text-sm text-body">
-                              <PinIcon />
-                              {job.location}
-                            </p>
-                            <ul className="mt-3 flex flex-wrap gap-2" aria-label="Role details">
-                              <li className="rounded-full bg-accent-surface px-2.5 py-1 text-xs font-semibold text-primary">
-                                {job.employmentType}
-                              </li>
-                              <li className="rounded-full bg-accent-surface px-2.5 py-1 text-xs font-semibold text-primary">
-                                {job.workArrangement}
-                              </li>
-                            </ul>
-                            <p className="mt-3 line-clamp-2 text-sm leading-relaxed">{job.summary}</p>
-                            {job.salary ? (
-                              <p className="mt-2 text-sm font-semibold text-heading">{job.salary}</p>
-                            ) : null}
-                          </div>
-                          <CircleArrow to={`/jobs/${job.slug}`} label={`View ${job.title}`} />
-                        </article>
-                      </li>
-                    )
-                  })}
+                  {paged.items.map((job) => (
+                    <li key={job.slug}>
+                      <HorizontalJobCard job={job} />
+                    </li>
+                  ))}
                 </ul>
               )}
 
@@ -391,7 +366,7 @@ export function JobsPage() {
                     className="!rounded-full"
                     aria-label="Previous page"
                     disabled={paged.current <= 1}
-                    onClick={() => setPage(paged.current - 1)}
+                    onClick={() => commit({ page: paged.current - 1 })}
                   >
                     <ArrowIcon className="rotate-180" />
                   </Button>
@@ -407,7 +382,7 @@ export function JobsPage() {
                         className="!rounded-lg"
                         aria-current={current ? 'page' : undefined}
                         aria-label={`Page ${pageNumber}`}
-                        onClick={() => setPage(pageNumber)}
+                        onClick={() => commit({ page: pageNumber })}
                       >
                         {pageNumber}
                       </Button>
@@ -419,7 +394,7 @@ export function JobsPage() {
                     className="!rounded-full"
                     aria-label="Next page"
                     disabled={paged.current >= paged.pageCount}
-                    onClick={() => setPage(paged.current + 1)}
+                    onClick={() => commit({ page: paged.current + 1 })}
                   >
                     <ArrowIcon />
                   </Button>
@@ -432,14 +407,19 @@ export function JobsPage() {
 
       <FilterDrawer
         open={drawerOpen}
-        values={draftFilters}
-        specialties={specialties}
-        locations={locations}
-        onChange={setDraftFilters}
+        dialogId="job-filter-drawer"
         onApply={applyDrawer}
         onClear={() => setDraftFilters(emptyFilters)}
         onClose={() => setDrawerOpen(false)}
-      />
+      >
+        <JobFilterGroups
+          idPrefix="drawer"
+          values={draftFilters}
+          specialties={specialties}
+          locations={locations}
+          onChange={setDraftFilters}
+        />
+      </FilterDrawer>
     </>
   )
 }

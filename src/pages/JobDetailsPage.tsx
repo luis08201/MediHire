@@ -112,7 +112,7 @@ export function JobDetailsPage() {
           <img
             src={hospital?.image ?? '/images/hospitals/lakeshore.jpg'}
             alt={hospital?.imageAlt ?? 'Healthcare setting used for atmosphere'}
-            className="curve-photo min-h-72 w-full object-cover"
+            className="curve-sweep min-h-72 w-full object-cover object-[center_40%]"
           />
         </Container>
       </section>
@@ -125,7 +125,7 @@ export function JobDetailsPage() {
             </h2>
             <p className="mt-4 max-w-xl text-lg leading-relaxed">{overview}</p>
           </div>
-          <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl bg-border sm:grid-cols-4">
+          <dl className="grid grid-cols-1 gap-px overflow-hidden rounded-2xl bg-border sm:grid-cols-2 xl:grid-cols-[minmax(11.5rem,1.4fr)_repeat(3,minmax(0,1fr))]">
             {facts.map((fact) => (
               <div key={fact.label} className="bg-accent-surface px-4 py-5">
                 <dt className="text-xs font-semibold text-muted">{fact.label}</dt>
@@ -157,7 +157,7 @@ export function JobDetailsPage() {
               </>
             ) : null}
           </div>
-          <aside className="rounded-3xl bg-accent-surface p-6 sm:p-8" aria-labelledby="job-qualifications">
+          <div className="rounded-3xl bg-accent-surface p-6 sm:p-8">
             <h2 id="job-qualifications" className="text-3xl">
               Requirements & Qualifications
             </h2>
@@ -175,7 +175,7 @@ export function JobDetailsPage() {
                 This sample listing does not include a separate requirements list. The responsibilities describe the work.
               </p>
             )}
-          </aside>
+          </div>
         </Container>
       </section>
 
@@ -252,7 +252,7 @@ function RelatedJobs({ jobs }: { jobs: JobListing[] }) {
             const workplace = getHospitalBySlug(role.hospitalSlug)
             return (
               <li key={role.slug}>
-                <article className="flex items-center gap-4 rounded-2xl border border-border bg-white p-4 shadow-sm">
+                <article className="soft-card flex items-center gap-4 p-4">
                   <img
                     src={workplace?.image ?? '/images/hospitals/harborlight.jpg'}
                     alt=""

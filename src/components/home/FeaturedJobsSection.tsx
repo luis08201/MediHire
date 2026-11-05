@@ -64,8 +64,8 @@ export function FeaturedJobsSection() {
         {jobs.map((job) => {
           const hospital = getHospitalBySlug(job.hospitalSlug)
           return (
-            <li key={job.slug} className="w-[min(20rem,78vw)] shrink-0 snap-start">
-              <article className="overflow-hidden rounded-2xl border border-border bg-white shadow-sm">
+            <li key={job.slug} className="w-[min(25rem,78vw)] shrink-0 snap-start">
+              <article className="soft-card overflow-hidden">
                 <img
                   src={hospital?.image ?? '/images/hospitals/harborlight.jpg'}
                   alt={hospital?.imageAlt ?? ''}

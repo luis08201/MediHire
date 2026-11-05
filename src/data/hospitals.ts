@@ -12,7 +12,7 @@ export const hospitals: Hospital[] = [
       'A waterfront regional center with adult inpatient care, surgery, and a full emergency department.',
     focusAreas: ['Emergency care', 'Surgical services', 'Cardiology'],
     image: '/images/hospitals/harborlight.jpg',
-    imageAlt: 'Empty, brightly lit procedure room',
+    imageAlt: 'A modern hospital entrance with a curved glass canopy and a brick-and-glass facade.',
   },
   {
     slug: 'northcedar-regional-hospital',
@@ -25,7 +25,7 @@ export const hospitals: Hospital[] = [
       'A community hospital for the Twin Cities metro, with inpatient units and outpatient clinics.',
     focusAreas: ['Family medicine', 'Emergency care', 'Orthopedics'],
     image: '/images/hospitals/northcedar.jpg',
-    imageAlt: 'Quiet inpatient room with a made bed',
+    imageAlt: 'Corner of a modern glass building under a blue sky.',
   },
   {
     slug: 'ridgeway-community-hospital',
@@ -38,7 +38,7 @@ export const hospitals: Hospital[] = [
       'A mountain-region community hospital focused on local acute care and rehabilitation.',
     focusAreas: ['Primary care', 'Rehabilitation', 'Imaging'],
     image: '/images/hospitals/ridgeway.jpg',
-    imageAlt: 'Open ward with empty beds and privacy curtains',
+    imageAlt: 'A glass tower with a pale panel facade.',
   },
   {
     slug: 'lakeshore-university-hospital',
@@ -51,7 +51,7 @@ export const hospitals: Hospital[] = [
       'An academic medical center with tertiary services, critical care, and teaching programs.',
     focusAreas: ['Critical care', 'Oncology', 'Teaching programs'],
     image: '/images/hospitals/lakeshore.jpg',
-    imageAlt: 'Empty operating room prepared for a case',
+    imageAlt: 'A hospital exterior with a glass wing and a red emergency sign.',
   },
   {
     slug: 'mesa-verde-health',
@@ -64,7 +64,7 @@ export const hospitals: Hospital[] = [
       'A desert-metro hospital with acute care, imaging, and outpatient specialty clinics.',
     focusAreas: ['Pulmonary care', 'Imaging', 'Pharmacy'],
     image: '/images/hospitals/mesa-verde.jpg',
-    imageAlt: 'Two clinicians reviewing images on a monitor',
+    imageAlt: 'A long, pale institutional building with rows of windows.',
   },
   {
     slug: 'solace-childrens-hospital',
@@ -77,7 +77,7 @@ export const hospitals: Hospital[] = [
       'A pediatric hospital for infants, children, and adolescents, including rehabilitation services.',
     focusAreas: ['Pediatrics', 'Rehabilitation', 'Diagnostic services'],
     image: '/images/hospitals/solace.jpg',
-    imageAlt: 'Care team gathered around an overhead surgical light',
+    imageAlt: 'A curved glass corner of a modern building.',
   },
 ]
 

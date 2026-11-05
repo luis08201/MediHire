@@ -64,14 +64,28 @@ export function filterBoardJobs(listings: BoardJob[], query: string, filters: Jo
     ) {
       return false
     }
-    if (!needle) return true
-
-    const haystack = [job.title, job.hospitalName, job.specialty, job.department, job.location]
-      .join(' ')
-      .toLowerCase()
-
-    return haystack.includes(needle)
+    return matchesJobQuery(job, needle)
   })
+}
+
+export const popularSearches = ['Nursing', 'Therapy'] as const
+
+function matchesJobQuery(job: BoardJob, needle: string) {
+  if (!needle) return true
+  if (needle === 'nursing') {
+    return job.specialty === 'Nursing' || /\b(nurse|rn)\b/i.test(job.title)
+  }
+  if (needle === 'therapy') {
+    if (job.specialty === 'Respiratory Therapy') return true
+    const text = `${job.title} ${job.department}`
+    if (job.specialty === 'Rehabilitation' && /physical|occupational|therap/i.test(text)) return true
+    return /\b(physical|occupational|respiratory) therapist\b/i.test(job.title)
+  }
+
+  const haystack = [job.title, job.hospitalName, job.specialty, job.department, job.location]
+    .join(' ')
+    .toLowerCase()
+  return haystack.includes(needle)
 }
 
 export function sortBoardJobs(listings: BoardJob[], sort: JobSort) {
@@ -112,6 +126,53 @@ export function pageOf<T>(items: T[], page: number, pageSize = JOBS_PER_PAGE) {
 
 export function toggleInList<T>(list: readonly T[], value: T): T[] {
   return list.includes(value) ? list.filter((item) => item !== value) : [...list, value]
+}
+
+const jobSorts = new Set<JobSort>(['recommended', 'title', 'hospital', 'location'])
+
+export function readJobSearch(
+  params: URLSearchParams,
+  options: { specialties: string[]; locations: string[] },
+) {
+  const sortValue = params.get('sort')
+  const sort: JobSort = sortValue && jobSorts.has(sortValue as JobSort) ? (sortValue as JobSort) : 'recommended'
+  const pageValue = Number.parseInt(params.get('page') ?? '1', 10)
+  const specialties = new Set(options.specialties)
+  const locations = new Set(options.locations)
+  const arrangements = new Set<string>(workArrangements)
+  const employment = new Set<string>(employmentTypes)
+
+  return {
+    query: params.get('q') ?? '',
+    sort,
+    page: Number.isFinite(pageValue) && pageValue > 0 ? pageValue : 1,
+    filters: {
+      specialties: params.getAll('specialty').filter((value) => specialties.has(value)),
+      locations: params.getAll('location').filter((value) => locations.has(value)),
+      arrangements: params.getAll('work').filter((value): value is WorkArrangement => arrangements.has(value)),
+      employmentTypes: params
+        .getAll('type')
+        .filter((value): value is EmploymentType => employment.has(value)),
+    } satisfies JobFilters,
+  }
+}
+
+export function writeJobSearch(state: {
+  query: string
+  filters: JobFilters
+  sort: JobSort
+  page: number
+}) {
+  const params = new URLSearchParams()
+  const query = state.query.trim()
+  if (query) params.set('q', query)
+  for (const value of state.filters.specialties) params.append('specialty', value)
+  for (const value of state.filters.locations) params.append('location', value)
+  for (const value of state.filters.arrangements) params.append('work', value)
+  for (const value of state.filters.employmentTypes) params.append('type', value)
+  if (state.sort !== 'recommended') params.set('sort', state.sort)
+  if (state.page > 1) params.set('page', String(state.page))
+  return params
 }
 
 export function activeFilterCount(filters: JobFilters) {

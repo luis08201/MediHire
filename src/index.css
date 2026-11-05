@@ -7,7 +7,7 @@
   Accent #247C77
   Heading #142D35
   Body #40545C
-  Muted #61747B
+  Muted #4A6168
   Background #FAFAF7
   White #FFFFFF
   Accent surface #E9F3F0
@@ -20,7 +20,7 @@
   --color-accent: #247c77;
   --color-heading: #142d35;
   --color-body: #40545c;
-  --color-muted: #61747b;
+  --color-muted: #4a6168;
   --color-background: #fafaf7;
   --color-white: #ffffff;
   --color-accent-surface: #e9f3f0;
@@ -127,10 +127,21 @@
   }
 
   .curve-photo {
-    border-radius: 42% 18% 18% 42% / 46% 18% 18% 46%;
+    border-radius: 48% 42% 46% 40% / 44% 48% 42% 50%;
+  }
+
+  .curve-sweep {
+    border-radius: 40% 8% 10% 12% / 46% 10% 12% 38%;
   }
 
   .curve-photo-left {
     border-radius: 46% 0 0 46% / 50% 0 0 50%;
+  }
+
+  .soft-card {
+    border: 1px solid var(--color-border);
+    background: #fff;
+    border-radius: 1rem;
+    box-shadow: 0 14px 32px -22px rgba(20, 45, 53, 0.45);
   }
 }
