@@ -23,7 +23,7 @@ export function JobDetailsPage() {
       <section>
         <Container className="py-16 md:py-24">
           <nav aria-label="Breadcrumb">
-            <Link to="/jobs" className="text-sm underline-offset-4 hover:underline">
+            <Link to="/jobs" className="text-sm text-accent underline underline-offset-4">
               Find Jobs
             </Link>
           </nav>
@@ -53,7 +53,7 @@ export function JobDetailsPage() {
           <nav aria-label="Breadcrumb" className="text-sm">
             <ol className="flex flex-wrap items-center gap-2">
               <li>
-                <Link to="/jobs" className="underline-offset-4 hover:underline">
+                <Link to="/jobs" className="text-accent underline underline-offset-4">
                   Find Jobs
                 </Link>
               </li>
@@ -68,7 +68,7 @@ export function JobDetailsPage() {
           </h1>
           <p className="mt-5 text-lg">
             {hospital ? (
-              <Link to={`/hospitals/${hospital.slug}`} className="underline-offset-4 hover:underline">
+              <Link to={`/hospitals/${hospital.slug}`} className="text-accent underline underline-offset-4">
                 {hospital.name}
               </Link>
             ) : (
@@ -93,12 +93,12 @@ export function JobDetailsPage() {
           <img
             src={hospital?.image ?? '/images/hospitals/lakeshore.jpg'}
             alt={hospital?.imageAlt ?? 'Healthcare setting used for atmosphere'}
-            className="aspect-[3/2] w-full object-cover object-[center_40%] lg:aspect-[2.4/1]"
+            className="aspect-[3/2] w-full rounded-2xl object-cover object-[center_40%] lg:aspect-[2.4/1]"
           />
         </div>
       </section>
 
-      <section className="border-t border-primary/10" aria-labelledby="job-overview">
+      <section className="border-t border-border" aria-labelledby="job-overview">
         <Container className="py-16">
           <h2 id="job-overview" className="text-3xl sm:text-4xl">
             Job overview
@@ -136,7 +136,7 @@ export function JobDetailsPage() {
               </>
             ) : null}
           </div>
-          <div className="bg-accent-surface p-6 sm:p-8">
+          <div className="rounded-2xl border border-border bg-surface p-6 sm:p-8">
             <h2 id="job-qualifications" className="text-3xl">
               Requirements and qualifications
             </h2>
@@ -159,7 +159,7 @@ export function JobDetailsPage() {
       </section>
 
       {hospital ? (
-        <section className="border-t border-primary/10" aria-labelledby="about-hospital">
+        <section className="border-t border-border" aria-labelledby="about-hospital">
           <Container className="py-16">
             <h2 id="about-hospital" className="text-3xl sm:text-4xl">
               {hospital.name}
@@ -170,7 +170,7 @@ export function JobDetailsPage() {
             </p>
             <Link
               to={`/hospitals/${hospital.slug}`}
-              className="mt-6 inline-flex min-h-11 items-center text-sm underline-offset-4 hover:underline"
+              className="mt-6 inline-flex min-h-11 items-center text-sm text-accent underline underline-offset-4"
             >
               View the hospital
             </Link>
@@ -185,17 +185,17 @@ export function JobDetailsPage() {
 
 function RelatedJobs({ jobs }: { jobs: JobListing[] }) {
   return (
-    <section aria-labelledby="related-jobs" className="border-t border-primary/10">
+    <section aria-labelledby="related-jobs" className="border-t border-border">
       <Container className="py-16">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <h2 id="related-jobs" className="text-3xl sm:text-4xl">
             Related roles
           </h2>
-          <Link to="/jobs" className="text-sm underline-offset-4 hover:underline">
+          <Link to="/jobs" className="text-sm text-accent underline underline-offset-4">
             View all jobs
           </Link>
         </div>
-        <ul className="mt-8 border-t border-primary/10">
+        <ul className="mt-8 flex flex-col gap-4">
           {jobs.map((role) => (
             <li key={role.slug}>
               <HorizontalJobCard job={role} />

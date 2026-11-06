@@ -1,38 +1,39 @@
 @import "tailwindcss";
 
 /*
-  Editorial Healthcare
-  Ink #163C45
-  Tide #3D8C82
-  Paper #F8F7F2
-  Mist #E8F1EB
-  Gold #D9A56D
-  Muted #3A5560
+  MedTech night
+  Night #070B20
+  Raised #151D43
+  Button #2A5CF0
+  Signal #3568FF is large type, ornaments, and glow only
+  Signal text #9CB7FF
+  Ink #F5F7FF
+  Muted #AAB8D6
+  Line #5E6D99 meets 3:1 on both surfaces
 */
 
 @theme {
-  --color-primary: #163c45;
-  --color-primary-hover: #0e2c34;
-  --color-accent: #3d8c82;
-  --color-gold: #d9a56d;
-  --color-heading: #163c45;
-  --color-body: #163c45;
-  --color-muted: #3a5560;
-  --color-background: #f8f7f2;
-  --color-white: #ffffff;
-  --color-accent-surface: #e8f1eb;
-  --color-border: #5c757c;
+  --color-background: #070b20;
+  --color-surface: #151d43;
+  --color-primary: #2a5cf0;
+  --color-primary-hover: #2554e8;
+  --color-signal: #3568ff;
+  --color-accent: #9cb7ff;
+  --color-heading: #f5f7ff;
+  --color-body: #f5f7ff;
+  --color-muted: #aab8d6;
+  --color-border: #5e6d99;
 
-  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
-  --font-serif: "DM Serif Display", georgia, "Times New Roman", serif;
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
 
   --container-content: 72rem;
 }
 
 @layer base {
   html {
-    color-scheme: light;
+    color-scheme: dark;
     scroll-behavior: smooth;
+    scroll-padding-top: 6.5rem;
   }
 
   body {
@@ -50,8 +51,9 @@
   h1,
   h2,
   h3 {
-    font-family: var(--font-serif);
-    font-weight: 400;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    letter-spacing: -0.03em;
     color: var(--color-heading);
     text-wrap: balance;
   }
@@ -94,11 +96,26 @@
     }
   }
 
-  .hero-photo {
-    animation: hero-fade 400ms ease both;
+  .field {
+    min-height: 3rem;
+    width: 100%;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    background: var(--color-surface);
+    color: var(--color-heading);
+    padding-inline: 1rem;
+    font-size: 1rem;
   }
 
-  @keyframes hero-fade {
+  .field::placeholder {
+    color: var(--color-muted);
+  }
+
+  .hero-orbit {
+    animation: orbit-in 400ms ease both;
+  }
+
+  @keyframes orbit-in {
     from {
       opacity: 0;
     }
@@ -109,7 +126,7 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .hero-photo {
+    .hero-orbit {
       animation: none;
     }
   }

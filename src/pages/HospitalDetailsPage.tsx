@@ -14,7 +14,7 @@ function Breadcrumb({ current }: { current?: string }) {
     <nav aria-label="Breadcrumb">
       <ol className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm">
         <li>
-          <Link to="/" className="underline-offset-4 hover:underline">
+          <Link to="/" className="text-accent underline underline-offset-4">
             Home
           </Link>
         </li>
@@ -22,7 +22,7 @@ function Breadcrumb({ current }: { current?: string }) {
           /
         </li>
         <li>
-          <Link to="/hospitals" className="underline-offset-4 hover:underline">
+          <Link to="/hospitals" className="text-accent underline underline-offset-4">
             Hospitals
           </Link>
         </li>
@@ -111,12 +111,12 @@ export function HospitalDetailsPage() {
           <img
             src={hospital.image}
             alt={hospital.imageAlt}
-            className="aspect-[3/2] w-full object-cover object-[center_40%] lg:aspect-[2.4/1]"
+            className="aspect-[3/2] w-full rounded-2xl object-cover object-[center_40%] lg:aspect-[2.4/1]"
           />
         </div>
       </section>
 
-      <section className="border-t border-primary/10">
+      <section className="border-t border-border">
         <Container className="space-y-16 py-16">
           <section aria-labelledby="about-hospital">
             <h2 id="about-hospital" className="text-3xl sm:text-4xl">
@@ -129,7 +129,7 @@ export function HospitalDetailsPage() {
             <h2
               id="open-positions"
               tabIndex={-1}
-              className="scroll-mt-28 text-3xl sm:text-4xl"
+              className="scroll-mt-32 text-3xl sm:text-4xl"
             >
               Open positions
             </h2>
@@ -139,7 +139,7 @@ export function HospitalDetailsPage() {
                 : `${roles.length} open ${roles.length === 1 ? 'role' : 'roles'} from the sample job board.`}
             </p>
             {roles.length === 0 ? (
-              <div className="mt-8 max-w-2xl border-t border-primary/10 py-10">
+              <div className="mt-8 max-w-2xl rounded-2xl border border-border bg-surface px-6 py-10">
                 <h3 className="text-2xl">No open positions</h3>
                 <p className="mt-3 leading-relaxed">This sample hospital has no roles on the job board.</p>
                 <div className="mt-6">
@@ -149,7 +149,7 @@ export function HospitalDetailsPage() {
                 </div>
               </div>
             ) : (
-              <ul className="mt-6 border-t border-primary/10">
+              <ul className="mt-6 flex flex-col gap-4">
                 {roles.map((role) => (
                   <li key={role.slug}>
                     <HorizontalJobCard job={role} />
@@ -161,7 +161,7 @@ export function HospitalDetailsPage() {
         </Container>
       </section>
 
-      <section className="bg-accent-surface" aria-labelledby="hospital-cta">
+      <section className="bg-surface" aria-labelledby="hospital-cta">
         <Container className="py-16">
           <h2 id="hospital-cta" className="max-w-xl text-4xl leading-[1.08] sm:text-5xl">
             Find your place in better care.

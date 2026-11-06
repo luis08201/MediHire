@@ -21,15 +21,17 @@ export function PlatformSection() {
         <h2 id="hospitals-band-heading" className="max-w-xl text-4xl leading-[1.08] sm:text-5xl">
           Places in the directory.
         </h2>
-        <div className="mt-12 grid gap-6 md:grid-cols-2">
+        <div className="mt-12 grid gap-6 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,0.85fr)]">
           {photos.map((hospital) => (
             <Link key={hospital.slug} to={`/hospitals/${hospital.slug}`} className="group block">
               <img
                 src={hospital.image}
                 alt={hospital.imageAlt}
-                className="aspect-[16/10] w-full object-cover"
+                className="aspect-[16/10] w-full rounded-2xl object-cover"
               />
-              <p className="mt-4 text-2xl group-hover:underline">{hospital.name}</p>
+              <p className="mt-4 text-2xl text-heading underline decoration-accent underline-offset-4">
+                {hospital.name}
+              </p>
               <p className="mt-1 text-sm text-muted">
                 {hospital.city}, {hospital.region}
               </p>
@@ -37,20 +39,22 @@ export function PlatformSection() {
           ))}
         </div>
         <ul className="mt-12 grid gap-6 sm:grid-cols-2">
-          {names.map((hospital) => (
-            <li key={hospital.slug} className="border-t border-primary/10 pt-4">
-              <Link
-                to={`/hospitals/${hospital.slug}`}
-                className="text-xl underline-offset-4 hover:underline"
-              >
-                {hospital.name}
-              </Link>
-              <p className="mt-1 text-sm text-muted">
-                {hospital.city}, {hospital.region} · {openCount(hospital.slug)} open{' '}
-                {openCount(hospital.slug) === 1 ? 'role' : 'roles'}
-              </p>
-            </li>
-          ))}
+          {names.map((hospital) => {
+            const count = openCount(hospital.slug)
+            return (
+              <li key={hospital.slug} className="rounded-2xl border border-border bg-surface p-5">
+                <Link
+                  to={`/hospitals/${hospital.slug}`}
+                  className="text-xl text-heading underline decoration-accent underline-offset-4"
+                >
+                  {hospital.name}
+                </Link>
+                <p className="mt-2 text-sm text-muted">
+                  {hospital.city}, {hospital.region} · {count} open {count === 1 ? 'role' : 'roles'}
+                </p>
+              </li>
+            )
+          })}
         </ul>
       </Container>
     </Section>

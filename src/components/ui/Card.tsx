@@ -24,7 +24,7 @@ export function Card({
   return (
     <article
       className={cn(
-        'flex h-full flex-col border-t border-primary/15 py-6',
+        'flex h-full flex-col rounded-2xl border border-border bg-surface p-6',
         className,
       )}
     >
@@ -33,7 +33,7 @@ export function Card({
         {href ? (
           <Link
             to={href}
-            className="text-heading underline-offset-4 hover:text-primary hover:underline"
+            className="text-heading underline decoration-accent underline-offset-4"
           >
             {title}
           </Link>

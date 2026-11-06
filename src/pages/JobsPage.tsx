@@ -202,7 +202,7 @@ export function JobsPage() {
                 onChange={(event) => setQueryDraft(event.target.value)}
                 placeholder="Registered nurse, pharmacy, Seattle"
                 autoComplete="off"
-                className="min-h-12 w-full flex-1 border border-border bg-transparent px-3 text-base text-heading placeholder:text-muted"
+                className="field"
               />
               <Button type="submit" className="sm:min-w-28">
                 Search
@@ -214,7 +214,7 @@ export function JobsPage() {
                 <button
                   key={term}
                   type="button"
-                  className="min-h-11 border border-primary/15 px-3 text-sm hover:bg-accent-surface"
+                  className="inline-flex min-h-11 items-center rounded-full border border-border px-4 text-sm hover:bg-surface"
                   onClick={() => searchFor(term)}
                 >
                   {term}
@@ -228,7 +228,7 @@ export function JobsPage() {
       <section
         ref={resultsRef}
         aria-labelledby="job-results-heading"
-        className="scroll-mt-24 border-t border-primary/10"
+        className="scroll-mt-32 border-t border-border"
       >
         <Container className="py-10 lg:py-14">
           <div className="mb-6 lg:hidden">
@@ -246,7 +246,7 @@ export function JobsPage() {
           <div className="grid items-start gap-10 lg:grid-cols-[17rem_minmax(0,1fr)]">
             <aside
               aria-labelledby="job-filters-heading"
-              className="hidden lg:sticky lg:top-24 lg:block lg:max-h-[calc(100svh-6rem)] lg:overflow-y-auto lg:bg-accent-surface lg:p-6"
+              className="hidden rounded-2xl border border-border bg-surface lg:sticky lg:top-28 lg:block lg:max-h-[calc(100svh-8rem)] lg:overflow-y-auto lg:p-6"
             >
               <div>
                 <div className="flex items-center justify-between gap-3">
@@ -261,7 +261,7 @@ export function JobsPage() {
                     Clear all
                   </button>
                 </div>
-                <div className="mt-5 border-t border-primary/10 pt-5">
+                <div className="mt-5 border-t border-border pt-5">
                   <JobFilterGroups
                     idPrefix="desktop"
                     values={filters}
@@ -289,7 +289,7 @@ export function JobsPage() {
                     name="sort"
                     value={sort}
                     onChange={(event) => commit({ sort: event.target.value as JobSort, page: 1 })}
-                    className="min-h-11 rounded border border-border bg-transparent px-3 text-sm text-heading"
+                    className="min-h-11 rounded-full border border-border bg-surface px-4 text-sm text-heading"
                   >
                     <option value="recommended">Recommended</option>
                     <option value="title">Title A–Z</option>
@@ -307,7 +307,7 @@ export function JobsPage() {
                         <button
                           type="button"
                           aria-label={chip.removeLabel}
-                          className="inline-flex min-h-11 items-center gap-2 border border-primary/15 bg-accent-surface px-3 text-sm"
+                          className="inline-flex min-h-11 items-center gap-2 rounded-full border border-border bg-surface px-4 text-sm"
                           onClick={chip.remove}
                         >
                           <span aria-hidden="true">{chip.label}</span>
@@ -327,7 +327,7 @@ export function JobsPage() {
               ) : null}
 
               {paged.items.length === 0 ? (
-                <div className="mt-8 border-t border-primary/10 py-14">
+                <div className="mt-8 rounded-2xl border border-border bg-surface px-6 py-14">
                   <h3 className="text-3xl">No matching roles</h3>
                   <p className="mt-3 max-w-md leading-relaxed">
                     Nothing in the sample board matches this search. Try another keyword, or
@@ -338,7 +338,7 @@ export function JobsPage() {
                   </Button>
                 </div>
               ) : (
-                <ul className="mt-6 border-t border-primary/10">
+                <ul className="mt-6 flex flex-col gap-4">
                   {paged.items.map((job) => (
                     <li key={job.slug}>
                       <HorizontalJobCard job={job} />

@@ -3,9 +3,11 @@ import { cn } from '../../lib/cn.ts'
 
 export function BrandMark({ className }: { className?: string }) {
   return (
-    <Link to="/" className={cn('inline-flex items-center gap-2 text-heading', className)}>
-      <CrossIcon />
-      <span className="font-serif text-[1.7rem] leading-none">MediHire</span>
+    <Link to="/" className={cn('inline-flex items-center gap-2 px-2 text-heading', className)}>
+      <span className="text-accent">
+        <CrossIcon />
+      </span>
+      <span className="text-lg leading-none font-semibold tracking-tight">MediHire</span>
     </Link>
   )
 }
@@ -35,7 +37,7 @@ export function ArrowIcon({ className }: { className?: string }) {
 
 export function CheckIcon() {
   return (
-    <svg viewBox="0 0 24 24" className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden="true">
+    <svg viewBox="0 0 24 24" className="mt-0.5 size-4 shrink-0 text-accent" aria-hidden="true">
       <path
         d="M5 12.5l4.2 4.2L19 7.5"
         fill="none"

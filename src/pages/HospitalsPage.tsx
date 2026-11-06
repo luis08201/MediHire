@@ -147,7 +147,7 @@ export function HospitalsPage() {
                 onChange={(event) => setQueryDraft(event.target.value)}
                 placeholder="Seattle, pediatrics, imaging"
                 autoComplete="off"
-                className="min-h-12 w-full flex-1 border border-border bg-transparent px-3 text-base text-heading placeholder:text-muted"
+                className="field"
               />
               <Button type="submit" className="sm:min-w-28">
                 Search
@@ -157,7 +157,7 @@ export function HospitalsPage() {
         </Container>
       </section>
 
-      <section aria-labelledby="hospital-results-heading" className="border-t border-primary/10">
+      <section aria-labelledby="hospital-results-heading" className="border-t border-border">
         <Container className="py-10 lg:py-14">
           <div className="mb-6 lg:hidden">
             <Button
@@ -174,7 +174,7 @@ export function HospitalsPage() {
           <div className="grid items-start gap-10 lg:grid-cols-[16rem_minmax(0,1fr)]">
             <aside
               aria-labelledby="hospital-filters-heading"
-              className="hidden lg:sticky lg:top-24 lg:block lg:max-h-[calc(100svh-6rem)] lg:overflow-y-auto lg:bg-accent-surface lg:p-6"
+              className="hidden rounded-2xl border border-border bg-surface lg:sticky lg:top-28 lg:block lg:max-h-[calc(100svh-8rem)] lg:overflow-y-auto lg:p-6"
             >
               <div className="flex items-center justify-between gap-3">
                 <h2 id="hospital-filters-heading" className="font-sans text-lg">
@@ -188,7 +188,7 @@ export function HospitalsPage() {
                   Clear all
                 </button>
               </div>
-              <div className="mt-5 border-t border-primary/10 pt-5">
+              <div className="mt-5 border-t border-border pt-5">
                 <HospitalFilterGroups
                   idPrefix="hospital-desktop"
                   values={filters}
@@ -215,7 +215,7 @@ export function HospitalsPage() {
                 name="sort"
                 value={sort}
                 onChange={(event) => commit({ sort: event.target.value as HospitalSort })}
-                className="min-h-11 rounded border border-border bg-transparent px-3 text-sm text-heading"
+                className="min-h-11 rounded-full border border-border bg-surface px-4 text-sm text-heading"
               >
                 <option value="recommended">Recommended</option>
                 <option value="name">Name A–Z</option>
@@ -233,7 +233,7 @@ export function HospitalsPage() {
                     <button
                       type="button"
                       aria-label={chip.removeLabel}
-                      className="inline-flex min-h-11 items-center gap-2 border border-primary/15 bg-accent-surface px-3 text-sm"
+                      className="inline-flex min-h-11 items-center gap-2 rounded-full border border-border bg-surface px-4 text-sm"
                       onClick={chip.remove}
                     >
                       <span aria-hidden="true">{chip.label}</span>
@@ -253,7 +253,7 @@ export function HospitalsPage() {
           ) : null}
 
           {results.length === 0 ? (
-            <div className="mt-8 border-t border-primary/10 py-14">
+            <div className="mt-8 rounded-2xl border border-border bg-surface px-6 py-14">
               <h3 className="text-3xl">No matching hospitals</h3>
               <p className="mt-3 max-w-md leading-relaxed">
                 Nothing in the sample directory matches this search. Try another city or specialty,
@@ -264,22 +264,22 @@ export function HospitalsPage() {
               </Button>
             </div>
           ) : (
-            <ul className="mt-8 border-t border-primary/10">
+            <ul className="mt-8 flex flex-col gap-4">
               {results.map((hospital) => (
-                <li key={hospital.slug} className="border-b border-primary/10 py-10">
-                  <article className="grid gap-6 md:grid-cols-[minmax(0,0.42fr)_minmax(0,1fr)] md:items-center">
+                <li key={hospital.slug}>
+                  <article className="grid gap-6 rounded-2xl border border-border bg-surface p-4 md:grid-cols-[minmax(0,0.42fr)_minmax(0,1fr)] md:items-center md:p-5">
                     <img
                       src={hospital.image}
                       alt={hospital.imageAlt}
                       loading="lazy"
-                      className="aspect-[16/10] w-full object-cover"
+                      className="aspect-[16/10] w-full rounded-xl object-cover"
                     />
                     <div>
                       <p className="text-sm text-muted">{hospital.type}</p>
                       <h3 className="mt-2 text-3xl leading-tight">
                         <Link
                           to={`/hospitals/${hospital.slug}`}
-                          className="underline-offset-4 hover:underline"
+                          className="text-heading underline decoration-accent underline-offset-4"
                         >
                           {hospital.name}
                         </Link>
@@ -301,7 +301,7 @@ export function HospitalsPage() {
         </Container>
       </section>
 
-      <section className="bg-accent-surface" aria-labelledby="hospital-jobs-cta">
+      <section className="bg-surface" aria-labelledby="hospital-jobs-cta">
         <Container className="py-16">
           <h2 id="hospital-jobs-cta" className="max-w-xl text-4xl leading-[1.08] sm:text-5xl">
             See the roles at these hospitals

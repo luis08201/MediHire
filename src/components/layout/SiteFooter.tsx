@@ -22,13 +22,13 @@ const columns = [
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-primary/10">
+    <footer className="mt-8 border-t border-border">
       <Container className="py-16">
         <div className="grid gap-12 md:grid-cols-[minmax(0,1.4fr)_repeat(2,minmax(0,0.7fr))]">
           <div className="max-w-sm">
-            <p className="font-serif text-3xl text-heading">MediHire</p>
+            <p className="text-3xl font-semibold tracking-tight text-heading">MediHire</p>
             <p className="mt-4 max-w-[40ch] leading-relaxed">
-              A fictional healthcare recruitment journal for clinicians and the teams who hire them.
+              A fictional healthcare recruitment preview for clinicians and the teams who hire them.
             </p>
           </div>
           {columns.map((column) => (
@@ -37,7 +37,7 @@ export function SiteFooter() {
               <ul className="mt-4 flex flex-col gap-3">
                 {column.links.map((link) => (
                   <li key={link.label}>
-                    <Link to={link.to} className="text-sm underline-offset-4 hover:underline">
+                    <Link to={link.to} className="text-sm text-accent underline underline-offset-4">
                       {link.label}
                     </Link>
                   </li>

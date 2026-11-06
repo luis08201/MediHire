@@ -10,7 +10,7 @@ type SectionProps = {
 
 export function Section({ children, className, id, labelledBy }: SectionProps) {
   return (
-    <section id={id} aria-labelledby={labelledBy} className={cn('section-space scroll-mt-20', className)}>
+    <section id={id} aria-labelledby={labelledBy} className={cn('section-space scroll-mt-32', className)}>
       {children}
     </section>
   )

@@ -5,11 +5,11 @@ import { cn } from '../../lib/cn.ts'
 import { BrandMark } from '../ui/Marks.tsx'
 
 const links = [
-  { to: '/jobs', label: 'Find Jobs' },
-  { to: '/hospitals', label: 'Hospitals' },
-  { to: '/#features', label: 'Features' },
-  { to: '/#solutions', label: 'Solutions' },
-  { to: '/#pricing', label: 'Pricing' },
+  { to: '/jobs', label: 'Find Jobs', quiet: false },
+  { to: '/hospitals', label: 'Hospitals', quiet: false },
+  { to: '/#features', label: 'Features', quiet: true },
+  { to: '/#solutions', label: 'Solutions', quiet: true },
+  { to: '/#pricing', label: 'Pricing', quiet: true },
 ] as const
 
 export function SiteHeader() {
@@ -47,21 +47,19 @@ export function SiteHeader() {
   }
 
   return (
-    <header className="sticky top-0 z-40 border-b border-primary/10 bg-background">
-      <div className="content-wrap flex h-16 items-center justify-between gap-4">
+    <header className="sticky top-4 z-40 mx-auto w-[min(72rem,calc(100%-2.5rem))]">
+      <div className="flex items-center justify-between gap-3 rounded-full border border-border bg-surface/95 px-3 py-2 shadow-[0_10px_40px_-24px_rgba(53,104,255,0.85)] backdrop-blur">
         <BrandMark />
-        <div className="hidden items-center gap-8 lg:flex">
-          <nav aria-label="Primary" className="flex items-center gap-6">
-            {links.map((link) => (
-              <PrimaryLink key={link.to} to={link.to} onNavigate={handleHashClick}>
-                {link.label}
-              </PrimaryLink>
-            ))}
-          </nav>
-        </div>
+        <nav aria-label="Primary" className="hidden items-center gap-1 lg:flex">
+          {links.map((link) => (
+            <PrimaryLink key={link.to} to={link.to} quiet={link.quiet} onNavigate={handleHashClick}>
+              {link.label}
+            </PrimaryLink>
+          ))}
+        </nav>
         <button
           type="button"
-          className="inline-flex size-11 items-center justify-center rounded-md text-heading lg:hidden"
+          className="inline-flex size-11 items-center justify-center rounded-full text-heading lg:hidden"
           aria-expanded={open}
           aria-controls={menuId}
           onClick={() => setOpen((value) => !value)}
@@ -75,14 +73,14 @@ export function SiteHeader() {
         aria-label="Primary"
         className={
           open
-            ? 'border-t border-primary/10 bg-background px-5 py-3 shadow-[0_16px_40px_-24px_rgba(22,60,69,0.45)] lg:hidden'
+            ? 'mt-2 rounded-3xl border border-border bg-surface px-4 py-3 shadow-[0_16px_40px_-16px_rgba(7,11,32,0.85)] lg:hidden'
             : 'hidden'
         }
       >
         <ul className="flex flex-col">
           {links.map((link) => (
             <li key={link.to}>
-              <PrimaryLink to={link.to} block onNavigate={handleHashClick}>
+              <PrimaryLink to={link.to} quiet={link.quiet} block onNavigate={handleHashClick}>
                 {link.label}
               </PrimaryLink>
             </li>
@@ -95,20 +93,23 @@ export function SiteHeader() {
 
 function PrimaryLink({
   to,
+  quiet = false,
   block = false,
   onNavigate,
   children,
 }: {
   to: string
+  quiet?: boolean
   block?: boolean
   onNavigate: (to: string) => void
   children: string
 }) {
   const className = (isActive: boolean) =>
     cn(
-      'text-sm text-body underline-offset-4 hover:underline',
-      isActive && 'text-heading underline',
+      'rounded-full px-3 text-sm',
       block && 'flex min-h-11 items-center',
+      !block && 'inline-flex min-h-11 items-center',
+      isActive ? 'bg-signal/15 font-semibold text-heading' : quiet ? 'text-muted' : 'text-heading',
     )
 
   if (to.includes('#')) {

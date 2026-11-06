@@ -14,32 +14,35 @@ export function FeaturedJobsSection() {
           <h2 id="featured-jobs-heading" className="max-w-xl text-4xl leading-[1.08] sm:text-5xl">
             Three roles from the sample board.
           </h2>
-          <Link to="/jobs" className="text-sm underline-offset-4 hover:underline">
+          <Link to="/jobs" className="text-sm text-accent underline underline-offset-4">
             View all jobs
           </Link>
         </div>
-        <ul className="mt-12 border-t border-primary/10">
+        <ul className="mt-12 grid gap-6 lg:grid-cols-3">
           {shown.map((job) => {
             const hospital = getHospitalBySlug(job.hospitalSlug)
             return (
-              <li key={job.slug} className="border-b border-primary/10">
-                <article className="grid gap-6 py-8 sm:grid-cols-[7.5rem_minmax(0,1fr)] sm:items-center">
+              <li key={job.slug}>
+                <article className="flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-surface">
                   <img
                     src={hospital?.image ?? '/images/hospitals/harborlight.jpg'}
                     alt=""
-                    className="aspect-[4/3] w-full object-cover sm:h-24"
+                    className="aspect-[16/10] w-full object-cover"
                   />
-                  <div>
-                    <h3 className="text-3xl leading-tight">
-                      <Link to={`/jobs/${job.slug}`} className="underline-offset-4 hover:underline">
+                  <div className="flex flex-1 flex-col p-5">
+                    <h3 className="text-2xl leading-tight">
+                      <Link
+                        to={`/jobs/${job.slug}`}
+                        className="text-heading underline decoration-accent underline-offset-4"
+                      >
                         {job.title}
                       </Link>
                     </h3>
-                    <p className="mt-2 text-sm">
+                    <p className="mt-3 text-sm">
                       {hospital ? (
                         <Link
                           to={`/hospitals/${hospital.slug}`}
-                          className="underline-offset-4 hover:underline"
+                          className="text-accent underline underline-offset-4"
                         >
                           {hospital.name}
                         </Link>
@@ -50,6 +53,8 @@ export function FeaturedJobsSection() {
                     <p className="mt-2 text-sm text-muted">
                       {job.location} · {job.employmentType} · {job.workArrangement}
                     </p>
+                    <p className="mt-4 text-sm leading-relaxed">{job.summary}</p>
+                    {job.salary ? <p className="mt-3 text-sm">{job.salary}</p> : null}
                   </div>
                 </article>
               </li>

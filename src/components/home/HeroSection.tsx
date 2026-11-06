@@ -1,42 +1,43 @@
 import { ButtonLink } from '../ui/Button.tsx'
+import { OrbitMark } from '../ui/OrbitMark.tsx'
+import { HeroSearch } from './HeroSearch.tsx'
+
+const badges = ['18 sample roles', '6 fictional hospitals', 'No applications']
 
 export function HeroSection() {
   return (
-    <section className="overflow-hidden" aria-labelledby="home-heading">
-      <div className="lg:grid lg:min-h-[calc(100svh-4rem)] lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
-        <div className="flex items-center px-5 py-16 sm:px-8 lg:py-24 lg:pr-16 lg:pl-[max(2rem,calc((100vw-72rem)/2))]">
-          <div className="max-w-xl">
-            <h1
-              id="home-heading"
-              className="text-[2.5rem] leading-[1.02] sm:text-6xl lg:text-[5.75rem]"
+    <section className="relative overflow-hidden" aria-labelledby="home-heading">
+      <OrbitMark className="hero-orbit pointer-events-none absolute top-8 -right-24 hidden w-[34rem] lg:block" />
+      <div className="relative mx-auto flex max-w-3xl flex-col items-center px-5 pt-12 pb-20 text-center sm:px-8 lg:pt-20 lg:pb-28">
+        <OrbitMark className="hero-orbit mb-8 w-36 lg:hidden" />
+        <ul className="flex flex-wrap justify-center gap-2">
+          {badges.map((badge) => (
+            <li
+              key={badge}
+              className="rounded-full border border-border bg-surface/80 px-3 py-2 text-sm text-accent"
             >
-              The next role
-              <br />
-              is already
-              <br />
-              on the ward.
-            </h1>
-            <span className="mt-8 block h-px w-12 bg-gold" aria-hidden="true" />
-            <p className="mt-8 max-w-[42ch] text-lg leading-relaxed">
-              Eighteen sample roles across six fictional hospitals. Search the board, or read a
-              hospital the way you would a profile.
-            </p>
-            <div className="mt-10 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
-              <ButtonLink to="/jobs">Explore the job board</ButtonLink>
-              <ButtonLink to="/hospitals" variant="ghost">
-                Read the hospitals
-              </ButtonLink>
-            </div>
-            <p className="mt-6 max-w-[42ch] text-sm text-muted">
-              Sample listings. Nothing here starts an application.
-            </p>
-          </div>
+              {badge}
+            </li>
+          ))}
+        </ul>
+        <h1
+          id="home-heading"
+          className="mt-8 text-[2.5rem] leading-[1.05] sm:text-6xl lg:text-[4.75rem]"
+        >
+          Your Next Move
+          <span className="mt-1 block text-accent">in Healthcare.</span>
+        </h1>
+        <p className="mt-6 max-w-[42ch] text-lg leading-relaxed">
+          Eighteen sample roles across six fictional hospitals. Search the board to read a listing.
+          Nothing here starts an application.
+        </p>
+        <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row">
+          <ButtonLink to="/jobs">Find Jobs</ButtonLink>
+          <ButtonLink to="/hospitals" variant="secondary">
+            Explore Hospitals
+          </ButtonLink>
         </div>
-        <img
-          src="/images/hospitals/northcedar.jpg"
-          alt="Corner of a modern glass building under a blue sky."
-          className="hero-photo aspect-[3/2] w-full object-cover object-[22%_42%] lg:aspect-auto lg:h-full lg:min-h-[32rem]"
-        />
+        <HeroSearch />
       </div>
     </section>
   )

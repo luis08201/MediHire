@@ -1,12 +1,16 @@
-import { Link } from 'react-router'
+import { ButtonLink } from '../ui/Button.tsx'
 import { Container } from '../layout/Container.tsx'
 
 export function FinalCtaSection() {
   return (
-    <section id="features" className="section-space scroll-mt-24 bg-accent-surface" aria-labelledby="preview-heading">
-      <div id="solutions" className="scroll-mt-24" />
-      <div id="pricing" className="scroll-mt-24" />
-      <div id="demo" className="scroll-mt-24" />
+    <section
+      id="features"
+      className="section-space scroll-mt-32 bg-surface"
+      aria-labelledby="preview-heading"
+    >
+      <div id="solutions" className="scroll-mt-32" />
+      <div id="pricing" className="scroll-mt-32" />
+      <div id="demo" className="scroll-mt-32" />
       <Container>
         <h2 id="preview-heading" className="max-w-xl text-4xl leading-[1.08] sm:text-5xl">
           A note on this preview.
@@ -15,9 +19,9 @@ export function FinalCtaSection() {
           There is nothing to buy and no demo to book. Hospitals and roles are sample data.
           Photography is atmosphere, not a partner facility. No personal information is collected.
         </p>
-        <Link to="/jobs" className="mt-8 inline-flex min-h-11 items-center text-sm underline-offset-4 hover:underline">
-          Explore the job board
-        </Link>
+        <div className="mt-8">
+          <ButtonLink to="/jobs">Find Jobs</ButtonLink>
+        </div>
       </Container>
     </section>
   )

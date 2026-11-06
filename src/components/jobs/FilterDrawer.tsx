@@ -86,7 +86,7 @@ export function FilterDrawer({
     <div className="fixed inset-0 z-50 lg:hidden">
       <button
         type="button"
-        className="absolute inset-0 bg-heading/40"
+        className="absolute inset-0 bg-background/70"
         aria-label="Close filters"
         onClick={onClose}
       />
@@ -96,7 +96,7 @@ export function FilterDrawer({
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
-        className="absolute inset-y-0 right-0 flex w-full max-w-md flex-col border-l border-border bg-background shadow-xl"
+        className="absolute inset-y-0 right-0 flex w-full max-w-md flex-col border-l border-border bg-surface shadow-[0_16px_40px_-12px_rgba(7,11,32,0.9)]"
       >
         <div className="flex items-center justify-between gap-4 border-b border-border px-5 py-4">
           <h2 id={titleId} className="font-sans text-xl font-semibold">
