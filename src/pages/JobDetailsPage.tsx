@@ -93,7 +93,7 @@ export function JobDetailsPage() {
           <img
             src={hospital?.image ?? '/images/hospitals/lakeshore.jpg'}
             alt={hospital?.imageAlt ?? 'Healthcare setting used for atmosphere'}
-            className="aspect-[3/2] w-full rounded-2xl object-cover object-[center_40%] lg:aspect-[2.4/1]"
+            className="aspect-[3/2] w-full rounded-md object-cover object-[center_40%] lg:aspect-[2.4/1]"
           />
         </div>
       </section>
@@ -136,7 +136,7 @@ export function JobDetailsPage() {
               </>
             ) : null}
           </div>
-          <div className="rounded-2xl border border-border bg-surface p-6 sm:p-8">
+          <div className="rounded-md border border-border bg-surface p-6 sm:p-8">
             <h2 id="job-qualifications" className="text-3xl">
               Requirements and qualifications
             </h2>

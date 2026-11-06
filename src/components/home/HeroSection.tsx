@@ -1,43 +1,32 @@
 import { ButtonLink } from '../ui/Button.tsx'
-import { OrbitMark } from '../ui/OrbitMark.tsx'
 import { HeroSearch } from './HeroSearch.tsx'
-
-const badges = ['18 sample roles', '6 fictional hospitals', 'No applications']
 
 export function HeroSection() {
   return (
-    <section className="relative overflow-hidden" aria-labelledby="home-heading">
-      <OrbitMark className="hero-orbit pointer-events-none absolute top-8 -right-24 hidden w-[34rem] lg:block" />
-      <div className="relative mx-auto flex max-w-3xl flex-col items-center px-5 pt-12 pb-20 text-center sm:px-8 lg:pt-20 lg:pb-28">
-        <OrbitMark className="hero-orbit mb-8 w-36 lg:hidden" />
-        <ul className="flex flex-wrap justify-center gap-2">
-          {badges.map((badge) => (
-            <li
-              key={badge}
-              className="rounded-full border border-border bg-surface/80 px-3 py-2 text-sm text-accent"
-            >
-              {badge}
-            </li>
-          ))}
-        </ul>
-        <h1
-          id="home-heading"
-          className="mt-8 text-[2.5rem] leading-[1.05] sm:text-6xl lg:text-[4.75rem]"
-        >
-          Your Next Move
-          <span className="mt-1 block text-accent">in Healthcare.</span>
-        </h1>
-        <p className="mt-6 max-w-[42ch] text-lg leading-relaxed">
-          Eighteen sample roles across six fictional hospitals. Search the board to read a listing.
-          Nothing here starts an application.
-        </p>
-        <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row">
-          <ButtonLink to="/jobs">Find Jobs</ButtonLink>
-          <ButtonLink to="/hospitals" variant="secondary">
-            Explore Hospitals
-          </ButtonLink>
+    <section className="border-b border-border" aria-labelledby="home-heading">
+      <div className="mx-auto grid max-w-[72rem] items-center gap-10 px-5 py-16 lg:grid-cols-2 lg:gap-16 lg:px-8 lg:py-24">
+        <div>
+          <p className="text-sm font-medium text-primary">Sample directory</p>
+          <h1
+            id="home-heading"
+            className="mt-4 max-w-[12ch] text-5xl leading-[1.05] sm:text-6xl"
+          >
+            Find Your Place in Healthcare.
+          </h1>
+          <p className="mt-6 max-w-[42ch] text-lg leading-relaxed">
+            Eighteen sample roles across six fictional hospitals. Search the board to read a
+            listing. Nothing here starts an application.
+          </p>
+          <HeroSearch />
+          <div className="mt-6">
+            <ButtonLink to="/jobs">Explore Jobs</ButtonLink>
+          </div>
         </div>
-        <HeroSearch />
+        <img
+          src="/images/nurse-teal.jpg"
+          alt="Portrait of a clinician wearing teal scrubs against a light background."
+          className="aspect-[4/5] w-full rounded-md object-cover object-[center_18%] lg:aspect-[5/6]"
+        />
       </div>
     </section>
   )

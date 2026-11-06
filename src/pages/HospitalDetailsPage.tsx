@@ -111,7 +111,7 @@ export function HospitalDetailsPage() {
           <img
             src={hospital.image}
             alt={hospital.imageAlt}
-            className="aspect-[3/2] w-full rounded-2xl object-cover object-[center_40%] lg:aspect-[2.4/1]"
+            className="aspect-[3/2] w-full rounded-md object-cover object-[center_40%] lg:aspect-[2.4/1]"
           />
         </div>
       </section>
@@ -139,7 +139,7 @@ export function HospitalDetailsPage() {
                 : `${roles.length} open ${roles.length === 1 ? 'role' : 'roles'} from the sample job board.`}
             </p>
             {roles.length === 0 ? (
-              <div className="mt-8 max-w-2xl rounded-2xl border border-border bg-surface px-6 py-10">
+              <div className="mt-8 max-w-2xl rounded-md border border-border bg-surface px-6 py-10">
                 <h3 className="text-2xl">No open positions</h3>
                 <p className="mt-3 leading-relaxed">This sample hospital has no roles on the job board.</p>
                 <div className="mt-6">

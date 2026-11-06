@@ -5,7 +5,7 @@ export function FinalCtaSection() {
   return (
     <section
       id="features"
-      className="section-space scroll-mt-32 bg-surface"
+      className="section-space scroll-mt-32 bg-soft"
       aria-labelledby="preview-heading"
     >
       <div id="solutions" className="scroll-mt-32" />
@@ -20,7 +20,7 @@ export function FinalCtaSection() {
           Photography is atmosphere, not a partner facility. No personal information is collected.
         </p>
         <div className="mt-8">
-          <ButtonLink to="/jobs">Find Jobs</ButtonLink>
+          <ButtonLink to="/jobs">Explore Jobs</ButtonLink>
         </div>
       </Container>
     </section>

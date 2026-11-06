@@ -47,8 +47,8 @@ export function SiteHeader() {
   }
 
   return (
-    <header className="sticky top-4 z-40 mx-auto w-[min(72rem,calc(100%-2.5rem))]">
-      <div className="flex items-center justify-between gap-3 rounded-full border border-border bg-surface/95 px-3 py-2 shadow-[0_10px_40px_-24px_rgba(53,104,255,0.85)] backdrop-blur">
+    <header className="sticky top-0 z-40 border-b border-border bg-background">
+      <div className="content-wrap flex h-16 items-center justify-between gap-4">
         <BrandMark />
         <nav aria-label="Primary" className="hidden items-center gap-1 lg:flex">
           {links.map((link) => (
@@ -59,7 +59,7 @@ export function SiteHeader() {
         </nav>
         <button
           type="button"
-          className="inline-flex size-11 items-center justify-center rounded-full text-heading lg:hidden"
+          className="inline-flex size-11 items-center justify-center rounded-md text-heading lg:hidden"
           aria-expanded={open}
           aria-controls={menuId}
           onClick={() => setOpen((value) => !value)}
@@ -71,11 +71,7 @@ export function SiteHeader() {
       <nav
         id={menuId}
         aria-label="Primary"
-        className={
-          open
-            ? 'mt-2 rounded-3xl border border-border bg-surface px-4 py-3 shadow-[0_16px_40px_-16px_rgba(7,11,32,0.85)] lg:hidden'
-            : 'hidden'
-        }
+        className={open ? 'border-t border-border bg-background px-5 py-3 lg:hidden' : 'hidden'}
       >
         <ul className="flex flex-col">
           {links.map((link) => (
@@ -106,10 +102,9 @@ function PrimaryLink({
 }) {
   const className = (isActive: boolean) =>
     cn(
-      'rounded-full px-3 text-sm',
-      block && 'flex min-h-11 items-center',
-      !block && 'inline-flex min-h-11 items-center',
-      isActive ? 'bg-signal/15 font-semibold text-heading' : quiet ? 'text-muted' : 'text-heading',
+      'px-3 text-sm underline-offset-4',
+      block ? 'flex min-h-11 items-center' : 'inline-flex min-h-11 items-center',
+      isActive ? 'font-semibold text-heading underline decoration-primary' : quiet ? 'text-muted' : 'text-heading',
     )
 
   if (to.includes('#')) {

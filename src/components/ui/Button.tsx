@@ -13,15 +13,14 @@ type ButtonStyleProps = {
 }
 
 const base =
-  'inline-flex items-center justify-center rounded-full font-medium transition duration-200 disabled:cursor-not-allowed disabled:opacity-40'
+  'inline-flex items-center justify-center rounded-md font-medium transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-40'
 
 const variantClass: Record<Variant, string> = {
-  primary:
-    'bg-primary text-heading shadow-[0_0_28px_-8px_rgba(53,104,255,0.9)] hover:bg-primary-hover',
-  secondary: 'border border-border bg-transparent text-heading hover:bg-surface',
-  ghost: 'text-accent underline-offset-4 hover:underline',
-  inverse: 'bg-heading text-background hover:bg-accent',
-  inverseQuiet: 'border border-heading bg-transparent text-heading hover:bg-heading hover:text-background',
+  primary: 'bg-primary text-white hover:bg-primary-hover',
+  secondary: 'border border-border bg-background text-heading hover:bg-surface',
+  ghost: 'text-primary underline-offset-4 hover:underline',
+  inverse: 'bg-heading text-white hover:bg-primary',
+  inverseQuiet: 'border border-heading bg-transparent text-heading hover:bg-heading hover:text-white',
 }
 
 const sizeClass: Record<Size, string> = {

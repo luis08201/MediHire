@@ -26,7 +26,7 @@ export function SiteFooter() {
       <Container className="py-16">
         <div className="grid gap-12 md:grid-cols-[minmax(0,1.4fr)_repeat(2,minmax(0,0.7fr))]">
           <div className="max-w-sm">
-            <p className="text-3xl font-semibold tracking-tight text-heading">MediHire</p>
+            <p className="font-heading text-3xl font-semibold tracking-tight text-heading">MediHire</p>
             <p className="mt-4 max-w-[40ch] leading-relaxed">
               A fictional healthcare recruitment preview for clinicians and the teams who hire them.
             </p>

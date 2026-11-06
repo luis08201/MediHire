@@ -174,7 +174,7 @@ export function HospitalsPage() {
           <div className="grid items-start gap-10 lg:grid-cols-[16rem_minmax(0,1fr)]">
             <aside
               aria-labelledby="hospital-filters-heading"
-              className="hidden rounded-2xl border border-border bg-surface lg:sticky lg:top-28 lg:block lg:max-h-[calc(100svh-8rem)] lg:overflow-y-auto lg:p-6"
+              className="hidden rounded-md border border-border bg-surface lg:sticky lg:top-20 lg:block lg:max-h-[calc(100svh-6rem)] lg:overflow-y-auto lg:p-6"
             >
               <div className="flex items-center justify-between gap-3">
                 <h2 id="hospital-filters-heading" className="font-sans text-lg">
@@ -215,7 +215,7 @@ export function HospitalsPage() {
                 name="sort"
                 value={sort}
                 onChange={(event) => commit({ sort: event.target.value as HospitalSort })}
-                className="min-h-11 rounded-full border border-border bg-surface px-4 text-sm text-heading"
+                className="min-h-11 rounded-md border border-border bg-surface px-4 text-sm text-heading"
               >
                 <option value="recommended">Recommended</option>
                 <option value="name">Name A–Z</option>
@@ -233,7 +233,7 @@ export function HospitalsPage() {
                     <button
                       type="button"
                       aria-label={chip.removeLabel}
-                      className="inline-flex min-h-11 items-center gap-2 rounded-full border border-border bg-surface px-4 text-sm"
+                      className="inline-flex min-h-11 items-center gap-2 rounded-md border border-border bg-surface px-4 text-sm"
                       onClick={chip.remove}
                     >
                       <span aria-hidden="true">{chip.label}</span>
@@ -253,7 +253,7 @@ export function HospitalsPage() {
           ) : null}
 
           {results.length === 0 ? (
-            <div className="mt-8 rounded-2xl border border-border bg-surface px-6 py-14">
+            <div className="mt-8 rounded-md border border-border bg-surface px-6 py-14">
               <h3 className="text-3xl">No matching hospitals</h3>
               <p className="mt-3 max-w-md leading-relaxed">
                 Nothing in the sample directory matches this search. Try another city or specialty,
@@ -267,12 +267,12 @@ export function HospitalsPage() {
             <ul className="mt-8 flex flex-col gap-4">
               {results.map((hospital) => (
                 <li key={hospital.slug}>
-                  <article className="grid gap-6 rounded-2xl border border-border bg-surface p-4 md:grid-cols-[minmax(0,0.42fr)_minmax(0,1fr)] md:items-center md:p-5">
+                  <article className="grid gap-6 rounded-md border border-border bg-surface p-4 md:grid-cols-[minmax(0,0.42fr)_minmax(0,1fr)] md:items-center md:p-5">
                     <img
                       src={hospital.image}
                       alt={hospital.imageAlt}
                       loading="lazy"
-                      className="aspect-[16/10] w-full rounded-xl object-cover"
+                      className="aspect-[16/10] w-full rounded-md object-cover"
                     />
                     <div>
                       <p className="text-sm text-muted">{hospital.type}</p>

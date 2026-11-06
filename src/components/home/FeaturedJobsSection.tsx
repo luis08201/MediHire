@@ -8,7 +8,7 @@ const shown = featuredJobs.slice(0, 3)
 
 export function FeaturedJobsSection() {
   return (
-    <Section labelledBy="featured-jobs-heading">
+    <Section labelledBy="featured-jobs-heading" className="bg-surface">
       <Container>
         <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <h2 id="featured-jobs-heading" className="max-w-xl text-4xl leading-[1.08] sm:text-5xl">
@@ -23,7 +23,7 @@ export function FeaturedJobsSection() {
             const hospital = getHospitalBySlug(job.hospitalSlug)
             return (
               <li key={job.slug}>
-                <article className="flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-surface">
+                <article className="flex h-full flex-col overflow-hidden rounded-md border border-border bg-background">
                   <img
                     src={hospital?.image ?? '/images/hospitals/harborlight.jpg'}
                     alt=""

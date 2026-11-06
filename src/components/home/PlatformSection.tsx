@@ -27,7 +27,7 @@ export function PlatformSection() {
               <img
                 src={hospital.image}
                 alt={hospital.imageAlt}
-                className="aspect-[16/10] w-full rounded-2xl object-cover"
+                className="aspect-[16/10] w-full rounded-md object-cover"
               />
               <p className="mt-4 text-2xl text-heading underline decoration-accent underline-offset-4">
                 {hospital.name}
@@ -42,7 +42,7 @@ export function PlatformSection() {
           {names.map((hospital) => {
             const count = openCount(hospital.slug)
             return (
-              <li key={hospital.slug} className="rounded-2xl border border-border bg-surface p-5">
+              <li key={hospital.slug} className="rounded-md border border-border bg-background p-5">
                 <Link
                   to={`/hospitals/${hospital.slug}`}
                   className="text-xl text-heading underline decoration-accent underline-offset-4"

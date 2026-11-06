@@ -1,39 +1,42 @@
 @import "tailwindcss";
 
 /*
-  MedTech night
-  Night #070B20
-  Raised #151D43
-  Button #2A5CF0
-  Signal #3568FF is large type, ornaments, and glow only
-  Signal text #9CB7FF
-  Ink #F5F7FF
-  Muted #AAB8D6
-  Line #5E6D99 meets 3:1 on both surfaces
+  Modern healthcare
+  White #FFFFFF
+  Mist #F5F8F6
+  Soft green #DDF3E9
+  Charcoal #142521
+  Emerald #159E72 is a large accent only (3.4:1 on white)
+  Ink green #0F7A58 is the same hue, dark enough for text and buttons (5.3:1)
+  Muted #3E554E
+  Line #5C726B meets 3:1 on white and mist
 */
 
 @theme {
-  --color-background: #070b20;
-  --color-surface: #151d43;
-  --color-primary: #2a5cf0;
-  --color-primary-hover: #2554e8;
-  --color-signal: #3568ff;
-  --color-accent: #9cb7ff;
-  --color-heading: #f5f7ff;
-  --color-body: #f5f7ff;
-  --color-muted: #aab8d6;
-  --color-border: #5e6d99;
+  --color-background: #ffffff;
+  --color-surface: #f5f8f6;
+  --color-soft: #ddf3e9;
+  --color-primary: #0f7a58;
+  --color-primary-hover: #0e6e50;
+  --color-emerald: #159e72;
+  --color-accent: #0f7a58;
+  --color-heading: #142521;
+  --color-body: #142521;
+  --color-muted: #3e554e;
+  --color-border: #5c726b;
+  --color-white: #ffffff;
 
-  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: "Manrope", ui-sans-serif, system-ui, sans-serif;
 
   --container-content: 72rem;
 }
 
 @layer base {
   html {
-    color-scheme: dark;
+    color-scheme: light;
     scroll-behavior: smooth;
-    scroll-padding-top: 6.5rem;
+    scroll-padding-top: 5rem;
   }
 
   body {
@@ -51,7 +54,7 @@
   h1,
   h2,
   h3 {
-    font-family: var(--font-sans);
+    font-family: var(--font-heading);
     font-weight: 600;
     letter-spacing: -0.03em;
     color: var(--color-heading);
@@ -59,7 +62,7 @@
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-accent);
+    outline: 2px solid var(--color-primary);
     outline-offset: 3px;
   }
 
@@ -100,34 +103,14 @@
     min-height: 3rem;
     width: 100%;
     border: 1px solid var(--color-border);
-    border-radius: 999px;
-    background: var(--color-surface);
+    border-radius: 0.375rem;
+    background: var(--color-background);
     color: var(--color-heading);
-    padding-inline: 1rem;
+    padding-inline: 0.875rem;
     font-size: 1rem;
   }
 
   .field::placeholder {
     color: var(--color-muted);
-  }
-
-  .hero-orbit {
-    animation: orbit-in 400ms ease both;
-  }
-
-  @keyframes orbit-in {
-    from {
-      opacity: 0;
-    }
-
-    to {
-      opacity: 1;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .hero-orbit {
-      animation: none;
-    }
   }
 }

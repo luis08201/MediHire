@@ -23,7 +23,7 @@ export function HeroSearch() {
   }
 
   return (
-    <form role="search" className="mt-10 w-full max-w-xl text-left" onSubmit={onSubmit}>
+    <form role="search" className="mt-8 w-full max-w-xl" onSubmit={onSubmit}>
       <label htmlFor="hero-search" className="text-sm font-medium">
         Job title, specialty, or keyword
       </label>
@@ -46,7 +46,7 @@ export function HeroSearch() {
           <Link
             key={term}
             to={{ pathname: '/jobs', search: searchFor(term) }}
-            className="inline-flex min-h-11 items-center rounded-full border border-border px-4 text-sm text-heading"
+            className="inline-flex min-h-11 items-center rounded-md border border-border bg-soft px-4 text-sm text-heading"
           >
             {term}
           </Link>

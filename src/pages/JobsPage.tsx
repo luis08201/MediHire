@@ -214,7 +214,7 @@ export function JobsPage() {
                 <button
                   key={term}
                   type="button"
-                  className="inline-flex min-h-11 items-center rounded-full border border-border px-4 text-sm hover:bg-surface"
+                  className="inline-flex min-h-11 items-center rounded-md border border-border px-4 text-sm hover:bg-surface"
                   onClick={() => searchFor(term)}
                 >
                   {term}
@@ -246,7 +246,7 @@ export function JobsPage() {
           <div className="grid items-start gap-10 lg:grid-cols-[17rem_minmax(0,1fr)]">
             <aside
               aria-labelledby="job-filters-heading"
-              className="hidden rounded-2xl border border-border bg-surface lg:sticky lg:top-28 lg:block lg:max-h-[calc(100svh-8rem)] lg:overflow-y-auto lg:p-6"
+              className="hidden rounded-md border border-border bg-surface lg:sticky lg:top-20 lg:block lg:max-h-[calc(100svh-6rem)] lg:overflow-y-auto lg:p-6"
             >
               <div>
                 <div className="flex items-center justify-between gap-3">
@@ -289,7 +289,7 @@ export function JobsPage() {
                     name="sort"
                     value={sort}
                     onChange={(event) => commit({ sort: event.target.value as JobSort, page: 1 })}
-                    className="min-h-11 rounded-full border border-border bg-surface px-4 text-sm text-heading"
+                    className="min-h-11 rounded-md border border-border bg-surface px-4 text-sm text-heading"
                   >
                     <option value="recommended">Recommended</option>
                     <option value="title">Title A–Z</option>
@@ -307,7 +307,7 @@ export function JobsPage() {
                         <button
                           type="button"
                           aria-label={chip.removeLabel}
-                          className="inline-flex min-h-11 items-center gap-2 rounded-full border border-border bg-surface px-4 text-sm"
+                          className="inline-flex min-h-11 items-center gap-2 rounded-md border border-border bg-surface px-4 text-sm"
                           onClick={chip.remove}
                         >
                           <span aria-hidden="true">{chip.label}</span>
@@ -327,7 +327,7 @@ export function JobsPage() {
               ) : null}
 
               {paged.items.length === 0 ? (
-                <div className="mt-8 rounded-2xl border border-border bg-surface px-6 py-14">
+                <div className="mt-8 rounded-md border border-border bg-surface px-6 py-14">
                   <h3 className="text-3xl">No matching roles</h3>
                   <p className="mt-3 max-w-md leading-relaxed">
                     Nothing in the sample board matches this search. Try another keyword, or

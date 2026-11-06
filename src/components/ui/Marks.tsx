@@ -3,11 +3,11 @@ import { cn } from '../../lib/cn.ts'
 
 export function BrandMark({ className }: { className?: string }) {
   return (
-    <Link to="/" className={cn('inline-flex items-center gap-2 px-2 text-heading', className)}>
+    <Link to="/" className={cn('inline-flex items-center gap-2 text-heading', className)}>
       <span className="text-accent">
         <CrossIcon />
       </span>
-      <span className="text-lg leading-none font-semibold tracking-tight">MediHire</span>
+      <span className="font-heading text-lg leading-none font-semibold tracking-tight">MediHire</span>
     </Link>
   )
 }

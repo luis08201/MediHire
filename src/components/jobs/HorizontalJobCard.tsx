@@ -6,11 +6,11 @@ export function HorizontalJobCard({ job }: { job: JobListing }) {
   const hospital = getHospitalBySlug(job.hospitalSlug)
 
   return (
-    <article className="grid gap-5 rounded-2xl border border-border bg-surface p-4 sm:grid-cols-[8.5rem_minmax(0,1fr)] sm:items-center sm:p-5">
+    <article className="grid gap-5 rounded-md border border-border bg-background p-4 sm:grid-cols-[8.5rem_minmax(0,1fr)] sm:items-center sm:p-5">
       <img
         src={hospital?.image ?? '/images/hospitals/harborlight.jpg'}
         alt=""
-        className="aspect-[4/3] w-full rounded-xl object-cover sm:h-24"
+        className="aspect-[4/3] w-full rounded-md object-cover sm:h-24"
       />
       <div className="min-w-0">
         <h3 className="text-2xl leading-tight">

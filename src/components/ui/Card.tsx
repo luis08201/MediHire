@@ -24,7 +24,7 @@ export function Card({
   return (
     <article
       className={cn(
-        'flex h-full flex-col rounded-2xl border border-border bg-surface p-6',
+        'flex h-full flex-col rounded-md border border-border bg-background p-6',
         className,
       )}
     >
