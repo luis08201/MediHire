@@ -352,6 +352,11 @@ ul.badge-row { list-style: none; padding: 0; margin: 0 0 1rem; }
 }
 .panel h2, .section-head h2, .service-block h2 { font-size: clamp(1.7rem, 3vw, 2.4rem); margin: 0 0 0.6rem; }
 .section { padding: 2.2rem 0; }
+.section-more {
+  display: flex;
+  justify-content: center;
+  margin: 40px 0 0;
+}
 .section-head { display: grid; gap: 0.4rem; margin-bottom: 1rem; }
 .kicker { color: var(--teal-deep); font-weight: 700; }
 .card h3, .job-card h2, .job-card h3, .person-card h2, .person-card h3, .article-card h2, .article-card h3, .location-card h2, .location-card h3 {

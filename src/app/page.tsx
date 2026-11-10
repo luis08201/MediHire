@@ -158,7 +158,7 @@ export default function HomePage() {
               <PersonCard key={member.id} member={member} department={departmentById(member.departmentId)?.name} />
             ))}
           </div>
-          <p><Link href="/team">{copy.cta.meetTeam}</Link></p>
+          <p className="section-more"><Link className="button primary" href="/team">{copy.cta.meetTeam}</Link></p>
         </section>
 
         <section className="section">
@@ -169,7 +169,7 @@ export default function HomePage() {
           <div className="list roles">
             {jobs.slice(0, 3).map((job) => <JobCard key={job.id} job={job} location={locationById(job.locationId)} />)}
           </div>
-          <p><Link href="/careers">{copy.cta.browseJobs}</Link></p>
+          <p className="section-more"><Link className="button primary" href="/careers">{copy.cta.browseJobs}</Link></p>
         </section>
 
         <section className="section">
@@ -192,7 +192,7 @@ export default function HomePage() {
               </article>
             ))}
           </div>
-          <p><Link href="/locations">{copy.cta.viewCoverage}</Link></p>
+          <p className="section-more"><Link className="button primary" href="/locations">{copy.cta.viewCoverage}</Link></p>
         </section>
 
         <section className="section">
