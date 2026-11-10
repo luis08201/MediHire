@@ -113,10 +113,13 @@ export function PersonCard({ member, department, departmentSlug = "", filterable
           <Link href={`/team/${member.slug}`}>{member.name}</Link>
           <VerifiedMark />
         </h3>
-        <p>{department ? `${member.role} · ${department}` : member.role}</p>
+        <p>{member.role}</p>
         {filterable ? <span className="visually-hidden" aria-hidden="true" fs-list-field="department">{departmentSlug}</span> : null}
         <div className="card-foot">
-          {member.demo ? <SampleBadge /> : <span />}
+          <p className="card-meta">
+            {member.demo ? <span>{copy.sample}</span> : null}
+            {department ? <span>{department}</span> : null}
+          </p>
           <Link className="card-action" href={`/team/${member.slug}`}>{copy.cta.viewProfile}</Link>
         </div>
       </div>
