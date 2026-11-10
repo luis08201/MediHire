@@ -1073,12 +1073,15 @@ article.role-card .role-details:hover { color: #fff; background: #2a2a2a; }
 .blog-page .directory {
   display: flex;
   flex-direction: column;
+  align-items: stretch;
   gap: 1.15rem;
+  width: 100%;
 }
 .blog-page .filters {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: center;
+  width: 100%;
   gap: 0.65rem 0.7rem;
   position: static;
   max-height: none;
@@ -1099,8 +1102,8 @@ article.role-card .role-details:hover { color: #fff; background: #2a2a2a; }
 }
 .blog-page .filters .journal-browse-label { order: 1; }
 .blog-page .filters .text-button { order: 2; }
-.blog-page .filters fieldset { order: 3; flex: 1 1 auto; }
-.blog-page .filters .field { order: 4; margin: 0 0 0 auto; min-width: min(100%, 15rem); }
+.blog-page .filters fieldset { order: 3; flex: 1 1 auto; min-width: 0; }
+.blog-page .filters .field { order: 4; flex: 0 0 15.5rem; width: 15.5rem; margin: 0 0 0 auto; min-width: 0; }
 .blog-page .filters fieldset {
   display: flex;
   flex-wrap: wrap;
@@ -1295,7 +1298,17 @@ article.role-card .role-details:hover { color: #fff; background: #2a2a2a; }
   color: #8a949a;
   font-size: 0.8rem;
 }
-.blog-page .pagination { justify-content: center; margin-top: 0.4rem; }
+.blog-page .pagination {
+  display: flex;
+  justify-content: center;
+  align-self: stretch;
+  width: 100%;
+  margin-top: 0.4rem;
+}
+@media (max-width: 760px) {
+  .blog-page .filters { flex-wrap: wrap; }
+  .blog-page .filters .field { flex-basis: 100%; width: 100%; margin-left: 0; }
+}
 .blog-page .pagination [fs-list-element="page-count"] {
   position: absolute;
   width: 1px;
