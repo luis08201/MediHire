@@ -484,16 +484,86 @@ legend { font-weight: 700; padding: 0 0.3rem; color: var(--navy); }
 .apply-bar strong { color: white; }
 .apply-bar .button { background: white; color: var(--navy); }
 .site-footer {
-  background: #123f48;
-  color: #d7ebe7;
-  padding: 2.5rem 0 2rem;
+  position: relative;
+  overflow: hidden;
+  background: transparent;
+  color: var(--ink);
+  padding: 1.2rem 0 5.5rem;
 }
-.site-footer a { color: #c8f6ea; }
-.footer-grid { display: grid; gap: 1.2rem; }
-.site-footer h2 { color: white; font-size: 1.1rem; }
-.site-footer ul { list-style: none; padding: 0; margin: 0; }
-.site-footer li { margin: 0.35rem 0; }
-.legal { color: #b7cfc9; font-size: 0.92rem; }
+.site-footer::after {
+  content: "MediHire";
+  position: absolute;
+  left: 50%;
+  bottom: -1.2rem;
+  transform: translateX(-50%);
+  font-size: clamp(5.5rem, 16vw, 11rem);
+  font-weight: 800;
+  letter-spacing: -0.06em;
+  line-height: 1;
+  color: rgba(18, 52, 60, 0.045);
+  pointer-events: none;
+  white-space: nowrap;
+}
+.footer-card {
+  position: relative;
+  z-index: 1;
+  width: min(1120px, calc(100% - 2rem));
+  margin-inline: auto;
+  background: #fff;
+  border-radius: 1.7rem;
+  padding: 2rem 2.1rem 1.15rem;
+  box-shadow: 0 16px 50px rgba(20, 32, 40, 0.05);
+}
+.footer-main { display: grid; gap: 2rem; }
+.footer-brand p {
+  max-width: 24rem;
+  margin: 0.9rem 0 1rem;
+  color: #8b919a;
+  font-size: 0.96rem;
+  line-height: 1.55;
+}
+.footer-social { display: flex; align-items: center; gap: 0.95rem; color: #171a1f; }
+.footer-social svg {
+  width: 1.15rem;
+  height: 1.15rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.footer-social svg.fill { fill: currentColor; stroke: none; }
+.footer-credits { margin-left: auto; }
+.footer-columns { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.4rem; }
+.footer-columns h2 { margin: 0 0 0.75rem; color: #171a1f; font-size: 0.98rem; }
+.footer-columns ul { list-style: none; padding: 0; margin: 0; }
+.footer-columns li { margin: 0.42rem 0; }
+.footer-columns a { color: #8b919a; text-decoration: none; font-size: 0.95rem; }
+.footer-columns a:hover { color: #171a1f; }
+.footer-rule { border: 0; border-top: 1px solid #eceff2; margin: 1.5rem 0 0.95rem; }
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.footer-bottom > p { margin: 0; color: #9aa1aa; font-size: 0.9rem; }
+.footer-credits summary {
+  color: #6d747e;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+  cursor: pointer;
+  list-style: none;
+}
+.footer-credits summary::-webkit-details-marker { display: none; }
+.footer-credits ul { list-style: none; padding: 0.7rem 0 0; margin: 0; }
+.footer-credits li { margin: 0.3rem 0; color: #8b919a; font-size: 0.88rem; }
+.footer-credits a { color: #5c7278; }
+@media (max-width: 720px) {
+  .footer-columns { grid-template-columns: 1fr; }
+  .footer-card { padding: 1.4rem 1.15rem 1rem; }
+}
 .split .panel:first-child { box-shadow: inset 4px 0 0 var(--mint), var(--shadow); }
 .split .panel:last-child { box-shadow: inset 4px 0 0 var(--lilac), var(--shadow); }
 .search-group { margin: 1.4rem 0; }
@@ -541,7 +611,8 @@ legend { font-weight: 700; padding: 0 0.3rem; color: var(--navy); }
   }
   .logo { grid-column: 2; grid-row: 1; justify-self: center; }
   .header-actions { display: flex; grid-column: 3; grid-row: 1; justify-self: end; margin-left: 0; }
-  .hero, .haltha-hero, .profile, .split, .footer-grid { grid-template-columns: 1.1fr 0.9fr; align-items: center; }
+  .hero, .haltha-hero, .profile, .split { grid-template-columns: 1.1fr 0.9fr; align-items: center; }
+  .footer-main { grid-template-columns: minmax(16rem, 1.15fr) minmax(0, 1.6fr); align-items: start; }
   .stat-band { grid-template-columns: repeat(4, 1fr); padding: 1.8rem 2rem; }
   .card-grid, .article-grid { grid-template-columns: repeat(3, 1fr); }
   .location-grid, .service-grid { grid-template-columns: repeat(3, 1fr); }

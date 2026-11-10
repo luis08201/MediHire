@@ -78,6 +78,30 @@ function PagesMenu({ pathname, onNavigate }: { pathname: string; onNavigate?: ()
   );
 }
 
+function Logo() {
+  return (
+    <Link href="/" className="logo" aria-label={copy.brand}>
+      <svg className="logo-mark" viewBox="0 0 32 32" aria-hidden="true">
+        <rect width="32" height="32" rx="8" fill="#7EE0C4" />
+        <path d="M8 21.5c2.4-6 4.4-8.5 8-8.5s5.6 2.5 8 8.5" stroke="#123F48" strokeWidth="2.2" strokeLinecap="round" fill="none" />
+        <circle cx="16" cy="11.2" r="2.1" fill="#CBBAFC" />
+      </svg>
+      {copy.brand}
+    </Link>
+  );
+}
+
+function SocialMarks() {
+  return (
+    <div className="footer-social" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="M4 4l16 16M20 4 4 20" /></svg>
+      <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="4" /><circle cx="12" cy="12" r="3.5" /><circle cx="17.2" cy="6.8" r="0.8" fill="currentColor" stroke="none" /></svg>
+      <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2" /><path d="M8 10.5V17M8 7.5v.2M12 17v-6.5a2 2 0 0 1 4 0V17" /></svg>
+      <svg className="fill" viewBox="0 0 24 24"><path d="M14 8h2V5h-2c-2.2 0-4 1.8-4 4v2H8v3h2v6h3v-6h2.2l.8-3H13V9c0-.6.4-1 1-1Z" /></svg>
+    </div>
+  );
+}
+
 export function SiteHeader() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
@@ -99,14 +123,7 @@ export function SiteHeader() {
   return (
     <header className="site-header">
       <div className="header-inner">
-        <Link href="/" className="logo" aria-label={copy.brand}>
-          <svg className="logo-mark" viewBox="0 0 32 32" aria-hidden="true">
-            <rect width="32" height="32" rx="8" fill="#7EE0C4" />
-            <path d="M8 21.5c2.4-6 4.4-8.5 8-8.5s5.6 2.5 8 8.5" stroke="#123F48" strokeWidth="2.2" strokeLinecap="round" fill="none" />
-            <circle cx="16" cy="11.2" r="2.1" fill="#CBBAFC" />
-          </svg>
-          {copy.brand}
-        </Link>
+        <Logo />
         <nav className="primary-nav" aria-label={copy.nav.primary}>
           <Link href="/" aria-current={current(pathname, "/") ? "page" : undefined}>{copy.nav.home}</Link>
           <Link href="/about" aria-current={current(pathname, "/about") ? "page" : undefined}>{copy.nav.about}</Link>
@@ -152,40 +169,54 @@ export function SiteHeader() {
 export function SiteFooter({ credits }: { credits: { title: string; source: string; creator: string }[] }) {
   return (
     <footer className="site-footer">
-      <div className="footer-inner footer-grid">
-        <div>
-          <h2>{copy.brand}</h2>
-          <p>{copy.footer.summary}</p>
-          <p className="legal">{copy.footer.rights}</p>
+      <div className="footer-card">
+        <div className="footer-main">
+          <div className="footer-brand">
+            <Logo />
+            <p>{copy.footer.summary}</p>
+            <SocialMarks />
+          </div>
+          <div className="footer-columns">
+            <nav aria-label={copy.footer.services}>
+              <h2>{copy.footer.services}</h2>
+              <ul>
+                <li><Link href="/services">{copy.nav.services}</Link></li>
+                <li><Link href="/locations">{copy.nav.locations}</Link></li>
+                <li><Link href="/careers">{copy.nav.careers}</Link></li>
+              </ul>
+            </nav>
+            <nav aria-label={copy.footer.resources}>
+              <h2>{copy.footer.resources}</h2>
+              <ul>
+                <li><Link href="/blog">{copy.nav.blog}</Link></li>
+                <li><Link href="/team">{copy.nav.team}</Link></li>
+                <li><Link href="/search">{copy.nav.search}</Link></li>
+              </ul>
+            </nav>
+            <nav aria-label={copy.footer.company}>
+              <h2>{copy.footer.company}</h2>
+              <ul>
+                <li><Link href="/about">{copy.nav.about}</Link></li>
+                <li><Link href="/contact">{copy.nav.contact}</Link></li>
+                <li><Link href="/careers">{copy.footer.forClinicians}</Link></li>
+              </ul>
+            </nav>
+          </div>
         </div>
-        <div>
-          <h2>{copy.footer.explore}</h2>
-          <ul>
-            <li><Link href="/services">{copy.nav.services}</Link></li>
-            <li><Link href="/locations">{copy.nav.locations}</Link></li>
-            <li><Link href="/careers">{copy.nav.careers}</Link></li>
-            <li><Link href="/blog">{copy.nav.blog}</Link></li>
-            <li><Link href="/team">{copy.nav.team}</Link></li>
-            <li><Link href="/contact">{copy.nav.contact}</Link></li>
-            <li><Link href="/search">{copy.nav.search}</Link></li>
-          </ul>
-        </div>
-        <div>
-          <h2>{copy.footer.audiences}</h2>
-          <ul>
-            <li><Link href="/services">{copy.footer.forHospitals}</Link></li>
-            <li><Link href="/careers">{copy.footer.forClinicians}</Link></li>
-            <li><Link href="/about">{copy.nav.about}</Link></li>
-          </ul>
-          <h2 id="photo-credits">{copy.footer.photos}</h2>
-          <ul>
-            {credits.map((credit) => (
-              <li key={credit.source}>
-                <a href={credit.source}>{credit.title}</a>
-                <span> · {credit.creator}</span>
-              </li>
-            ))}
-          </ul>
+        <hr className="footer-rule" />
+        <div className="footer-bottom">
+          <p>© {new Date().getFullYear()} {copy.brand}. {copy.footer.rights}</p>
+          <details className="footer-credits" id="photo-credits">
+            <summary>{copy.footer.photos}</summary>
+            <ul>
+              {credits.map((credit) => (
+                <li key={credit.source}>
+                  <a href={credit.source}>{credit.title}</a>
+                  <span> · {credit.creator}</span>
+                </li>
+              ))}
+            </ul>
+          </details>
         </div>
       </div>
     </footer>
