@@ -265,14 +265,18 @@ main { padding-bottom: 4rem; }
   z-index: 1;
   right: 1.1rem;
   bottom: 1.1rem;
-  width: min(16.5rem, calc(100% - 2rem));
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: max-content;
+  max-width: calc(100% - 2.2rem);
   background: white;
   color: var(--ink);
   border-radius: 1.2rem;
-  padding: 0.9rem 1rem 0.4rem;
+  padding: 0.7rem 1rem;
   box-shadow: var(--shadow);
 }
-.hero-float p { margin-bottom: 0.55rem; }
+.hero-float p { margin: 0; max-width: 8.5rem; line-height: 1.25; font-weight: 700; }
 @media (max-width: 839px) {
   .photo-hero { min-height: 38rem; flex-direction: column; align-items: stretch; }
   .photo-hero-copy { padding-bottom: 1rem; }

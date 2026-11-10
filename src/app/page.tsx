@@ -53,7 +53,6 @@ export default function HomePage() {
             </div>
           </div>
           <aside className="hero-float">
-            <p className="kicker">{copy.home.floatTitle}</p>
             <div className="avatar-stack">
               {members.slice(0, 3).map((member) => (
                 <img key={member.id} src={member.portrait.src} alt="" width={64} height={64} />
