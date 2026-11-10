@@ -364,8 +364,13 @@ ul.badge-row { list-style: none; padding: 0; margin: 0 0 1rem; }
   padding-bottom: 48px;
 }
 .home-flow > .section { padding-top: 0; padding-bottom: 0; }
-.home-flow > .photo-hero,
-.home-flow > .stat-band { margin-top: 0; margin-bottom: 0; }
+.hero-block {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.hero-block > .photo-hero,
+.hero-block > .stat-band { margin: 0; }
 @media (min-width: 720px) {
   .home-flow { gap: 80px; padding-bottom: 80px; }
 }
@@ -407,7 +412,8 @@ ul.badge-row { list-style: none; padding: 0; margin: 0 0 1rem; }
   height: calc(100svh - var(--header));
   overflow: hidden;
   display: flex;
-  align-items: stretch;
+  align-items: center;
+  justify-content: center;
   background: #10242c;
 }
 .process-bg {
@@ -429,16 +435,25 @@ ul.badge-row { list-style: none; padding: 0; margin: 0 0 1rem; }
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-rows: auto minmax(0, 1fr);
-  gap: 1.2rem;
+  grid-template-rows: auto auto;
+  gap: 1.5rem;
+  align-items: center;
+  justify-items: center;
   width: min(1120px, calc(100% - 2rem));
   margin: 0 auto;
   padding: 1.4rem 0 1.6rem;
 }
+.process-copy { justify-self: start; }
 .process-copy h2 { margin: 0 0 0.55rem; color: white; font-size: clamp(2rem, 4vw, 3rem); }
 .process-copy p { margin: 0; max-width: 28rem; color: rgba(255, 255, 255, 0.86); }
-.process-viewport { min-width: 0; overflow: hidden; display: flex; align-items: center; }
-.process-track { display: flex; gap: 1.15rem; will-change: transform; }
+.process-viewport {
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+.process-track { position: relative; display: flex; align-items: center; gap: 1.15rem; will-change: transform; }
 .process-point {
   flex: 0 0 min(22rem, 78vw);
   display: grid;
@@ -457,9 +472,10 @@ ul.badge-row { list-style: none; padding: 0; margin: 0 0 1rem; }
 .process-point p:last-child { margin: 0; color: #5c7278; }
 @media (min-width: 900px) {
   .process-layout {
-    grid-template-columns: minmax(16rem, 24rem) minmax(0, 1fr);
-    grid-template-rows: 1fr;
+    grid-template-columns: minmax(16rem, 22rem) minmax(0, 1fr);
+    grid-template-rows: auto;
     align-items: center;
+    justify-items: stretch;
   }
 }
 @media (prefers-reduced-motion: reduce) {
