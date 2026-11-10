@@ -34,6 +34,7 @@ export default function CareersPage() {
         emptyTitle={copy.filters.emptyCareersTitle}
         emptyBody={copy.filters.emptyCareersBody}
         total={jobs.length}
+        listClassName="roles"
       >
         {jobs.map((job) => (
           <JobCard key={job.id} job={job} location={locationById(job.locationId)} filterable />

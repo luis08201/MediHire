@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { copy, fill } from "@/i18n/en";
-import { formatCompensation, formatDate, labelFrom } from "@/lib/format";
+import { formatDate, labelFrom } from "@/lib/format";
 import { renderMarkdown } from "@/lib/markdown";
 import type { BlogPost, Job, Location, TeamMember } from "@/lib/cms/types";
 
@@ -40,6 +40,35 @@ function VerifiedMark() {
   );
 }
 
+const roleTones = ["peach", "mint", "lilac", "sky", "blush", "mist"] as const;
+
+function roleTone(slug: string) {
+  let total = 0;
+  for (const char of slug) total += char.charCodeAt(0);
+  return roleTones[total % roleTones.length];
+}
+
+function roleDate(iso: string | null) {
+  if (!iso) return "";
+  const date = new Date(`${iso.slice(0, 10)}T00:00:00Z`);
+  const month = date.toLocaleString("en-US", { month: "short", timeZone: "UTC" });
+  return `${date.getUTCDate()} ${month}, ${date.getUTCFullYear()}`;
+}
+
+function compactPay(compensation: Job["compensation"]) {
+  if (!compensation || (!compensation.min && !compensation.max)) return null;
+  const money = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: compensation.currency,
+    maximumFractionDigits: 0,
+  });
+  const suffix = compensation.period === "hour" ? "/hr" : "/yr";
+  const min = compensation.min || compensation.max;
+  const max = compensation.max || compensation.min;
+  if (min && max && min !== max) return `${money.format(min)}–${money.format(max)}${suffix}`;
+  return `${money.format(min || max)}${suffix}`;
+}
+
 export function JobCard({
   job,
   location,
@@ -50,55 +79,44 @@ export function JobCard({
   filterable?: boolean;
 }) {
   const specialty = labelFrom("specialty", job.specialty);
-  const pay = formatCompensation(job.compensation);
+  const pay = compactPay(job.compensation);
+  const place = location ? `${location.city}, ${location.state}` : "";
+  const initial = job.employer.trim().charAt(0).toUpperCase();
   return (
-    <article className="job-card" {...(filterable ? { "fs-list-element": "item" } : {})}>
-      <div className="badge-row">
-        {job.demo ? <SampleBadge /> : null}
-        <span className="badge">{labelFrom("employmentType", job.employmentType)}</span>
-        <span className="badge">{labelFrom("shift", job.shift)}</span>
+    <article className={`job-card role-card tone-${roleTone(job.slug)}`} {...(filterable ? { "fs-list-element": "item" } : {})}>
+      <div className="role-body">
+        {job.publishedAt ? <p className="role-date">{roleDate(job.publishedAt)}</p> : null}
+        <div className="role-head">
+          <div>
+            <p className="role-employer">{job.employer}</p>
+            <h3>
+              <Link href={`/careers/${job.slug}`} {...(filterable ? { "fs-list-field": "title" } : {})}>{job.title}</Link>
+            </h3>
+          </div>
+          {initial ? <span className="role-mark" aria-hidden="true">{initial}</span> : null}
+        </div>
+        <div className="role-tags">
+          {job.demo ? <span>{copy.sample}</span> : null}
+          <span>{labelFrom("employmentType", job.employmentType)}</span>
+          <span>{labelFrom("shift", job.shift)}</span>
+          <span>{labelFrom("arrangement", job.workArrangement)}</span>
+        </div>
+        {filterable ? (
+          <>
+            <span className="visually-hidden" aria-hidden="true" fs-list-field="search">{`${job.title} ${specialty}`}</span>
+            <span className="visually-hidden" aria-hidden="true" fs-list-field="specialty">{job.specialty}</span>
+            {location ? <span className="visually-hidden" aria-hidden="true" fs-list-field="location">{location.slug}</span> : null}
+            <span className="visually-hidden" aria-hidden="true" fs-list-field="shift">{job.shift}</span>
+            <span className="visually-hidden" aria-hidden="true" fs-list-field="employment">{job.employmentType}</span>
+          </>
+        ) : null}
       </div>
-      <h3>
-        <Link href={`/careers/${job.slug}`} {...(filterable ? { "fs-list-field": "title" } : {})}>{job.title}</Link>
-      </h3>
-      {filterable ? (
-        <span className="visually-hidden" aria-hidden="true" fs-list-field="search">{`${job.title} ${specialty}`}</span>
-      ) : null}
-      <p>{job.employer}</p>
-      <dl className="facts">
-        <div className="fact">
-          <dt>{copy.jobs.specialty}</dt>
-          <dd>
-            {filterable ? <span className="visually-hidden" aria-hidden="true" fs-list-field="specialty">{job.specialty}</span> : null}
-            <span {...(filterable ? { "fs-list-field": "specialty-label" } : {})}>{specialty}</span>
-          </dd>
-        </div>
-        <div className="fact">
-          <dt>{copy.jobs.location}</dt>
-          <dd>
-            {filterable && location ? <span className="visually-hidden" aria-hidden="true" fs-list-field="location">{location.slug}</span> : null}
-            {location?.name ?? "—"}
-          </dd>
-        </div>
-        <div className="fact">
-          <dt>{copy.jobs.shift}</dt>
-          <dd>
-            {filterable ? <span className="visually-hidden" aria-hidden="true" fs-list-field="shift">{job.shift}</span> : null}
-            {labelFrom("shift", job.shift)}
-          </dd>
-        </div>
-        <div className="fact">
-          <dt>{copy.jobs.employment}</dt>
-          <dd>
-            {filterable ? <span className="visually-hidden" aria-hidden="true" fs-list-field="employment">{job.employmentType}</span> : null}
-            {labelFrom("employmentType", job.employmentType)}
-          </dd>
-        </div>
-      </dl>
-      {pay ? <p><strong>{copy.jobs.compensation}: </strong>{pay}</p> : null}
-      <p>{job.summary}</p>
-      <div className="card-foot">
-        <Link className="card-action" href={`/careers/${job.slug}`}>{copy.cta.viewRole}</Link>
+      <div className="role-foot">
+        <p>
+          {pay ? <strong className="role-pay">{pay}</strong> : null}
+          {place ? <span className="role-place">{place}</span> : null}
+        </p>
+        <Link className="role-details" href={`/careers/${job.slug}`}>{copy.cta.details}</Link>
       </div>
     </article>
   );

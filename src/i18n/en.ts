@@ -29,6 +29,7 @@ export const copy = {
     requestStaff: "Request Staff",
     browseJobs: "Browse Jobs",
     viewRole: "View role",
+    details: "Details",
     apply: "Apply",
     applyExternal: "Apply on employer site",
     contactTeam: "Contact the team",

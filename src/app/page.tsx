@@ -166,7 +166,7 @@ export default function HomePage() {
             <h2>{copy.home.featuredTitle}</h2>
             <p>{copy.home.featuredBody}</p>
           </div>
-          <div className="list">
+          <div className="list roles">
             {jobs.slice(0, 3).map((job) => <JobCard key={job.id} job={job} location={locationById(job.locationId)} />)}
           </div>
           <p><Link href="/careers">{copy.cta.browseJobs}</Link></p>
