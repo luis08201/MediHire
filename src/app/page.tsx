@@ -1,8 +1,14 @@
 import Link from "next/link";
-import { ArticleCard, JobCard, JsonLd } from "@/components/content";
-import { copy } from "@/i18n/en";
-import { categoryById, getPage, listBlogPosts, listJobs, listLocations, listServices, locationById, pageField } from "@/lib/cms/queries";
+import { ArticleCard, JobCard, JsonLd, PersonCard } from "@/components/content";
+import { copy, fill } from "@/i18n/en";
+import { categoryById, departmentById, getPage, listBlogPosts, listJobs, listLocations, listServices, listTeamMembers, locationById, pageField } from "@/lib/cms/queries";
 import { breadcrumbJsonLd, buildMetadata, websiteJsonLd } from "@/lib/seo";
+
+const servicePhotos = [
+  { src: "/media/consult.jpg", alt: "Two clinicians reviewing medical imaging on a monitor." },
+  { src: "/media/or-team.jpg", alt: "Two surgeons in caps and masks looking down during a procedure." },
+  { src: "/media/respiratory.jpg", alt: "A surgical team gathered under operating-room lights." },
+];
 
 export async function generateMetadata() {
   const page = getPage("home");
@@ -19,11 +25,18 @@ export async function generateMetadata() {
 export default function HomePage() {
   const page = getPage("home");
   const text = (key: string) => pageField(page, key);
-  const jobs = listJobs().slice(0, 3);
-  const posts = listBlogPosts().slice(0, 3);
+  const jobs = listJobs();
+  const posts = listBlogPosts();
   const services = listServices();
-  const locations = listLocations().slice(0, 4);
+  const locations = listLocations();
+  const members = listTeamMembers();
   const steps = [1, 2, 3];
+  const counts = [
+    { value: jobs.length, label: copy.home.countRoles },
+    { value: locations.length, label: copy.home.countAreas },
+    { value: members.length, label: copy.home.countPeople },
+    { value: services.length, label: copy.home.countServices },
+  ];
   return (
     <>
       <JsonLd data={[websiteJsonLd(), breadcrumbJsonLd([{ name: "Home", path: "/" }])]} />
@@ -35,12 +48,30 @@ export default function HomePage() {
             <p className="lede">{text("heroBody")}</p>
             <div className="cta-row">
               <Link className="button primary" href="/contact">{copy.cta.requestStaff}</Link>
-              <Link className="button secondary" href="/careers">{copy.cta.browseJobs}</Link>
+              <Link className="button ghost" href="/careers">{copy.cta.browseJobs}</Link>
+            </div>
+            <div className="trust-row">
+              <div className="avatar-stack">
+                {members.slice(0, 3).map((member) => (
+                  <img key={member.id} src={member.portrait.src} alt="" width={64} height={64} />
+                ))}
+              </div>
+              <p>{copy.home.teamNote}</p>
             </div>
           </div>
           <div className="hero-photo">
             <img src="/media/hero-team.jpg" alt="Hands type on a laptop beside a stethoscope on a wooden desk." width={1800} height={1200} />
+            <p className="hero-chip">{fill(copy.home.openChip, { count: String(jobs.length) })}</p>
           </div>
+        </section>
+
+        <section className="stat-band" aria-label={copy.home.countsLabel}>
+          {counts.map((count) => (
+            <div key={count.label}>
+              <strong>{count.value}</strong>
+              <span>{count.label}</span>
+            </div>
+          ))}
         </section>
 
         <section className="section split">
@@ -64,13 +95,17 @@ export default function HomePage() {
             <p className="lede">{text("servicesBody")}</p>
           </div>
           <div className="service-grid">
-            {services.map((service) => (
-              <article className="card" key={service.id}>
-                <h3>{service.name}</h3>
-                <p>{service.summary}</p>
-                <Link href={`/contact?service=${service.slug}`}>{copy.cta.requestStaff}</Link>
-              </article>
-            ))}
+            {services.map((service, index) => {
+              const photo = servicePhotos[index % servicePhotos.length];
+              return (
+                <article className="card service-photo" key={service.id}>
+                  <img src={photo.src} alt={photo.alt} width={1200} height={800} />
+                  <h3>{service.name}</h3>
+                  <p>{service.summary}</p>
+                  <Link href={`/contact?service=${service.slug}`}>{copy.cta.requestStaff}</Link>
+                </article>
+              );
+            })}
           </div>
         </section>
 
@@ -113,11 +148,24 @@ export default function HomePage() {
 
         <section className="section">
           <div className="section-head">
+            <h2>{copy.home.peopleTitle}</h2>
+            <p className="lede">{copy.home.peopleBody}</p>
+          </div>
+          <div className="card-grid">
+            {members.slice(0, 3).map((member) => (
+              <PersonCard key={member.id} member={member} department={departmentById(member.departmentId)?.name} />
+            ))}
+          </div>
+          <p><Link href="/team">{copy.cta.meetTeam}</Link></p>
+        </section>
+
+        <section className="section">
+          <div className="section-head">
             <h2>{copy.home.featuredTitle}</h2>
             <p>{copy.home.featuredBody}</p>
           </div>
-          <div className="card-grid">
-            {jobs.map((job) => <JobCard key={job.id} job={job} location={locationById(job.locationId)} />)}
+          <div className="list">
+            {jobs.slice(0, 3).map((job) => <JobCard key={job.id} job={job} location={locationById(job.locationId)} />)}
           </div>
           <p><Link href="/careers">{copy.cta.browseJobs}</Link></p>
         </section>
@@ -128,11 +176,13 @@ export default function HomePage() {
             <p className="lede">{text("coverageBody")}</p>
           </div>
           <div className="card-grid">
-            {locations.map((location) => (
-              <article className="card" key={location.id}>
+            {locations.slice(0, 3).map((location) => (
+              <article className="card place-card" key={location.id}>
+                <img src={location.image.src} alt={location.image.alt} width={1200} height={800} />
+                <p className="kicker">{location.kind === "office" ? copy.locations.office : copy.locations.serviceArea}</p>
                 <h3><Link href={`/locations/${location.slug}`}>{location.name}</Link></h3>
-                <p>{location.kind === "office" ? copy.locations.office : copy.locations.serviceArea}</p>
-                <p>{location.summary}</p>
+                <p>{location.city}, {location.state}</p>
+                <Link href={`/locations/${location.slug}`}>{copy.cta.viewLocation}</Link>
               </article>
             ))}
           </div>
@@ -144,7 +194,7 @@ export default function HomePage() {
             <h2>{copy.home.articlesTitle}</h2>
           </div>
           <div className="article-grid">
-            {posts.map((post) => (
+            {posts.slice(0, 3).map((post) => (
               <ArticleCard
                 key={post.id}
                 post={post}

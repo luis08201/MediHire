@@ -2,22 +2,80 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useId, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { copy } from "@/i18n/en";
 
-const links = [
+const pageLinks = [
   { href: "/services", label: copy.nav.services },
-  { href: "/locations", label: copy.nav.locations },
+  { href: "/team", label: copy.nav.team },
   { href: "/careers", label: copy.nav.careers },
-  { href: "/blog", label: copy.nav.insights },
-  { href: "/about", label: copy.nav.about },
+  { href: "/locations", label: copy.nav.locations },
   { href: "/contact", label: copy.nav.contact },
-  { href: "/search", label: copy.nav.search },
 ];
 
 function current(pathname: string, href: string) {
   if (href === "/") return pathname === "/";
   return pathname === href || pathname.startsWith(`${href}/`);
+}
+
+function PagesMenu({ pathname, onNavigate }: { pathname: string; onNavigate?: () => void }) {
+  const [open, setOpen] = useState(false);
+  const menuId = useId();
+  const rootRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const sectionCurrent = pageLinks.some((link) => current(pathname, link.href));
+
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key !== "Escape") return;
+      setOpen(false);
+      buttonRef.current?.focus();
+    };
+    const onPointer = (event: MouseEvent) => {
+      const target = event.target;
+      if (!(target instanceof Node)) return;
+      if (!rootRef.current?.contains(target)) setOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    window.addEventListener("mousedown", onPointer);
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      window.removeEventListener("mousedown", onPointer);
+    };
+  }, [open]);
+
+  return (
+    <div className={sectionCurrent ? "nav-menu is-current" : "nav-menu"} ref={rootRef}>
+      <button
+        ref={buttonRef}
+        type="button"
+        aria-expanded={open}
+        aria-controls={menuId}
+        aria-haspopup="true"
+        onClick={() => setOpen((value) => !value)}
+      >
+        {copy.nav.pages}
+        <span className="chevron" aria-hidden="true" />
+      </button>
+      <div id={menuId} className="nav-menu-panel" hidden={!open}>
+        {pageLinks.map((link) => (
+          <Link
+            key={link.href}
+            href={link.href}
+            aria-current={current(pathname, link.href) ? "page" : undefined}
+            onClick={onNavigate}
+          >
+            {link.label}
+          </Link>
+        ))}
+      </div>
+    </div>
+  );
 }
 
 export function SiteHeader() {
@@ -50,11 +108,10 @@ export function SiteHeader() {
           {copy.brand}
         </Link>
         <nav className="primary-nav" aria-label={copy.nav.primary}>
-          {links.map((link) => (
-            <Link key={link.href} href={link.href} aria-current={current(pathname, link.href) ? "page" : undefined}>
-              {link.label}
-            </Link>
-          ))}
+          <Link href="/" aria-current={current(pathname, "/") ? "page" : undefined}>{copy.nav.home}</Link>
+          <Link href="/about" aria-current={current(pathname, "/about") ? "page" : undefined}>{copy.nav.about}</Link>
+          <PagesMenu pathname={pathname} />
+          <Link href="/blog" aria-current={current(pathname, "/blog") ? "page" : undefined}>{copy.nav.blog}</Link>
         </nav>
         <div className="header-actions">
           <Link className="text-button" href="/careers">{copy.cta.browseJobs}</Link>
@@ -73,11 +130,10 @@ export function SiteHeader() {
       <div className="wrap">
         <div id={panelId} className={open ? "mobile-panel open" : "mobile-panel"} hidden={!open}>
           <nav aria-label={copy.nav.primary}>
-            {links.map((link) => (
-              <Link key={link.href} href={link.href} aria-current={current(pathname, link.href) ? "page" : undefined}>
-                {link.label}
-              </Link>
-            ))}
+            <Link href="/" aria-current={current(pathname, "/") ? "page" : undefined}>{copy.nav.home}</Link>
+            <Link href="/about" aria-current={current(pathname, "/about") ? "page" : undefined}>{copy.nav.about}</Link>
+            <PagesMenu pathname={pathname} onNavigate={() => setOpen(false)} />
+            <Link href="/blog" aria-current={current(pathname, "/blog") ? "page" : undefined}>{copy.nav.blog}</Link>
           </nav>
           <div className="cta-row">
             <Link className="button ghost" href="/careers">{copy.cta.browseJobs}</Link>
@@ -109,9 +165,10 @@ export function SiteFooter({ credits }: { credits: { title: string; source: stri
             <li><Link href="/services">{copy.nav.services}</Link></li>
             <li><Link href="/locations">{copy.nav.locations}</Link></li>
             <li><Link href="/careers">{copy.nav.careers}</Link></li>
-            <li><Link href="/blog">{copy.nav.insights}</Link></li>
+            <li><Link href="/blog">{copy.nav.blog}</Link></li>
             <li><Link href="/team">{copy.nav.team}</Link></li>
             <li><Link href="/contact">{copy.nav.contact}</Link></li>
+            <li><Link href="/search">{copy.nav.search}</Link></li>
           </ul>
         </div>
         <div>
