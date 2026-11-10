@@ -342,14 +342,46 @@ ul.badge-row { list-style: none; padding: 0; margin: 0 0 1rem; }
 }
 .stat-band span { color: var(--muted); }
 .stat-band strong { color: var(--navy); }
-.service-photo, .place-card { display: grid; gap: 0.45rem; padding: 0.7rem; }
-.service-photo img, .place-card img, .person-card img {
-  width: 100%;
-  height: 12rem;
-  object-fit: cover;
-  border-radius: 0.9rem;
+.service-photo, .place-card, .article-card, .location-card, .job-card {
+  display: grid;
+  gap: 0.55rem;
+  padding: 0.7rem;
+  border-radius: 1.7rem;
 }
-.person-card img { height: 16rem; }
+.service-photo img, .place-card img, .article-card img, .location-card img {
+  width: 100%;
+  height: 13.5rem;
+  object-fit: cover;
+  border-radius: 1.2rem;
+}
+.person-card {
+  display: grid;
+  gap: 0;
+  padding: 0 0 1rem;
+  overflow: hidden;
+  border-radius: 1.8rem;
+}
+.person-card img {
+  width: 100%;
+  height: 18rem;
+  object-fit: cover;
+  border-radius: 0;
+}
+.person-body { padding: 0.95rem 1.05rem 0.15rem; }
+.card-action {
+  display: inline-flex;
+  align-items: center;
+  justify-self: start;
+  margin-top: 0.2rem;
+  border-radius: 999px;
+  padding: 0.45rem 0.95rem;
+  text-decoration: none;
+  font-weight: 700;
+  background: #f4f6f8;
+  color: var(--ink);
+  border: 1px solid #e6ebef;
+  box-shadow: inset 0 -1px 0 rgba(16, 40, 50, 0.04);
+}
 .split, .card-grid, .article-grid, .location-grid, .service-grid { display: grid; gap: 1rem; }
 .panel, .card, .job-card, .person-card, .article-card, .location-card, .service-block, .form-card, .notice {
   background: var(--card);

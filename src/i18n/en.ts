@@ -33,6 +33,7 @@ export const copy = {
     applyExternal: "Apply on employer site",
     contactTeam: "Contact the team",
     meetTeam: "Meet the team",
+    viewProfile: "View profile",
     readArticle: "Read article",
     viewCoverage: "View coverage",
     viewLocation: "View location",

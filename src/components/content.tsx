@@ -87,7 +87,7 @@ export function JobCard({
       </dl>
       {pay ? <p><strong>{copy.jobs.compensation}: </strong>{pay}</p> : null}
       <p>{job.summary}</p>
-      <Link className="text-button" href={`/careers/${job.slug}`}>{copy.cta.viewRole}</Link>
+      <Link className="card-action" href={`/careers/${job.slug}`}>{copy.cta.viewRole}</Link>
     </article>
   );
 }
@@ -96,13 +96,16 @@ export function PersonCard({ member, department, departmentSlug = "", filterable
   return (
     <article className="person-card" {...(filterable ? { "fs-list-element": "item" } : {})}>
       <img src={member.portrait.src} alt={member.portrait.alt} width={640} height={800} />
-      <div className="badge-row">
-        {member.demo ? <SampleBadge /> : null}
-        {department ? <span className="badge">{department}</span> : null}
+      <div className="person-body">
+        <div className="badge-row">
+          {member.demo ? <SampleBadge /> : null}
+          {department ? <span className="badge">{department}</span> : null}
+        </div>
+        <h3><Link href={`/team/${member.slug}`}>{member.name}</Link></h3>
+        <p>{member.role}</p>
+        {filterable ? <span className="visually-hidden" aria-hidden="true" fs-list-field="department">{departmentSlug}</span> : null}
+        <Link className="card-action" href={`/team/${member.slug}`}>{copy.cta.viewProfile}</Link>
       </div>
-      <h3><Link href={`/team/${member.slug}`}>{member.name}</Link></h3>
-      <p>{member.role}</p>
-      {filterable ? <span className="visually-hidden" aria-hidden="true" fs-list-field="department">{departmentSlug}</span> : null}
     </article>
   );
 }
@@ -119,7 +122,7 @@ export function ArticleCard({ post, category, categorySlug = "", filterable = fa
       <p>{post.excerpt}</p>
       <p className="muted">{formatDate(post.publishedAt)}</p>
       {filterable ? <span className="visually-hidden" aria-hidden="true" fs-list-field="category">{categorySlug}</span> : null}
-      <Link href={`/blog/${post.slug}`}>{copy.cta.readArticle}</Link>
+      <Link className="card-action" href={`/blog/${post.slug}`}>{copy.cta.readArticle}</Link>
     </article>
   );
 }
@@ -136,7 +139,7 @@ export function LocationCard({ location, filterable = false }: { location: Locat
       <p>{location.city}, {location.state} · {labelFrom("region", location.region)}</p>
       <p>{location.summary}</p>
       {filterable ? <span className="visually-hidden" aria-hidden="true" fs-list-field="region">{location.region}</span> : null}
-      <Link href={`/locations/${location.slug}`}>{copy.cta.viewCoverage}</Link>
+      <Link className="card-action" href={`/locations/${location.slug}`}>{copy.cta.viewLocation}</Link>
     </article>
   );
 }

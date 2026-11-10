@@ -100,7 +100,7 @@ export default function HomePage() {
                   <img src={photo.src} alt={photo.alt} width={1200} height={800} />
                   <h3>{service.name}</h3>
                   <p>{service.summary}</p>
-                  <Link href={`/contact?service=${service.slug}`}>{copy.cta.requestStaff}</Link>
+                  <Link className="card-action" href={`/contact?service=${service.slug}`}>{copy.cta.requestStaff}</Link>
                 </article>
               );
             })}
@@ -180,7 +180,7 @@ export default function HomePage() {
                 <p className="kicker">{location.kind === "office" ? copy.locations.office : copy.locations.serviceArea}</p>
                 <h3><Link href={`/locations/${location.slug}`}>{location.name}</Link></h3>
                 <p>{location.city}, {location.state}</p>
-                <Link href={`/locations/${location.slug}`}>{copy.cta.viewLocation}</Link>
+                <Link className="card-action" href={`/locations/${location.slug}`}>{copy.cta.viewLocation}</Link>
               </article>
             ))}
           </div>
