@@ -364,8 +364,13 @@ ul.badge-row { list-style: none; padding: 0; margin: 0 0 1rem; }
   padding-bottom: 48px;
 }
 .home-flow > .section { padding-top: 0; padding-bottom: 0; }
-.home-flow > .photo-hero,
-.home-flow > .stat-band { margin-top: 0; margin-bottom: 0; }
+.hero-block {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.hero-block > .photo-hero,
+.hero-block > .stat-band { margin: 0; }
 @media (min-width: 720px) {
   .home-flow { gap: 80px; padding-bottom: 80px; }
 }
