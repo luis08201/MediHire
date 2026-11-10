@@ -114,8 +114,7 @@ export function SiteHeader() {
           <Link href="/blog" aria-current={current(pathname, "/blog") ? "page" : undefined}>{copy.nav.blog}</Link>
         </nav>
         <div className="header-actions">
-          <Link className="button mint" href="/contact">{copy.cta.requestStaff}</Link>
-          <Link className="button lilac" href="/careers">{copy.cta.browseJobs}</Link>
+          <Link className="button gradient" href="/contact">{copy.cta.requestStaff}</Link>
         </div>
         <button
           className="menu-button"

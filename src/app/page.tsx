@@ -41,28 +41,26 @@ export default function HomePage() {
     <>
       <JsonLd data={[websiteJsonLd(), breadcrumbJsonLd([{ name: "Home", path: "/" }])]} />
       <div className="wrap">
-        <section className="haltha-hero">
-          <div>
-            <p className="eyebrow">{text("heroEyebrow")}</p>
+        <section className="photo-hero">
+          <img className="photo-hero-img" src="/media/consult.jpg" alt="Two clinicians reviewing medical imaging on a monitor." width={1600} height={1000} />
+          <div className="photo-hero-shade" aria-hidden="true" />
+          <div className="photo-hero-copy">
+            <p className="photo-chip">{fill(copy.home.openChip, { count: String(jobs.length) })}</p>
             <h1>{text("heroTitle")}</h1>
-            <p className="lede">{text("heroBody")}</p>
             <div className="cta-row">
-              <Link className="button mint" href="/contact">{copy.cta.requestStaff}</Link>
-              <Link className="button lilac" href="/careers">{copy.cta.browseJobs}</Link>
-            </div>
-            <div className="trust-row">
-              <div className="avatar-stack">
-                {members.slice(0, 3).map((member) => (
-                  <img key={member.id} src={member.portrait.src} alt="" width={64} height={64} />
-                ))}
-              </div>
-              <p>{copy.home.teamNote}</p>
+              <Link className="button gradient" href="/contact">{copy.cta.requestStaff}</Link>
+              <Link className="button white" href="/careers">{copy.cta.browseJobs}</Link>
             </div>
           </div>
-          <div className="hero-photo">
-            <img src="/media/hero-team.jpg" alt="Hands type on a laptop beside a stethoscope on a wooden desk." width={1800} height={1200} />
-            <p className="hero-chip">{fill(copy.home.openChip, { count: String(jobs.length) })}</p>
-          </div>
+          <aside className="hero-float">
+            <p className="kicker">{copy.home.floatTitle}</p>
+            <div className="avatar-stack">
+              {members.slice(0, 3).map((member) => (
+                <img key={member.id} src={member.portrait.src} alt="" width={64} height={64} />
+              ))}
+            </div>
+            <p>{fill(copy.home.floatBody, { count: String(members.length) })}</p>
+          </aside>
         </section>
 
         <section className="stat-band" aria-label={copy.home.countsLabel}>

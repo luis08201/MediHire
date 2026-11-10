@@ -86,6 +86,8 @@ export const copy = {
   home: {
     teamNote: "Sample team profiles, shown here so you can see who answers.",
     openChip: "{count} sample openings",
+    floatTitle: "Sample team",
+    floatBody: "{count} profiles you can open",
     peopleTitle: "People you can ask",
     peopleBody: "Recruiters and clinical partners who read a brief or a CV before anyone is introduced.",
     countsLabel: "Sample counts on this demonstration site",
