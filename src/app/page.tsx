@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArticleCard, JobCard, JsonLd, PersonCard } from "@/components/content";
+import { ProcessScroll } from "@/components/process-scroll";
 import { copy, fill } from "@/i18n/en";
 import { categoryById, departmentById, getPage, listBlogPosts, listJobs, listLocations, listServices, listTeamMembers, locationById, pageField } from "@/lib/cms/queries";
 import { breadcrumbJsonLd, buildMetadata, websiteJsonLd } from "@/lib/seo";
@@ -30,7 +31,6 @@ export default function HomePage() {
   const services = listServices();
   const locations = listLocations();
   const members = listTeamMembers();
-  const steps = [1, 2, 3];
   const counts = [
     { value: jobs.length, label: copy.home.countRoles },
     { value: locations.length, label: copy.home.countAreas },
@@ -134,42 +134,18 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="section">
-          <div className="section-head">
-            <h2>{text("howTitle")}</h2>
-            <p className="lede">{text("howIntro")}</p>
-          </div>
-          <div className="split">
-            <div>
-              <h3>{text("howHospitalTitle")}</h3>
-              <div className="steps">
-                {steps.map((step) => (
-                  <div className="step" key={`h-${step}`}>
-                    <span className="step-num">{step}</span>
-                    <div>
-                      <strong>{text(`hospitalStep${step}Title`)}</strong>
-                      <p>{text(`hospitalStep${step}Body`)}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div>
-              <h3>{text("howClinicianTitle")}</h3>
-              <div className="steps">
-                {steps.map((step) => (
-                  <div className="step" key={`c-${step}`}>
-                    <span className="step-num">{step}</span>
-                    <div>
-                      <strong>{text(`clinicianStep${step}Title`)}</strong>
-                      <p>{text(`clinicianStep${step}Body`)}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
+        <ProcessScroll
+          title={text("howTitle")}
+          intro={text("howIntro")}
+          steps={[
+            { id: "h1", group: text("howHospitalTitle"), title: text("hospitalStep1Title"), body: text("hospitalStep1Body"), image: "/media/consult.jpg", alt: "Two clinicians reviewing medical imaging on a monitor." },
+            { id: "h2", group: text("howHospitalTitle"), title: text("hospitalStep2Title"), body: text("hospitalStep2Body"), image: "/media/hallway.jpg", alt: "A clinic reception desk with a staircase and a floor directory." },
+            { id: "h3", group: text("howHospitalTitle"), title: text("hospitalStep3Title"), body: text("hospitalStep3Body"), image: "/media/hospital-exterior.jpg", alt: "Brick hospital entrance with a canopy and glass doors." },
+            { id: "c1", group: text("howClinicianTitle"), title: text("clinicianStep1Title"), body: text("clinicianStep1Body"), image: "/media/hero-team.jpg", alt: "Hands type on a laptop beside a stethoscope on a wooden desk." },
+            { id: "c2", group: text("howClinicianTitle"), title: text("clinicianStep2Title"), body: text("clinicianStep2Body"), image: "/media/or-team.jpg", alt: "Two surgeons in caps and masks looking down during a procedure." },
+            { id: "c3", group: text("howClinicianTitle"), title: text("clinicianStep3Title"), body: text("clinicianStep3Body"), image: "/media/respiratory.jpg", alt: "A surgical team gathered under operating-room lights." },
+          ]}
+        />
 
         <section className="section">
           <div className="section-head">
