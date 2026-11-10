@@ -36,24 +36,33 @@ export function ProcessScroll({
       const images = gsap.utils.toArray<HTMLElement>(".process-bg", root.current);
       if (!pin || !track || !viewport || images.length < 2) return;
 
+      const points = gsap.utils.toArray<HTMLElement>(".process-point", track);
       gsap.set(images, { autoAlpha: 0 });
       gsap.set(images[0], { autoAlpha: 1 });
+
+      const xFor = (index: number) => {
+        const card = points[index];
+        if (!card) return 0;
+        return viewport.clientWidth / 2 - (card.offsetLeft + card.offsetWidth / 2);
+      };
 
       const timeline = gsap.timeline({
         defaults: { ease: "none" },
         scrollTrigger: {
           trigger: pin,
           start: "top 4.5rem",
-          end: () => `+=${(images.length - 1) * window.innerHeight * 0.9}`,
+          end: () => `+=${Math.max(points.length - 1, 1) * window.innerHeight * 0.9}`,
           pin: true,
           scrub: true,
           invalidateOnRefresh: true,
         },
       });
 
-      timeline.to(track, {
-        x: () => -Math.max(0, track.scrollWidth - viewport.clientWidth),
-        duration: images.length - 1,
+      timeline.fromTo(track, {
+        x: () => xFor(0),
+      }, {
+        x: () => xFor(points.length - 1),
+        duration: Math.max(points.length - 1, 1),
       }, 0);
 
       images.forEach((image, index) => {
