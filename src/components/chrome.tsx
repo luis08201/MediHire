@@ -101,7 +101,7 @@ export function SiteHeader() {
       <div className="header-inner">
         <Link href="/" className="logo" aria-label={copy.brand}>
           <svg className="logo-mark" viewBox="0 0 32 32" aria-hidden="true">
-            <rect width="32" height="32" rx="8" fill="#10283A" />
+            <rect width="32" height="32" rx="8" fill="#1D4ED8" />
             <path d="M8 21.5c2.4-6 4.4-8.5 8-8.5s5.6 2.5 8 8.5" stroke="#8ED4CF" strokeWidth="2.2" strokeLinecap="round" fill="none" />
             <circle cx="16" cy="11.2" r="2.1" fill="#F6F1E8" />
           </svg>

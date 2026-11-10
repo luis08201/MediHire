@@ -1,18 +1,18 @@
 :root {
-  --navy: #10283a;
-  --navy-2: #1a3c55;
-  --ink: #1b2c38;
-  --muted: #4e606c;
-  --paper: #f3eee6;
-  --paper-2: #faf6f0;
-  --card: #fffdfb;
-  --line: #e0d4c4;
-  --teal: #0e6d69;
-  --teal-deep: #0a534f;
-  --foam: #e4f2f0;
-  --clay: #8c342c;
-  --focus: #0c6484;
-  --shadow: 0 16px 40px rgba(16, 40, 58, 0.08);
+  --navy: #163a73;
+  --navy-2: #1e4b8f;
+  --ink: #142033;
+  --muted: #5b6b80;
+  --paper: #eef3f9;
+  --paper-2: #f7faff;
+  --card: #ffffff;
+  --line: #e3ebf5;
+  --teal: #2f6fed;
+  --teal-deep: #1d4ed8;
+  --foam: #e7f0ff;
+  --clay: #b42318;
+  --focus: #1d4ed8;
+  --shadow: 0 18px 40px rgba(22, 58, 115, 0.08);
   --space: 1.25rem;
   --header: 4.5rem;
   color-scheme: light;
@@ -23,7 +23,8 @@ html { scroll-behavior: smooth; }
 body {
   margin: 0;
   background:
-    radial-gradient(1200px 420px at 100% -10%, rgba(14, 109, 105, 0.08), transparent 55%),
+    radial-gradient(900px 380px at 100% -8%, rgba(47, 111, 237, 0.16), transparent 60%),
+    radial-gradient(700px 320px at -10% 20%, rgba(186, 210, 255, 0.45), transparent 55%),
     var(--paper);
   color: var(--ink);
   font-family: var(--font-sans), "Segoe UI", sans-serif;
@@ -34,11 +35,11 @@ img { max-width: 100%; height: auto; display: block; }
 a { color: var(--teal-deep); text-underline-offset: 0.18em; }
 a:hover { color: var(--navy); }
 h1, h2, h3, h4 {
-  font-family: var(--font-display), Georgia, serif;
-  font-weight: 560;
-  letter-spacing: -0.03em;
-  line-height: 1.15;
-  color: var(--navy);
+  font-family: var(--font-sans), "Segoe UI", sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.045em;
+  line-height: 1.08;
+  color: var(--ink);
 }
 p { margin: 0 0 1rem; }
 :focus-visible {
@@ -67,7 +68,7 @@ p { margin: 0 0 1rem; }
   position: sticky;
   top: 0;
   z-index: 10;
-  background: rgba(243, 238, 230, 0.92);
+  background: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--line);
 }
@@ -87,8 +88,9 @@ p { margin: 0 0 1rem; }
   gap: 0.65rem;
   color: var(--navy);
   text-decoration: none;
-  font-family: var(--font-display), Georgia, serif;
-  font-size: 1.45rem;
+  font-family: var(--font-sans), "Segoe UI", sans-serif;
+  font-weight: 800;
+  font-size: 1.35rem;
   letter-spacing: -0.04em;
 }
 .logo-mark {
@@ -196,8 +198,8 @@ p { margin: 0 0 1rem; }
   font: inherit;
   font-weight: 640;
 }
-.button.primary { background: var(--navy); color: white; }
-.button.secondary { background: var(--teal); color: white; }
+.button.primary { background: var(--teal); color: white; }
+.button.secondary { background: #12315f; color: white; }
 .button.ghost, .text-button {
   background: transparent;
   color: var(--navy);
@@ -227,7 +229,7 @@ ul.badge-row { list-style: none; padding: 0; margin: 0 0 1rem; }
 .service-block + .service-block { margin-top: 1rem; }
 .frame { aspect-ratio: 16 / 9; }
 .hero-photo, .frame {
-  border-radius: 1.4rem;
+  border-radius: 1.8rem;
   overflow: hidden;
   box-shadow: var(--shadow);
   background: var(--navy);
@@ -269,7 +271,7 @@ ul.badge-row { list-style: none; padding: 0; margin: 0 0 1rem; }
 }
 .stat-band strong {
   display: block;
-  font-family: var(--font-display), Georgia, serif;
+  font-family: var(--font-sans), "Segoe UI", sans-serif;
   font-size: clamp(2rem, 4vw, 3rem);
   line-height: 1;
 }
@@ -285,9 +287,10 @@ ul.badge-row { list-style: none; padding: 0; margin: 0 0 1rem; }
 .split, .card-grid, .article-grid, .location-grid, .service-grid { display: grid; gap: 1rem; }
 .panel, .card, .job-card, .person-card, .article-card, .location-card, .service-block, .form-card, .notice {
   background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: 1.2rem;
+  border: 1px solid rgba(227, 235, 245, 0.9);
+  border-radius: 1.5rem;
   padding: 1.15rem;
+  box-shadow: var(--shadow);
 }
 .panel h2, .section-head h2, .service-block h2 { font-size: clamp(1.7rem, 3vw, 2.4rem); margin: 0 0 0.6rem; }
 .section { padding: 2.2rem 0; }
@@ -423,16 +426,16 @@ legend { font-weight: 700; padding: 0 0.3rem; color: var(--navy); }
 .apply-bar strong { color: white; }
 .apply-bar .button { background: white; color: var(--navy); }
 .site-footer {
-  background: var(--navy);
-  color: #efe7db;
+  background: #10243f;
+  color: #d7e3f4;
   padding: 2.5rem 0 2rem;
 }
-.site-footer a { color: #d7f3f0; }
+.site-footer a { color: #dbe7ff; }
 .footer-grid { display: grid; gap: 1.2rem; }
 .site-footer h2 { color: white; font-size: 1.1rem; }
 .site-footer ul { list-style: none; padding: 0; margin: 0; }
 .site-footer li { margin: 0.35rem 0; }
-.legal { color: #c9bfb2; font-size: 0.92rem; }
+.legal { color: #9eb0c9; font-size: 0.92rem; }
 .search-group { margin: 1.4rem 0; }
 .search-group h2 { font-size: 1.4rem; }
 .search-group ul { list-style: none; padding: 0; display: grid; gap: 0.7rem; }

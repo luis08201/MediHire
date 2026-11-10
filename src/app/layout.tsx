@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Fraunces, Outfit } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import Link from "next/link";
 import "./globals.css";
 import { SiteFooter, SiteHeader } from "@/components/chrome";
@@ -9,8 +9,11 @@ import { readCredits } from "@/lib/cms/store";
 import { isPreview } from "@/lib/preview";
 import { siteUrl } from "@/lib/site";
 
-const sans = Outfit({ subsets: ["latin"], variable: "--font-sans" });
-const display = Fraunces({ subsets: ["latin"], variable: "--font-display" });
+const sans = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  weight: ["400", "500", "600", "700", "800"],
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl()),
@@ -23,7 +26,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const preview = await isPreview();
   const credits = readCredits();
   return (
-    <html lang="en" className={`${sans.variable} ${display.variable}`}>
+    <html lang="en" className={sans.variable}>
       <body className={sans.className}>
         <a className="skip" href="#content">{copy.skip}</a>
         {preview ? (
