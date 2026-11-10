@@ -1,0 +1,22 @@
+[
+  {
+    "source": "/jobs",
+    "destination": "/careers",
+    "permanent": true
+  },
+  {
+    "source": "/jobs/:slug",
+    "destination": "/careers/:slug",
+    "permanent": true
+  },
+  {
+    "source": "/insights",
+    "destination": "/blog",
+    "permanent": true
+  },
+  {
+    "source": "/insights/:slug",
+    "destination": "/blog/:slug",
+    "permanent": true
+  }
+]

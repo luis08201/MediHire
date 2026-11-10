@@ -1,0 +1,41 @@
+[
+  {
+    "id": "svc-temporary",
+    "slug": "temporary-staffing",
+    "name": "Temporary staffing",
+    "sortOrder": 1,
+    "summary": "Named clinicians for a defined stretch of weeks, with an end date on the request.",
+    "body": "Temporary staffing covers a leave, a census spike, or a project with a known end. Tell us the specialty, the shift, and the week you need someone on the unit.\n\nThe request form can open with this service already selected.",
+    "editorialStatus": "published",
+    "seo": {
+      "title": "Temporary staffing",
+      "description": "Named clinicians for a defined stretch of weeks, with an end date on the request."
+    }
+  },
+  {
+    "id": "svc-shift",
+    "slug": "shift-coverage",
+    "name": "Shift coverage",
+    "sortOrder": 2,
+    "summary": "Per-diem and short blocks when a posted shift would otherwise go uncovered.",
+    "body": "Shift coverage is for the board you already have: a night, a weekend, or a short run of days. Include the start window in the staffing needs field.\n\nUse the location page when the coverage is tied to one service area.",
+    "editorialStatus": "published",
+    "seo": {
+      "title": "Shift coverage",
+      "description": "Per-diem and short blocks when a posted shift would otherwise go uncovered."
+    }
+  },
+  {
+    "id": "svc-permanent",
+    "slug": "permanent-placement",
+    "name": "Permanent placement",
+    "sortOrder": 3,
+    "summary": "A retained search for a role you intend to keep on the unit.",
+    "body": "Permanent placement is a different conversation from a 13-week assignment. Share the employment type, the reporting line, and whether the role is on-site or hybrid.\n\nClinicians still apply through the opening. Hiring teams start here.",
+    "editorialStatus": "published",
+    "seo": {
+      "title": "Permanent placement",
+      "description": "A retained search for a role you intend to keep on the unit."
+    }
+  }
+]

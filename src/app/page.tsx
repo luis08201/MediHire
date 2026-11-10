@@ -1,0 +1,214 @@
+import Link from "next/link";
+import { ArticleCard, JobCard, JsonLd, PersonCard } from "@/components/content";
+import { ProcessScroll } from "@/components/process-scroll";
+import { copy, fill } from "@/i18n/en";
+import { categoryById, departmentById, getPage, listBlogPosts, listJobs, listLocations, listServices, listTeamMembers, locationById, pageField } from "@/lib/cms/queries";
+import { breadcrumbJsonLd, buildMetadata, websiteJsonLd } from "@/lib/seo";
+
+const servicePhotos = [
+  { src: "/media/consult.jpg", alt: "Two clinicians reviewing medical imaging on a monitor." },
+  { src: "/media/or-team.jpg", alt: "Two surgeons in caps and masks looking down during a procedure." },
+  { src: "/media/respiratory.jpg", alt: "A surgical team gathered under operating-room lights." },
+];
+
+export async function generateMetadata() {
+  const page = getPage("home");
+  return buildMetadata({
+    title: page.seo.title,
+    description: page.seo.description,
+    path: "/",
+    absoluteTitle: true,
+    image: "/media/hero-team.jpg",
+    imageAlt: "Hands type on a laptop beside a stethoscope on a wooden desk.",
+  });
+}
+
+export default function HomePage() {
+  const page = getPage("home");
+  const text = (key: string) => pageField(page, key);
+  const jobs = listJobs();
+  const posts = listBlogPosts();
+  const services = listServices();
+  const locations = listLocations();
+  const members = listTeamMembers();
+  const counts = [
+    { value: jobs.length, label: copy.home.countRoles },
+    { value: locations.length, label: copy.home.countAreas },
+    { value: members.length, label: copy.home.countPeople },
+    { value: services.length, label: copy.home.countServices },
+  ];
+  return (
+    <>
+      <JsonLd data={[websiteJsonLd(), breadcrumbJsonLd([{ name: "Home", path: "/" }])]} />
+      <div className="wrap home-flow">
+        <section className="photo-hero">
+          <img className="photo-hero-img" src="/media/consult.jpg" alt="Two clinicians reviewing medical imaging on a monitor." width={1600} height={1000} />
+          <div className="photo-hero-shade" aria-hidden="true" />
+          <div className="photo-hero-copy">
+            <p className="photo-chip">{fill(copy.home.openChip, { count: String(jobs.length) })}</p>
+            <h1>{text("heroTitle")}</h1>
+            <div className="cta-row">
+              <Link className="button gradient" href="/contact">{copy.cta.requestStaff}</Link>
+              <Link className="button white" href="/careers">{copy.cta.browseJobs}</Link>
+            </div>
+          </div>
+          <aside className="hero-float">
+            <div className="avatar-stack">
+              {members.slice(0, 3).map((member) => (
+                <img key={member.id} src={member.portrait.src} alt="" width={64} height={64} />
+              ))}
+            </div>
+            <p>{fill(copy.home.floatBody, { count: String(members.length) })}</p>
+          </aside>
+        </section>
+
+        <section className="stat-band" aria-label={copy.home.countsLabel}>
+          {counts.map((count) => (
+            <div key={count.label}>
+              <strong>{count.value}</strong>
+              <span>{count.label}</span>
+            </div>
+          ))}
+        </section>
+
+        <section className="section audience-board">
+          <article className="metric-card">
+            <div className="metric-head">
+              <span className="metric-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M4 19V5M4 19h16" /><path d="M8 16v-4M12 16V8M16 16v-6" /></svg>
+              </span>
+              <p>{copy.footer.forHospitals}</p>
+            </div>
+            <h2>{text("hospitalTitle")}</h2>
+            <p>{text("hospitalBody")}</p>
+            <p className="metric-figure">{jobs.length}</p>
+            <p className="metric-caption">{copy.home.countRoles}</p>
+            <div className="metric-notes">
+              <p><strong>{services.length}</strong><span>{copy.home.countServices}</span></p>
+              <p><strong>{locations.length}</strong><span>{copy.home.countAreas}</span></p>
+            </div>
+            <Link className="button primary" href="/services">{copy.nav.services}</Link>
+          </article>
+          <article className="metric-card">
+            <div className="metric-head">
+              <span className="metric-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><circle cx="9" cy="9" r="2.2" /><circle cx="16" cy="9.5" r="1.8" /><path d="M4.5 17.5c.6-2.2 2.2-3.3 4.5-3.3s3.9 1.1 4.5 3.3M13.2 14.4c1.6-.2 3 .6 3.8 2.1" /></svg>
+              </span>
+              <p>{copy.footer.forClinicians}</p>
+            </div>
+            <h2>{text("clinicianTitle")}</h2>
+            <p>{text("clinicianBody")}</p>
+            <div className="metric-people">
+              <div className="avatar-stack">
+                {members.slice(0, 4).map((member) => (
+                  <img key={member.id} src={member.portrait.src} alt="" width={40} height={40} />
+                ))}
+              </div>
+              <p><strong>{members.length}</strong><span>{copy.home.countPeople}</span></p>
+            </div>
+            <Link className="button secondary" href="/careers">{copy.cta.browseJobs}</Link>
+          </article>
+        </section>
+
+        <section className="section">
+          <div className="section-head">
+            <h2>{text("servicesTitle")}</h2>
+            <p className="lede">{text("servicesBody")}</p>
+          </div>
+          <div className="service-grid">
+            {services.map((service, index) => {
+              const photo = servicePhotos[index % servicePhotos.length];
+              return (
+                <article className="card inset-card service-photo" key={service.id}>
+                  <img src={photo.src} alt={photo.alt} width={1200} height={800} />
+                  <div className="card-copy">
+                    <h3>{service.name}</h3>
+                    <p>{service.summary}</p>
+                    <div className="card-foot">
+                      <Link className="card-action" href={`/contact?service=${service.slug}`}>{copy.cta.requestStaff}</Link>
+                    </div>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </section>
+
+        <ProcessScroll
+          title={text("howTitle")}
+          intro={text("howIntro")}
+          steps={[
+            { id: "h1", group: text("howHospitalTitle"), title: text("hospitalStep1Title"), body: text("hospitalStep1Body"), image: "/media/consult.jpg", alt: "Two clinicians reviewing medical imaging on a monitor." },
+            { id: "h2", group: text("howHospitalTitle"), title: text("hospitalStep2Title"), body: text("hospitalStep2Body"), image: "/media/hallway.jpg", alt: "A clinic reception desk with a staircase and a floor directory." },
+            { id: "h3", group: text("howHospitalTitle"), title: text("hospitalStep3Title"), body: text("hospitalStep3Body"), image: "/media/hospital-exterior.jpg", alt: "Brick hospital entrance with a canopy and glass doors." },
+            { id: "c1", group: text("howClinicianTitle"), title: text("clinicianStep1Title"), body: text("clinicianStep1Body"), image: "/media/hero-team.jpg", alt: "Hands type on a laptop beside a stethoscope on a wooden desk." },
+            { id: "c2", group: text("howClinicianTitle"), title: text("clinicianStep2Title"), body: text("clinicianStep2Body"), image: "/media/or-team.jpg", alt: "Two surgeons in caps and masks looking down during a procedure." },
+            { id: "c3", group: text("howClinicianTitle"), title: text("clinicianStep3Title"), body: text("clinicianStep3Body"), image: "/media/respiratory.jpg", alt: "A surgical team gathered under operating-room lights." },
+          ]}
+        />
+
+        <section className="section">
+          <div className="section-head">
+            <h2>{copy.home.peopleTitle}</h2>
+            <p className="lede">{copy.home.peopleBody}</p>
+          </div>
+          <div className="card-grid">
+            {members.slice(0, 3).map((member) => (
+              <PersonCard key={member.id} member={member} department={departmentById(member.departmentId)?.name} />
+            ))}
+          </div>
+          <p className="section-more"><Link className="button primary" href="/team">{copy.cta.meetTeam}</Link></p>
+        </section>
+
+        <section className="section">
+          <div className="section-head">
+            <h2>{copy.home.featuredTitle}</h2>
+            <p>{copy.home.featuredBody}</p>
+          </div>
+          <div className="list roles">
+            {jobs.slice(0, 3).map((job) => <JobCard key={job.id} job={job} location={locationById(job.locationId)} />)}
+          </div>
+          <p className="section-more"><Link className="button primary" href="/careers">{copy.cta.browseJobs}</Link></p>
+        </section>
+
+        <section className="section">
+          <div className="section-head">
+            <h2>{text("coverageTitle")}</h2>
+            <p className="lede">{text("coverageBody")}</p>
+          </div>
+          <div className="card-grid">
+            {locations.slice(0, 3).map((location) => (
+              <article className="card inset-card place-card" key={location.id}>
+                <img src={location.image.src} alt={location.image.alt} width={1200} height={800} />
+                <div className="card-copy">
+                  <h3><Link href={`/locations/${location.slug}`}>{location.name}</Link></h3>
+                  <p>{location.city}, {location.state}</p>
+                  <div className="card-foot">
+                    <p className="card-meta"><span>{location.kind === "office" ? copy.locations.office : copy.locations.serviceArea}</span></p>
+                    <Link className="card-action" href={`/locations/${location.slug}`}>{copy.cta.viewLocation}</Link>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+          <p className="section-more"><Link className="button primary" href="/locations">{copy.cta.viewCoverage}</Link></p>
+        </section>
+
+        <section className="section">
+          <div className="section-head">
+            <h2>{copy.home.articlesTitle}</h2>
+          </div>
+          <div className="article-grid">
+            {posts.slice(0, 3).map((post) => (
+              <ArticleCard
+                key={post.id}
+                post={post}
+                category={categoryById(post.categoryId)?.name}
+              />
+            ))}
+          </div>
+        </section>
+      </div>
+    </>
+  );
+}
