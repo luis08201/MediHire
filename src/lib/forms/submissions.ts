@@ -12,6 +12,12 @@ export type SubmissionRecord = {
   payload: Record<string, unknown>;
 };
 
+const SUBMISSION_ID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+
+export function isSubmissionId(value: string) {
+  return SUBMISSION_ID.test(value);
+}
+
 function rootDir() {
   return process.env.SUBMISSIONS_DIR || path.join(process.cwd(), "data", "submissions");
 }
@@ -21,8 +27,16 @@ function ensure() {
   mkdirSync(path.join(rootDir(), "files"), { recursive: true });
 }
 
+function containedPath(id: string, ...segments: string[]) {
+  if (!isSubmissionId(id)) throw new Error("Invalid submission id");
+  const root = path.resolve(rootDir());
+  const file = path.resolve(root, ...segments);
+  if (file !== root && !file.startsWith(`${root}${path.sep}`)) throw new Error("Invalid submission path");
+  return file;
+}
+
 function recordPath(id: string) {
-  return path.join(rootDir(), `${id}.json`);
+  return containedPath(id, `${id}.json`);
 }
 
 export function readSubmission(id: string): SubmissionRecord | null {
@@ -68,7 +82,7 @@ export async function saveCv(id: string, file: File) {
   const safe = ["pdf", "doc", "docx"].includes(extension) ? extension : "bin";
   const filename = `${id}.${safe}`;
   const bytes = Buffer.from(await file.arrayBuffer());
-  writeFileSync(path.join(rootDir(), "files", filename), bytes);
+  writeFileSync(containedPath(id, "files", filename), bytes);
   return filename;
 }
 

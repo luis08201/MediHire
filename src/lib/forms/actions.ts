@@ -5,7 +5,7 @@ import { copy } from "@/i18n/en";
 import { getJob, listLocations, listServices } from "../cms/queries";
 import { applicationIsOpen } from "../format";
 import { cleanText, cvError, lengthError, phoneError, spamTimingError, validEmail, workEmailError } from "./validation";
-import { deliver, findDuplicate, fingerprint, rateLimited, readSubmission, saveCv, writeSubmission, type SubmissionRecord } from "./submissions";
+import { deliver, findDuplicate, fingerprint, isSubmissionId, rateLimited, readSubmission, saveCv, writeSubmission, type SubmissionRecord } from "./submissions";
 
 export type FormState = {
   ok: boolean;
@@ -92,7 +92,10 @@ export async function submitStaffing(_previous: FormState, formData: FormData): 
   if (Object.keys(errors).length) {
     return { ok: false, errors, values, message: copy.contact.errorSummary };
   }
-  const id = cleanText(formData.get("submission_id")) || crypto.randomUUID();
+  const id = cleanText(formData.get("submission_id"));
+  if (!isSubmissionId(id)) {
+    return { ok: false, errors: { form: copy.errors.generic }, values, message: copy.contact.errorSummary };
+  }
   const result = await accept({
     id,
     type: "staffing-request",
@@ -128,7 +131,10 @@ export async function submitApplication(_previous: FormState, formData: FormData
   if (Object.keys(errors).length) {
     return { ok: false, errors, values, message: copy.apply.errorSummary };
   }
-  const id = cleanText(formData.get("submission_id")) || crypto.randomUUID();
+  const id = cleanText(formData.get("submission_id"));
+  if (!isSubmissionId(id)) {
+    return { ok: false, errors: { form: copy.errors.generic }, values, message: copy.apply.errorSummary };
+  }
   const result = await accept({
     id,
     type: "application",
