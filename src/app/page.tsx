@@ -96,11 +96,15 @@ export default function HomePage() {
             {services.map((service, index) => {
               const photo = servicePhotos[index % servicePhotos.length];
               return (
-                <article className="card service-photo" key={service.id}>
+                <article className="card inset-card service-photo" key={service.id}>
                   <img src={photo.src} alt={photo.alt} width={1200} height={800} />
-                  <h3>{service.name}</h3>
-                  <p>{service.summary}</p>
-                  <Link className="card-action" href={`/contact?service=${service.slug}`}>{copy.cta.requestStaff}</Link>
+                  <div className="card-copy">
+                    <h3>{service.name}</h3>
+                    <p>{service.summary}</p>
+                    <div className="card-foot">
+                      <Link className="card-action" href={`/contact?service=${service.slug}`}>{copy.cta.requestStaff}</Link>
+                    </div>
+                  </div>
                 </article>
               );
             })}
@@ -175,12 +179,16 @@ export default function HomePage() {
           </div>
           <div className="card-grid">
             {locations.slice(0, 3).map((location) => (
-              <article className="card place-card" key={location.id}>
+              <article className="card inset-card place-card" key={location.id}>
                 <img src={location.image.src} alt={location.image.alt} width={1200} height={800} />
-                <p className="kicker">{location.kind === "office" ? copy.locations.office : copy.locations.serviceArea}</p>
-                <h3><Link href={`/locations/${location.slug}`}>{location.name}</Link></h3>
-                <p>{location.city}, {location.state}</p>
-                <Link className="card-action" href={`/locations/${location.slug}`}>{copy.cta.viewLocation}</Link>
+                <div className="card-copy">
+                  <h3><Link href={`/locations/${location.slug}`}>{location.name}</Link></h3>
+                  <p>{location.city}, {location.state}</p>
+                  <div className="card-foot">
+                    <p className="card-meta"><span>{location.kind === "office" ? copy.locations.office : copy.locations.serviceArea}</span></p>
+                    <Link className="card-action" href={`/locations/${location.slug}`}>{copy.cta.viewLocation}</Link>
+                  </div>
+                </div>
               </article>
             ))}
           </div>

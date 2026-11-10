@@ -30,6 +30,16 @@ export function SampleBadge() {
   return <span className="badge sample">{copy.sample}</span>;
 }
 
+function VerifiedMark() {
+  return (
+    <span className="verified" aria-hidden="true">
+      <svg viewBox="0 0 16 16" width="12" height="12" focusable="false">
+        <path d="M3.4 8.2 6.4 11.2 12.7 4.8" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    </span>
+  );
+}
+
 export function JobCard({
   job,
   location,
@@ -87,7 +97,9 @@ export function JobCard({
       </dl>
       {pay ? <p><strong>{copy.jobs.compensation}: </strong>{pay}</p> : null}
       <p>{job.summary}</p>
-      <Link className="card-action" href={`/careers/${job.slug}`}>{copy.cta.viewRole}</Link>
+      <div className="card-foot">
+        <Link className="card-action" href={`/careers/${job.slug}`}>{copy.cta.viewRole}</Link>
+      </div>
     </article>
   );
 }
@@ -96,15 +108,17 @@ export function PersonCard({ member, department, departmentSlug = "", filterable
   return (
     <article className="person-card" {...(filterable ? { "fs-list-element": "item" } : {})}>
       <img src={member.portrait.src} alt={member.portrait.alt} width={640} height={800} />
-      <div className="person-body">
-        <div className="badge-row">
-          {member.demo ? <SampleBadge /> : null}
-          {department ? <span className="badge">{department}</span> : null}
-        </div>
-        <h3><Link href={`/team/${member.slug}`}>{member.name}</Link></h3>
-        <p>{member.role}</p>
+      <div className="card-copy">
+        <h3>
+          <Link href={`/team/${member.slug}`}>{member.name}</Link>
+          <VerifiedMark />
+        </h3>
+        <p>{department ? `${member.role} · ${department}` : member.role}</p>
         {filterable ? <span className="visually-hidden" aria-hidden="true" fs-list-field="department">{departmentSlug}</span> : null}
-        <Link className="card-action" href={`/team/${member.slug}`}>{copy.cta.viewProfile}</Link>
+        <div className="card-foot">
+          {member.demo ? <SampleBadge /> : <span />}
+          <Link className="card-action" href={`/team/${member.slug}`}>{copy.cta.viewProfile}</Link>
+        </div>
       </div>
     </article>
   );
@@ -112,34 +126,42 @@ export function PersonCard({ member, department, departmentSlug = "", filterable
 
 export function ArticleCard({ post, category, categorySlug = "", filterable = false }: { post: BlogPost; category?: string; categorySlug?: string; filterable?: boolean }) {
   return (
-    <article className="article-card" {...(filterable ? { "fs-list-element": "item" } : {})}>
+    <article className="article-card inset-card" {...(filterable ? { "fs-list-element": "item" } : {})}>
       <img src={post.image.src} alt={post.image.alt} width={1200} height={800} />
-      <div className="badge-row">
-        {post.demo ? <SampleBadge /> : null}
-        {category ? <span className="badge">{category}</span> : null}
+      <div className="card-copy">
+        <h3><Link href={`/blog/${post.slug}`}>{post.title}</Link></h3>
+        <p>{post.excerpt}</p>
+        <p className="card-meta">{formatDate(post.publishedAt)}</p>
+        {filterable ? <span className="visually-hidden" aria-hidden="true" fs-list-field="category">{categorySlug}</span> : null}
+        <div className="card-foot">
+          <p className="card-meta">
+            {post.demo ? <SampleBadge /> : null}
+            {category ? <span>{category}</span> : null}
+          </p>
+          <Link className="card-action" href={`/blog/${post.slug}`}>{copy.cta.readArticle}</Link>
+        </div>
       </div>
-      <h3><Link href={`/blog/${post.slug}`}>{post.title}</Link></h3>
-      <p>{post.excerpt}</p>
-      <p className="muted">{formatDate(post.publishedAt)}</p>
-      {filterable ? <span className="visually-hidden" aria-hidden="true" fs-list-field="category">{categorySlug}</span> : null}
-      <Link className="card-action" href={`/blog/${post.slug}`}>{copy.cta.readArticle}</Link>
     </article>
   );
 }
 
 export function LocationCard({ location, filterable = false }: { location: Location; filterable?: boolean }) {
   return (
-    <article className="location-card" {...(filterable ? { "fs-list-element": "item" } : {})}>
+    <article className="location-card inset-card" {...(filterable ? { "fs-list-element": "item" } : {})}>
       <img src={location.image.src} alt={location.image.alt} width={1200} height={800} />
-      <div className="badge-row">
-        <span className={location.kind === "office" ? "badge office" : "badge"}>{location.kind === "office" ? copy.locations.office : copy.locations.serviceArea}</span>
-        {location.demo ? <SampleBadge /> : null}
+      <div className="card-copy">
+        <h3><Link href={`/locations/${location.slug}`}>{location.name}</Link></h3>
+        <p>{location.summary}</p>
+        {filterable ? <span className="visually-hidden" aria-hidden="true" fs-list-field="region">{location.region}</span> : null}
+        <div className="card-foot">
+          <p className="card-meta">
+            {location.demo ? <SampleBadge /> : null}
+            <span>{location.kind === "office" ? copy.locations.office : copy.locations.serviceArea}</span>
+            <span>{location.city}, {location.state}</span>
+          </p>
+          <Link className="card-action" href={`/locations/${location.slug}`}>{copy.cta.viewLocation}</Link>
+        </div>
       </div>
-      <h3><Link href={`/locations/${location.slug}`}>{location.name}</Link></h3>
-      <p>{location.city}, {location.state} · {labelFrom("region", location.region)}</p>
-      <p>{location.summary}</p>
-      {filterable ? <span className="visually-hidden" aria-hidden="true" fs-list-field="region">{location.region}</span> : null}
-      <Link className="card-action" href={`/locations/${location.slug}`}>{copy.cta.viewLocation}</Link>
     </article>
   );
 }
