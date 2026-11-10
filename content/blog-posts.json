@@ -1,0 +1,149 @@
+[
+  {
+    "id": "post-coverage",
+    "slug": "how-to-request-coverage",
+    "title": "How to request coverage without a scavenger hunt",
+    "excerpt": "A staffing request should name the unit, the shift, and the headcount in one pass.",
+    "body": "A staffing request should name the unit, the shift, and the headcount in one pass.\n\nStart with the service you need, then the specialty and the city. The form on the contact page is built for that order.\n\nThis is sample journal copy for the MediHire demonstration.",
+    "categoryId": "cat-workforce",
+    "authorId": "elena-voss",
+    "publishedAt": "2026-10-20",
+    "image": {
+      "src": "/media/consult.jpg",
+      "alt": "Two clinicians reviewing medical imaging on a monitor."
+    },
+    "editorialStatus": "published",
+    "demo": true,
+    "sortOrder": 1,
+    "seo": {
+      "title": "How to request coverage without a scavenger hunt",
+      "description": "A staffing request should name the unit, the shift, and the headcount in one pass."
+    }
+  },
+  {
+    "id": "post-shift",
+    "slug": "designing-a-shift-grid",
+    "title": "Designing a shift grid a unit can actually staff",
+    "excerpt": "Night, day, rotating, and weekend are different products. Write them that way.",
+    "body": "Night, day, rotating, and weekend are different products. Write them that way.\n\nA weekend radiologic role is not a night ICU role. Filters on the job board use those words as stable values so a label change does not break a shared link.\n\nThis is sample journal copy for the MediHire demonstration.",
+    "categoryId": "cat-hiring",
+    "authorId": "hannah-cole",
+    "publishedAt": "2026-09-12",
+    "image": {
+      "src": "/media/respiratory.jpg",
+      "alt": "A surgical team gathered under operating-room lights."
+    },
+    "editorialStatus": "published",
+    "demo": true,
+    "sortOrder": 1,
+    "seo": {
+      "title": "Designing a shift grid a unit can actually staff",
+      "description": "Night, day, rotating, and weekend are different products. Write them that way."
+    }
+  },
+  {
+    "id": "post-winter",
+    "slug": "winter-census-notes",
+    "title": "Winter census notes for sample hospitals",
+    "excerpt": "What to tell a staffing partner before the first cold front.",
+    "body": "What to tell a staffing partner before the first cold front.\n\nName the specialty, the number of people, and whether the need is temporary or per diem. Leave permanent searches in their own request.\n\nThis is sample journal copy for the MediHire demonstration.",
+    "categoryId": "cat-workforce",
+    "authorId": "jonah-reid",
+    "publishedAt": "2026-08-02",
+    "image": {
+      "src": "/media/hospital-exterior.jpg",
+      "alt": "Brick hospital entrance with a canopy and glass doors."
+    },
+    "editorialStatus": "published",
+    "demo": true,
+    "sortOrder": 1,
+    "seo": {
+      "title": "Winter census notes for sample hospitals",
+      "description": "What to tell a staffing partner before the first cold front."
+    }
+  },
+  {
+    "id": "post-interview",
+    "slug": "first-conversation",
+    "title": "The first conversation after a staffing request",
+    "excerpt": "Acceptance of the form is not a filled shift. It is a queued conversation.",
+    "body": "Acceptance of the form is not a filled shift. It is a queued conversation.\n\nIn this demonstration, a request is stored privately and marked as test mode until a delivery endpoint is configured.\n\nThis is sample journal copy for the MediHire demonstration.",
+    "categoryId": "cat-hiring",
+    "authorId": "sofia-berg",
+    "publishedAt": "2026-07-18",
+    "image": {
+      "src": "/media/hero-team.jpg",
+      "alt": "Hands type on a laptop beside a stethoscope on a wooden desk."
+    },
+    "editorialStatus": "published",
+    "demo": true,
+    "sortOrder": 1,
+    "seo": {
+      "title": "The first conversation after a staffing request",
+      "description": "Acceptance of the form is not a filled shift. It is a queued conversation."
+    }
+  },
+  {
+    "id": "post-orientation",
+    "slug": "orientation-for-travelers",
+    "title": "Orientation that respects a short assignment",
+    "excerpt": "Temporary clinicians need the same safety brief, on a shorter clock.",
+    "body": "Temporary clinicians need the same safety brief, on a shorter clock.\n\nList the systems, the badge process, and the person who receives the handoff. Put that in the request notes if it is already known.\n\nThis is sample journal copy for the MediHire demonstration.",
+    "categoryId": "cat-workforce",
+    "authorId": "andre-silva",
+    "publishedAt": "2026-06-04",
+    "image": {
+      "src": "/media/or-team.jpg",
+      "alt": "Two surgeons in caps and masks looking down during a procedure."
+    },
+    "editorialStatus": "published",
+    "demo": true,
+    "sortOrder": 1,
+    "seo": {
+      "title": "Orientation that respects a short assignment",
+      "description": "Temporary clinicians need the same safety brief, on a shorter clock."
+    }
+  },
+  {
+    "id": "post-nights",
+    "slug": "reading-a-night-shift",
+    "title": "How to read a night-shift opening",
+    "excerpt": "The wound-care example on the board is temporary, on-site, and past the first page.",
+    "body": "The wound-care example on the board is temporary, on-site, and past the first page.\n\nCheck specialty, location, employment type, and shift together. A shared filter link should reopen the same combination.\n\nThis is sample journal copy for the MediHire demonstration.",
+    "categoryId": "cat-clinician",
+    "authorId": "priya-nair",
+    "publishedAt": "2026-04-09",
+    "image": {
+      "src": "/media/hallway.jpg",
+      "alt": "A clinic reception desk with a staircase and a floor directory."
+    },
+    "editorialStatus": "published",
+    "demo": true,
+    "sortOrder": 1,
+    "seo": {
+      "title": "How to read a night-shift opening",
+      "description": "The wound-care example on the board is temporary, on-site, and past the first page."
+    }
+  },
+  {
+    "id": "post-draft",
+    "slug": "unpublished-briefing",
+    "title": "Unpublished briefing",
+    "excerpt": "This draft stays out of the journal, search, and the sitemap.",
+    "body": "This draft stays out of the journal, search, and the sitemap.\n\nDraft body for preview only.\n\nThis is sample journal copy for the MediHire demonstration.",
+    "categoryId": "cat-workforce",
+    "authorId": "elena-voss",
+    "publishedAt": "2026-11-01",
+    "image": {
+      "src": "/media/consult.jpg",
+      "alt": "Two clinicians reviewing medical imaging on a monitor."
+    },
+    "editorialStatus": "draft",
+    "demo": true,
+    "sortOrder": 1,
+    "seo": {
+      "title": "Unpublished briefing",
+      "description": "This draft stays out of the journal, search, and the sitemap."
+    }
+  }
+]

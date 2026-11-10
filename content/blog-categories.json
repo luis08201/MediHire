@@ -1,0 +1,41 @@
+[
+  {
+    "id": "cat-workforce",
+    "slug": "workforce-planning",
+    "name": "Workforce planning",
+    "summary": "Notes for leaders planning census and coverage.",
+    "description": "Workforce planning articles help hiring teams describe headcount, shift, and start window before they request staff.",
+    "sortOrder": 1,
+    "editorialStatus": "published",
+    "seo": {
+      "title": "Workforce planning",
+      "description": "Notes for leaders planning census and coverage."
+    }
+  },
+  {
+    "id": "cat-hiring",
+    "slug": "hiring-teams",
+    "name": "Hiring teams",
+    "summary": "How a staffing request becomes a short conversation.",
+    "description": "Hiring-team articles explain what MediHire asks for on the request form and what happens after it is accepted.",
+    "sortOrder": 2,
+    "editorialStatus": "published",
+    "seo": {
+      "title": "Hiring teams",
+      "description": "How a staffing request becomes a short conversation."
+    }
+  },
+  {
+    "id": "cat-clinician",
+    "slug": "clinician-careers",
+    "name": "Clinician careers",
+    "summary": "How to read an opening before you apply.",
+    "description": "Clinician career articles explain specialty, shift, and employment type on the job board. The sample article in this category is past the first page of the journal.",
+    "sortOrder": 3,
+    "editorialStatus": "published",
+    "seo": {
+      "title": "Clinician careers",
+      "description": "How to read an opening before you apply."
+    }
+  }
+]

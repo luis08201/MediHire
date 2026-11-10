@@ -1,0 +1,186 @@
+[
+  {
+    "id": "loc-austin",
+    "slug": "austin",
+    "name": "Austin",
+    "region": "southwest",
+    "kind": "office",
+    "city": "Austin",
+    "state": "TX",
+    "summary": "Sample headquarters",
+    "coverage": "The Austin office is a MediHire workplace. It is not a hospital.",
+    "address": "600 Sample Street, Suite 400, Austin, TX 78701",
+    "image": {
+      "src": "/media/hospital-exterior.jpg",
+      "alt": "Brick hospital entrance with a canopy and glass doors."
+    },
+    "sortOrder": 1,
+    "editorialStatus": "published",
+    "demo": true,
+    "seo": {
+      "title": "Austin office",
+      "description": "Sample headquarters"
+    }
+  },
+  {
+    "id": "loc-chicago",
+    "slug": "chicago",
+    "name": "Chicago",
+    "region": "midwest",
+    "kind": "office",
+    "city": "Chicago",
+    "state": "IL",
+    "summary": "Sample Midwest office",
+    "coverage": "The Chicago office coordinates Midwest coverage. It is not a hospital campus.",
+    "address": "200 Demonstration Plaza, Suite 500, Chicago, IL 60601",
+    "image": {
+      "src": "/media/consult.jpg",
+      "alt": "Two clinicians reviewing medical imaging on a monitor."
+    },
+    "sortOrder": 2,
+    "editorialStatus": "published",
+    "demo": true,
+    "seo": {
+      "title": "Chicago office",
+      "description": "Sample Midwest office"
+    }
+  },
+  {
+    "id": "loc-dallas",
+    "slug": "dallas",
+    "name": "Dallas–Fort Worth",
+    "region": "southwest",
+    "kind": "service-area",
+    "city": "Dallas",
+    "state": "TX",
+    "summary": "North Texas service area",
+    "coverage": "Clinicians are placed with hospitals and clinics across Dallas–Fort Worth. There is no public MediHire desk here.",
+    "address": null,
+    "image": {
+      "src": "/media/hallway.jpg",
+      "alt": "A clinic reception desk with a staircase and a floor directory."
+    },
+    "sortOrder": 3,
+    "editorialStatus": "published",
+    "demo": true,
+    "seo": {
+      "title": "Dallas–Fort Worth service area",
+      "description": "North Texas service area"
+    }
+  },
+  {
+    "id": "loc-boston",
+    "slug": "boston",
+    "name": "Greater Boston",
+    "region": "northeast",
+    "kind": "service-area",
+    "city": "Boston",
+    "state": "MA",
+    "summary": "New England service area",
+    "coverage": "Coverage in this sample area reaches community hospitals and academic campuses around Boston.",
+    "address": null,
+    "image": {
+      "src": "/media/hallway.jpg",
+      "alt": "A clinic reception desk with a staircase and a floor directory."
+    },
+    "sortOrder": 4,
+    "editorialStatus": "published",
+    "demo": true,
+    "seo": {
+      "title": "Greater Boston service area",
+      "description": "New England service area"
+    }
+  },
+  {
+    "id": "loc-nashville",
+    "slug": "nashville",
+    "name": "Nashville",
+    "region": "south",
+    "kind": "service-area",
+    "city": "Nashville",
+    "state": "TN",
+    "summary": "Middle Tennessee service area",
+    "coverage": "Night and temporary coverage in this sample area includes wound care and medical-surgical units.",
+    "address": null,
+    "image": {
+      "src": "/media/respiratory.jpg",
+      "alt": "A surgical team gathered under operating-room lights."
+    },
+    "sortOrder": 5,
+    "editorialStatus": "published",
+    "demo": true,
+    "seo": {
+      "title": "Nashville service area",
+      "description": "Middle Tennessee service area"
+    }
+  },
+  {
+    "id": "loc-denver",
+    "slug": "denver",
+    "name": "Denver",
+    "region": "mountain-west",
+    "kind": "service-area",
+    "city": "Denver",
+    "state": "CO",
+    "summary": "Front Range service area",
+    "coverage": "The Front Range sample area covers hospital medicine and surgical support.",
+    "address": null,
+    "image": {
+      "src": "/media/hospital-exterior.jpg",
+      "alt": "Brick hospital entrance with a canopy and glass doors."
+    },
+    "sortOrder": 6,
+    "editorialStatus": "published",
+    "demo": true,
+    "seo": {
+      "title": "Denver service area",
+      "description": "Front Range service area"
+    }
+  },
+  {
+    "id": "loc-phoenix",
+    "slug": "phoenix",
+    "name": "Phoenix",
+    "region": "southwest",
+    "kind": "service-area",
+    "city": "Phoenix",
+    "state": "AZ",
+    "summary": "Valley service area",
+    "coverage": "Phoenix listings in this demonstration include hospital medicine and expired travel examples that stay off the public board.",
+    "address": null,
+    "image": {
+      "src": "/media/consult.jpg",
+      "alt": "Two clinicians reviewing medical imaging on a monitor."
+    },
+    "sortOrder": 7,
+    "editorialStatus": "published",
+    "demo": true,
+    "seo": {
+      "title": "Phoenix service area",
+      "description": "Valley service area"
+    }
+  },
+  {
+    "id": "loc-seattle",
+    "slug": "seattle",
+    "name": "Seattle",
+    "region": "pacific",
+    "kind": "service-area",
+    "city": "Seattle",
+    "state": "WA",
+    "summary": "Puget Sound service area",
+    "coverage": "Seattle is the only Pacific sample area, and it sits past the first page of the locations list.",
+    "address": null,
+    "image": {
+      "src": "/media/hallway.jpg",
+      "alt": "A clinic reception desk with a staircase and a floor directory."
+    },
+    "sortOrder": 8,
+    "editorialStatus": "published",
+    "demo": true,
+    "seo": {
+      "title": "Seattle service area",
+      "description": "Puget Sound service area"
+    }
+  }
+]

@@ -1,0 +1,67 @@
+[
+  {
+    "id": "dept-leadership",
+    "slug": "leadership",
+    "name": "Leadership",
+    "summary": "The people who set MediHire’s staffing standard.",
+    "description": "Leadership keeps the two journeys honest: hospitals get a clear request path, and clinicians see requirements before they apply.",
+    "sortOrder": 1,
+    "editorialStatus": "published",
+    "seo": {
+      "title": "Leadership",
+      "description": "The people who set MediHire’s staffing standard."
+    }
+  },
+  {
+    "id": "dept-clinical",
+    "slug": "clinical-partnerships",
+    "name": "Clinical partnerships",
+    "summary": "Clinicians who advise on scope, credentialing, and unit fit.",
+    "description": "Clinical partnerships review specialty requirements with hiring leaders so a request matches the unit that will receive the clinician.",
+    "sortOrder": 2,
+    "editorialStatus": "published",
+    "seo": {
+      "title": "Clinical partnerships",
+      "description": "Clinicians who advise on scope, credentialing, and unit fit."
+    }
+  },
+  {
+    "id": "dept-recruiting",
+    "slug": "recruiting",
+    "name": "Recruiting",
+    "summary": "Recruiters who help clinicians read an opening and take the next step.",
+    "description": "Recruiting answers questions about shift, location, and employment type, then routes an application to the right reviewer.",
+    "sortOrder": 3,
+    "editorialStatus": "published",
+    "seo": {
+      "title": "Recruiting",
+      "description": "Recruiters who help clinicians read an opening and take the next step."
+    }
+  },
+  {
+    "id": "dept-operations",
+    "slug": "client-operations",
+    "name": "Client operations",
+    "summary": "The desk that turns a staffing request into a coverage plan.",
+    "description": "Client operations confirms headcount, start window, and which service — temporary staffing, shift coverage, or permanent placement — fits the request.",
+    "sortOrder": 4,
+    "editorialStatus": "published",
+    "seo": {
+      "title": "Client operations",
+      "description": "The desk that turns a staffing request into a coverage plan."
+    }
+  },
+  {
+    "id": "dept-quality",
+    "slug": "quality-safety",
+    "name": "Quality and safety",
+    "summary": "The review desk for credential files and handoff notes.",
+    "description": "Quality and safety checks that a sample file has the license, specialty, and dates a hospital asked for before anyone is presented.",
+    "sortOrder": 5,
+    "editorialStatus": "published",
+    "seo": {
+      "title": "Quality and safety",
+      "description": "The review desk for credential files and handoff notes."
+    }
+  }
+]

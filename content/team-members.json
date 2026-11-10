@@ -1,0 +1,173 @@
+[
+  {
+    "id": "elena-voss",
+    "slug": "elena-voss",
+    "name": "Elena Voss",
+    "role": "Managing director",
+    "departmentId": "dept-leadership",
+    "portrait": {
+      "src": "/media/portrait-elena.jpg",
+      "alt": "A clinician in a white coat sits at a clinic desk with a stethoscope and paperwork."
+    },
+    "biography": "Elena leads the demonstration team. She keeps hospital requests and clinician applications in separate queues.",
+    "sortOrder": 1,
+    "editorialStatus": "published",
+    "demo": true,
+    "seo": {
+      "title": "Elena Voss, Managing director",
+      "description": "Elena leads the demonstration team. She keeps hospital requests and clinician applications in separate queues."
+    }
+  },
+  {
+    "id": "jonah-reid",
+    "slug": "jonah-reid",
+    "name": "Jonah Reid",
+    "role": "Clinical partnerships lead",
+    "departmentId": "dept-clinical",
+    "portrait": {
+      "src": "/media/portrait-jonah.jpg",
+      "alt": "A bearded clinician wearing glasses and a white coat stands with arms crossed."
+    },
+    "biography": "Jonah reviews specialty language with hiring leaders so an ICU request is not written like a medical-surgical one.",
+    "sortOrder": 2,
+    "editorialStatus": "published",
+    "demo": true,
+    "seo": {
+      "title": "Jonah Reid, Clinical partnerships lead",
+      "description": "Jonah reviews specialty language with hiring leaders so an ICU request is not written like a medical-surgical one."
+    }
+  },
+  {
+    "id": "priya-nair",
+    "slug": "priya-nair",
+    "name": "Priya Nair",
+    "role": "Recruiting lead",
+    "departmentId": "dept-recruiting",
+    "portrait": {
+      "src": "/media/portrait-priya.jpg",
+      "alt": "A clinician looks down, a red stethoscope around her neck."
+    },
+    "biography": "Priya helps clinicians compare shift and employment type before they apply.",
+    "sortOrder": 3,
+    "editorialStatus": "published",
+    "demo": true,
+    "seo": {
+      "title": "Priya Nair, Recruiting lead",
+      "description": "Priya helps clinicians compare shift and employment type before they apply."
+    }
+  },
+  {
+    "id": "marcus-hale",
+    "slug": "marcus-hale",
+    "name": "Marcus Hale",
+    "role": "Recruiter",
+    "departmentId": "dept-recruiting",
+    "portrait": {
+      "src": "/media/portrait-marcus.jpg",
+      "alt": "A clinician wearing a mask and scrubs stands outdoors."
+    },
+    "biography": "Marcus answers first questions about location and credential for sample openings.",
+    "sortOrder": 4,
+    "editorialStatus": "published",
+    "demo": true,
+    "seo": {
+      "title": "Marcus Hale, Recruiter",
+      "description": "Marcus answers first questions about location and credential for sample openings."
+    }
+  },
+  {
+    "id": "hannah-cole",
+    "slug": "hannah-cole",
+    "name": "Hannah Cole",
+    "role": "Client operations lead",
+    "departmentId": "dept-operations",
+    "portrait": {
+      "src": "/media/portrait-hannah.jpg",
+      "alt": "A clinician in surgical attire stands under operating-room lights."
+    },
+    "biography": "Hannah turns a staffing request into a coverage note the clinical team can review.",
+    "sortOrder": 5,
+    "editorialStatus": "published",
+    "demo": true,
+    "seo": {
+      "title": "Hannah Cole, Client operations lead",
+      "description": "Hannah turns a staffing request into a coverage note the clinical team can review."
+    }
+  },
+  {
+    "id": "andre-silva",
+    "slug": "andre-silva",
+    "name": "Andre Silva",
+    "role": "Perioperative advisor",
+    "departmentId": "dept-clinical",
+    "portrait": {
+      "src": "/media/portrait-andre.jpg",
+      "alt": "A surgeon in a cap looks down, gloved hands in view."
+    },
+    "biography": "Andre advises on surgical technology and operating-room coverage language.",
+    "sortOrder": 6,
+    "editorialStatus": "published",
+    "demo": true,
+    "seo": {
+      "title": "Andre Silva, Perioperative advisor",
+      "description": "Andre advises on surgical technology and operating-room coverage language."
+    }
+  },
+  {
+    "id": "sofia-berg",
+    "slug": "sofia-berg",
+    "name": "Sofia Berg",
+    "role": "Client partner",
+    "departmentId": "dept-operations",
+    "portrait": {
+      "src": "/media/portrait-sofia.jpg",
+      "alt": "A smiling clinician in a cream suit wears a stethoscope in a studio portrait."
+    },
+    "biography": "Sofia stays with a hiring team from the first request through the sample confirmation.",
+    "sortOrder": 7,
+    "editorialStatus": "published",
+    "demo": true,
+    "seo": {
+      "title": "Sofia Berg, Client partner",
+      "description": "Sofia stays with a hiring team from the first request through the sample confirmation."
+    }
+  },
+  {
+    "id": "camille-ortiz",
+    "slug": "camille-ortiz",
+    "name": "Camille Ortiz",
+    "role": "Quality reviewer",
+    "departmentId": "dept-quality",
+    "portrait": {
+      "src": "/media/portrait-camille.jpg",
+      "alt": "A woman in a blue shirt works at a laptop in a brick office."
+    },
+    "biography": "Camille checks that a sample credential file matches the specialty and the dates on the request. Her profile is the last card on the team list so department filtering can be tested past the first page.",
+    "sortOrder": 8,
+    "editorialStatus": "published",
+    "demo": true,
+    "seo": {
+      "title": "Camille Ortiz, Quality reviewer",
+      "description": "Camille checks that a sample credential file matches the specialty and the dates on the request. Her profile is the last card on the team list so department filtering can be tested past the first page."
+    }
+  },
+  {
+    "id": "rowan-hale",
+    "slug": "rowan-hale",
+    "name": "Rowan Hale",
+    "role": "Advisor",
+    "departmentId": "dept-leadership",
+    "portrait": {
+      "src": "/media/portrait-jonah.jpg",
+      "alt": "A bearded clinician wearing glasses and a white coat stands with arms crossed."
+    },
+    "biography": "This draft profile is for editorial preview only.",
+    "sortOrder": 9,
+    "editorialStatus": "draft",
+    "demo": true,
+    "seo": {
+      "title": "Rowan Hale, Advisor",
+      "description": "This draft profile is for editorial preview only."
+    }
+  }
+]

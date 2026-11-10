@@ -1,0 +1,120 @@
+[
+  {
+    "id": "home",
+    "title": "Home",
+    "seo": {
+      "title": "MediHire · Healthcare staffing for hospitals and clinicians",
+      "description": "MediHire helps hospitals request staff and helps clinicians review active openings with the requirements in plain view."
+    },
+    "fields": {
+      "heroEyebrow": "Healthcare recruitment",
+      "heroTitle": "Staff the unit. Read the role before you apply.",
+      "heroBody": "MediHire is a demonstration staffing desk for hospitals and clinics, and a job board for nurses, therapists, and other clinicians. Request coverage or browse openings — both paths stay in English and in the open.",
+      "hospitalTitle": "For hospitals and hiring teams",
+      "hospitalBody": "Describe the specialty, the shift, and the headcount. A staffing partner replies to the work email you provide. This demonstration stores the request privately and labels test mode until delivery is configured.",
+      "clinicianTitle": "For healthcare professionals",
+      "clinicianBody": "Filter active openings by specialty, location, employment type, and shift. Open a role to see the employer, the schedule, and how to apply.",
+      "servicesTitle": "Staffing services",
+      "servicesBody": "Three ways to ask for help. Each one opens a staffing request with that service selected.",
+      "howTitle": "How it works",
+      "howIntro": "Hiring teams and clinicians move on separate paths that meet in a reviewed introduction.",
+      "howHospitalTitle": "Hiring teams",
+      "hospitalStep1Title": "Name the coverage",
+      "hospitalStep1Body": "Choose temporary staffing, shift coverage, or permanent placement.",
+      "hospitalStep2Title": "Send the request",
+      "hospitalStep2Body": "Include organization, work email, specialty, location, and the staffing need.",
+      "hospitalStep3Title": "Review introductions",
+      "hospitalStep3Body": "In the full product, a partner would confirm fit. Here, the request stops in the private queue.",
+      "howClinicianTitle": "Clinicians",
+      "clinicianStep1Title": "Filter the board",
+      "clinicianStep1Body": "Combine specialty, location, employment type, and shift. Share the address if you want the same view later.",
+      "clinicianStep2Title": "Read the requirements",
+      "clinicianStep2Body": "Employer, arrangement, shift, and qualifications are on the opening.",
+      "clinicianStep3Title": "Apply once",
+      "clinicianStep3Body": "Use the built-in form or the employer’s page when the opening says so. Closed roles do not take applications.",
+      "coverageTitle": "Coverage and offices",
+      "coverageBody": "Physical offices are MediHire workplaces. Service areas are where clinicians are placed. They are labeled differently on purpose."
+    }
+  },
+  {
+    "id": "about",
+    "title": "About",
+    "seo": {
+      "title": "About MediHire",
+      "description": "MediHire’s mission is a plain-language staffing desk for hospitals and a readable job board for clinicians."
+    },
+    "fields": {
+      "lede": "MediHire exists so a hiring team can ask for coverage without a scavenger hunt, and a clinician can see the shift before sending a CV.",
+      "missionTitle": "Mission",
+      "missionBody": "Hospitals and clinics need people who can work a specific unit, on a specific pattern, in a specific place. Clinicians need those facts before they apply.\n\nThis demonstration keeps both journeys on the public site. Accounts, applicant tracking, organization permissions, and billing are described as later product work, not built here.",
+      "approachTitle": "Recruitment approach",
+      "approachBody": "A request names the service, the specialty, and the location. An opening names the employer, the arrangement, the shift, and the employment type. Filter values are stable codes, so a display label can change without breaking a shared link.\n\nSample records are marked. Drafts stay in the editor until someone publishes them. Closed and expired openings leave the board and stop accepting applications."
+    }
+  },
+  {
+    "id": "services",
+    "title": "Services",
+    "seo": {
+      "title": "Staffing services",
+      "description": "Temporary staffing, shift coverage, and permanent placement for hospitals and clinics."
+    },
+    "fields": {
+      "lede": "Choose the service that matches the length of the need. Each description is editable in the CMS, and each one can open a staffing request."
+    }
+  },
+  {
+    "id": "contact",
+    "title": "Request staff",
+    "seo": {
+      "title": "Request staff",
+      "description": "Send MediHire a staffing request with your organization, work email, specialty, location, and coverage needs."
+    },
+    "fields": {
+      "lede": "Use your organization email. Tell us the specialty, where you need people, and what the next few weeks look like. A location or service link can prefill this form."
+    }
+  },
+  {
+    "id": "careers",
+    "title": "Careers",
+    "seo": {
+      "title": "Healthcare openings",
+      "description": "Browse sample healthcare openings and filter by specialty, location, employment type, and shift."
+    },
+    "fields": {
+      "lede": "Active sample openings only. Search by job title or specialty, then combine the filters. The address keeps your choices so a colleague can open the same board."
+    }
+  },
+  {
+    "id": "team",
+    "title": "Team",
+    "seo": {
+      "title": "MediHire team",
+      "description": "Meet the sample MediHire team and filter profiles by department."
+    },
+    "fields": {
+      "lede": "These profiles are sample staff for the demonstration. Filter by department, or open a department page for the longer description."
+    }
+  },
+  {
+    "id": "blog",
+    "title": "Insights",
+    "seo": {
+      "title": "Insights for hiring teams and clinicians",
+      "description": "Articles on workforce planning, hiring teams, and clinician careers."
+    },
+    "fields": {
+      "lede": "Short sample articles for the two audiences MediHire serves. Filter by category or open the category page."
+    }
+  },
+  {
+    "id": "locations",
+    "title": "Locations",
+    "seo": {
+      "title": "Offices and service areas",
+      "description": "See where MediHire keeps sample offices and where it places clinicians."
+    },
+    "fields": {
+      "lede": "Offices are workplaces for MediHire staff. Service areas are regions where clinicians are placed with hospitals and clinics. Filter by region."
+    }
+  }
+]

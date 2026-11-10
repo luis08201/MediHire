@@ -1,0 +1,365 @@
+[
+  {
+    "id": "job-icu-austin",
+    "slug": "icu-nurse-austin",
+    "title": "ICU registered nurse",
+    "employer": "Northbank Medical Center",
+    "specialty": "icu-nursing",
+    "locationId": "loc-austin",
+    "workArrangement": "on-site",
+    "shift": "night",
+    "employmentType": "permanent",
+    "compensation": {
+      "min": 62,
+      "max": 78,
+      "currency": "USD",
+      "period": "hour"
+    },
+    "summary": "Night ICU coverage for a sample medical center in Austin.",
+    "responsibilities": "- Take a six-bed ICU assignment on nights.\n- Give a recorded handoff at 07:00.\n- Escalate changes to the sample charge nurse.",
+    "qualifications": "- Active RN license that can be used in Texas.\n- Two years of adult ICU experience.\n- Comfort with ventilators and titration protocols.",
+    "application": {
+      "mode": "internal",
+      "url": null
+    },
+    "publishedAt": "2026-02-02",
+    "closingDate": "2027-03-31",
+    "jobStatus": "open",
+    "sortOrder": 1,
+    "editorialStatus": "published",
+    "demo": true,
+    "seo": {
+      "title": "ICU registered nurse",
+      "description": "Night ICU coverage for a sample medical center in Austin."
+    }
+  },
+  {
+    "id": "job-er-boston",
+    "slug": "emergency-nurse-boston",
+    "title": "Emergency nurse",
+    "employer": "Harborline Hospital",
+    "specialty": "emergency-nursing",
+    "locationId": "loc-boston",
+    "workArrangement": "on-site",
+    "shift": "day",
+    "employmentType": "temporary",
+    "compensation": null,
+    "summary": "Day-shift emergency coverage for a 13-week sample assignment.",
+    "responsibilities": "- Staff a pod in the sample emergency department.\n- Document in the unit’s existing system.",
+    "qualifications": "- RN license usable in Massachusetts.\n- Recent emergency department experience.",
+    "application": {
+      "mode": "internal",
+      "url": null
+    },
+    "publishedAt": "2026-03-01",
+    "closingDate": "2027-02-28",
+    "jobStatus": "open",
+    "sortOrder": 2,
+    "editorialStatus": "published",
+    "demo": true,
+    "seo": {
+      "title": "Emergency nurse",
+      "description": "Day-shift emergency coverage for a 13-week sample assignment."
+    }
+  },
+  {
+    "id": "job-medsurg-dallas",
+    "slug": "med-surg-nurse-dallas",
+    "title": "Medical-surgical nurse",
+    "employer": "Cedar Row Community Hospital",
+    "specialty": "med-surg",
+    "locationId": "loc-dallas",
+    "workArrangement": "on-site",
+    "shift": "day",
+    "employmentType": "per-diem",
+    "compensation": null,
+    "summary": "Per-diem day shifts on a medical-surgical floor in the Dallas sample area.",
+    "responsibilities": "- Cover posted day shifts.\n- Follow the unit’s bedside report.",
+    "qualifications": "- RN license usable in Texas.\n- One year of medical-surgical nursing.",
+    "application": {
+      "mode": "internal",
+      "url": null
+    },
+    "publishedAt": "2026-03-12",
+    "closingDate": null,
+    "jobStatus": "open",
+    "sortOrder": 3,
+    "editorialStatus": "published",
+    "demo": true,
+    "seo": {
+      "title": "Medical-surgical nurse",
+      "description": "Per-diem day shifts on a medical-surgical floor in the Dallas sample area."
+    }
+  },
+  {
+    "id": "job-rt-chicago",
+    "slug": "respiratory-therapist-chicago",
+    "title": "Respiratory therapist",
+    "employer": "Lakeside Sample Hospital",
+    "specialty": "respiratory-therapy",
+    "locationId": "loc-chicago",
+    "workArrangement": "on-site",
+    "shift": "night",
+    "employmentType": "contract",
+    "compensation": {
+      "min": 48,
+      "max": 62,
+      "currency": "USD",
+      "period": "hour"
+    },
+    "summary": "Night contract for a respiratory therapy team in the Chicago sample office area.",
+    "responsibilities": "- Cover ventilator rounds on nights.\n- Join the sample rapid-response roster.",
+    "qualifications": "- RRT credential.\n- Adult critical-care experience.",
+    "application": {
+      "mode": "internal",
+      "url": null
+    },
+    "publishedAt": "2026-04-04",
+    "closingDate": "2027-04-30",
+    "jobStatus": "open",
+    "sortOrder": 4,
+    "editorialStatus": "published",
+    "demo": true,
+    "seo": {
+      "title": "Respiratory therapist",
+      "description": "Night contract for a respiratory therapy team in the Chicago sample office area."
+    }
+  },
+  {
+    "id": "job-hospitalist-phoenix",
+    "slug": "hospitalist-phoenix",
+    "title": "Hospitalist",
+    "employer": "Red Mesa Regional",
+    "specialty": "hospital-medicine",
+    "locationId": "loc-phoenix",
+    "workArrangement": "hybrid",
+    "shift": "day",
+    "employmentType": "permanent",
+    "compensation": {
+      "min": 240000,
+      "max": 280000,
+      "currency": "USD",
+      "period": "year"
+    },
+    "summary": "Permanent hospital medicine role with a sample external application page.",
+    "responsibilities": "- Round on an inpatient teaching service.\n- Share weekend coverage on a published rotation.",
+    "qualifications": "- Board certification or eligibility in internal medicine.\n- Eligibility to work in Arizona.",
+    "application": {
+      "mode": "external",
+      "url": "https://example.com/apply/hospitalist-phoenix"
+    },
+    "publishedAt": "2026-04-20",
+    "closingDate": "2027-05-01",
+    "jobStatus": "open",
+    "sortOrder": 5,
+    "editorialStatus": "published",
+    "demo": true,
+    "seo": {
+      "title": "Hospitalist",
+      "description": "Permanent hospital medicine role with a sample external application page."
+    }
+  },
+  {
+    "id": "job-tech-denver",
+    "slug": "surgical-technologist-denver",
+    "title": "Surgical technologist",
+    "employer": "Clearwater Surgical Hospital",
+    "specialty": "surgical-technology",
+    "locationId": "loc-denver",
+    "workArrangement": "on-site",
+    "shift": "day",
+    "employmentType": "temporary",
+    "compensation": null,
+    "summary": "Daytime surgical technology coverage in the Denver sample area.",
+    "responsibilities": "- Scrub on general and orthopedic lists.\n- Complete the sample count process.",
+    "qualifications": "- Surgical technologist certification.\n- Recent operating-room experience.",
+    "application": {
+      "mode": "internal",
+      "url": null
+    },
+    "publishedAt": "2026-05-02",
+    "closingDate": "2027-01-15",
+    "jobStatus": "open",
+    "sortOrder": 6,
+    "editorialStatus": "published",
+    "demo": true,
+    "seo": {
+      "title": "Surgical technologist",
+      "description": "Daytime surgical technology coverage in the Denver sample area."
+    }
+  },
+  {
+    "id": "job-ld-austin",
+    "slug": "labor-delivery-nurse-austin",
+    "title": "Labor and delivery nurse",
+    "employer": "Northbank Medical Center",
+    "specialty": "labor-delivery",
+    "locationId": "loc-austin",
+    "workArrangement": "on-site",
+    "shift": "rotating",
+    "employmentType": "permanent",
+    "compensation": null,
+    "summary": "Rotating labor and delivery shifts at the Austin sample employer.",
+    "responsibilities": "- Support labor, delivery, and recovery.\n- Rotate days and nights on the published pattern.",
+    "qualifications": "- RN license usable in Texas.\n- Recent labor and delivery experience.",
+    "application": {
+      "mode": "internal",
+      "url": null
+    },
+    "publishedAt": "2026-05-18",
+    "closingDate": null,
+    "jobStatus": "open",
+    "sortOrder": 7,
+    "editorialStatus": "published",
+    "demo": true,
+    "seo": {
+      "title": "Labor and delivery nurse",
+      "description": "Rotating labor and delivery shifts at the Austin sample employer."
+    }
+  },
+  {
+    "id": "job-rad-chicago",
+    "slug": "radiologic-technologist-chicago",
+    "title": "Radiologic technologist",
+    "employer": "Lakeside Sample Hospital",
+    "specialty": "radiologic-technology",
+    "locationId": "loc-chicago",
+    "workArrangement": "on-site",
+    "shift": "weekend",
+    "employmentType": "permanent",
+    "compensation": null,
+    "summary": "Weekend diagnostic imaging coverage in Chicago.",
+    "responsibilities": "- Perform general radiography on weekend shifts.\n- Follow the sample radiation-safety checklist.",
+    "qualifications": "- ARRT registration.\n- State license where required.",
+    "application": {
+      "mode": "internal",
+      "url": null
+    },
+    "publishedAt": "2026-06-01",
+    "closingDate": "2027-06-01",
+    "jobStatus": "open",
+    "sortOrder": 8,
+    "editorialStatus": "published",
+    "demo": true,
+    "seo": {
+      "title": "Radiologic technologist",
+      "description": "Weekend diagnostic imaging coverage in Chicago."
+    }
+  },
+  {
+    "id": "job-wound-nashville",
+    "slug": "wound-care-nurse-nashville",
+    "title": "Night wound care nurse",
+    "employer": "Midtown Sample Hospital",
+    "specialty": "wound-care",
+    "locationId": "loc-nashville",
+    "workArrangement": "on-site",
+    "shift": "night",
+    "employmentType": "temporary",
+    "compensation": null,
+    "summary": "Temporary night wound-care assignment. This opening is past the first page of the unfiltered board.",
+    "responsibilities": "- Assess and dress complex wounds on the night shift.\n- Record measurements in the sample chart.",
+    "qualifications": "- RN license usable in Tennessee.\n- Wound-care experience or certification.",
+    "application": {
+      "mode": "internal",
+      "url": null
+    },
+    "publishedAt": "2026-06-15",
+    "closingDate": "2027-06-30",
+    "jobStatus": "open",
+    "sortOrder": 9,
+    "editorialStatus": "published",
+    "demo": true,
+    "seo": {
+      "title": "Night wound care nurse",
+      "description": "Temporary night wound-care assignment. This opening is past the first page of the unfiltered board."
+    }
+  },
+  {
+    "id": "job-or-boston",
+    "slug": "operating-room-nurse-boston",
+    "title": "Operating room nurse",
+    "employer": "Harborline Hospital",
+    "specialty": "surgical-technology",
+    "locationId": "loc-boston",
+    "workArrangement": "on-site",
+    "shift": "day",
+    "employmentType": "permanent",
+    "compensation": null,
+    "summary": "This sample operating-room role is closed and must not accept applications.",
+    "responsibilities": "- Circulate in the sample operating room.",
+    "qualifications": "- Perioperative nursing experience.",
+    "application": {
+      "mode": "internal",
+      "url": null
+    },
+    "publishedAt": "2026-01-10",
+    "closingDate": "2027-01-10",
+    "jobStatus": "closed",
+    "sortOrder": 20,
+    "editorialStatus": "published",
+    "demo": true,
+    "seo": {
+      "title": "Operating room nurse",
+      "description": "This sample operating-room role is closed and must not accept applications."
+    }
+  },
+  {
+    "id": "job-travel-er",
+    "slug": "travel-emergency-nurse-phoenix",
+    "title": "Travel emergency nurse",
+    "employer": "Red Mesa Regional",
+    "specialty": "emergency-nursing",
+    "locationId": "loc-phoenix",
+    "workArrangement": "on-site",
+    "shift": "night",
+    "employmentType": "temporary",
+    "compensation": null,
+    "summary": "This sample travel role is past its closing date.",
+    "responsibilities": "- Staff the sample emergency department.",
+    "qualifications": "- Emergency nursing experience.",
+    "application": {
+      "mode": "internal",
+      "url": null
+    },
+    "publishedAt": "2026-01-20",
+    "closingDate": "2026-08-15",
+    "jobStatus": "open",
+    "sortOrder": 21,
+    "editorialStatus": "published",
+    "demo": true,
+    "seo": {
+      "title": "Travel emergency nurse",
+      "description": "This sample travel role is past its closing date."
+    }
+  },
+  {
+    "id": "job-crna",
+    "slug": "nurse-anesthetist-denver",
+    "title": "Nurse anesthetist",
+    "employer": "Clearwater Surgical Hospital",
+    "specialty": "nurse-anesthesia",
+    "locationId": "loc-denver",
+    "workArrangement": "on-site",
+    "shift": "day",
+    "employmentType": "permanent",
+    "compensation": null,
+    "summary": "Draft sample role that must stay off the public site.",
+    "responsibilities": "- Provide anesthesia for the sample list.",
+    "qualifications": "- CRNA credential.",
+    "application": {
+      "mode": "internal",
+      "url": null
+    },
+    "publishedAt": null,
+    "closingDate": null,
+    "jobStatus": "open",
+    "sortOrder": 30,
+    "editorialStatus": "draft",
+    "demo": true,
+    "seo": {
+      "title": "Nurse anesthetist",
+      "description": "Draft sample role that must stay off the public site."
+    }
+  }
+]
