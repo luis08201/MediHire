@@ -21,7 +21,7 @@
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: clip; }
 body {
   margin: 0;
   background: var(--paper);
@@ -382,7 +382,11 @@ ul.badge-row { list-style: none; padding: 0; margin: 0 0 1rem; }
 }
 .badge.sample { background: #f6e4cf; color: #6d3d12; }
 .badge.office { background: var(--navy); color: white; }
-.process-scroll { width: 100vw; margin-left: calc(50% - 50vw); }
+.process-scroll {
+  width: auto;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+}
 .process-pin {
   position: relative;
   height: calc(100svh - var(--header));
