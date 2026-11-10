@@ -16,6 +16,8 @@ export function FilteredDirectory({
   total,
   listClassName,
   lead,
+  browseLabel,
+  clearLabel,
   children,
 }: {
   instance: string;
@@ -29,12 +31,15 @@ export function FilteredDirectory({
   total: number;
   listClassName?: string;
   lead?: ReactNode;
+  browseLabel?: string;
+  clearLabel?: string;
   children: ReactNode;
 }) {
   const listId = `${instance}-list`;
   return (
     <div className="directory" fs-list-element="wrapper" fs-list-instance={instance}>
       <form className="filters" fs-list-element="filters" fs-list-instance={instance} aria-controls={listId}>
+        {browseLabel ? <p className="journal-browse-label">{browseLabel}</p> : null}
         {search ? (
           <div className="field">
             <label htmlFor={`${instance}-search`}>{search.label}</label>
@@ -69,7 +74,7 @@ export function FilteredDirectory({
           </fieldset>
         ))}
         <button type="button" className="text-button" fs-list-element="clear" fs-list-instance={instance}>
-          {copy.cta.clearFilters}
+          {clearLabel ?? copy.cta.clearFilters}
         </button>
         {showQuery ? <p className="muted">{copy.filters.shareable}</p> : null}
       </form>
