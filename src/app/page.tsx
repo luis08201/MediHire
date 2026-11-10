@@ -40,7 +40,7 @@ export default function HomePage() {
   return (
     <>
       <JsonLd data={[websiteJsonLd(), breadcrumbJsonLd([{ name: "Home", path: "/" }])]} />
-      <div className="wrap">
+      <div className="wrap home-flow">
         <section className="photo-hero">
           <img className="photo-hero-img" src="/media/consult.jpg" alt="Two clinicians reviewing medical imaging on a monitor." width={1600} height={1000} />
           <div className="photo-hero-shade" aria-hidden="true" />
