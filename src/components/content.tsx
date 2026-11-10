@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { copy, fill } from "@/i18n/en";
+import { authorById } from "@/lib/cms/queries";
 import { formatDate, labelFrom } from "@/lib/format";
 import { renderMarkdown } from "@/lib/markdown";
 import type { BlogPost, Job, Location, TeamMember } from "@/lib/cms/types";
@@ -145,38 +146,80 @@ export function PersonCard({ member, department, departmentSlug = "", filterable
   );
 }
 
-export function ArticleHero({ post }: { post: BlogPost }) {
+function JournalByline({ post }: { post: BlogPost }) {
+  const author = authorById(post.authorId);
   return (
-    <article className="mag-hero">
-      <img src={post.image.src} alt={post.image.alt} width={1600} height={900} />
-      <div className="mag-hero-copy">
-        <h2>
-          <Link href={`/blog/${post.slug}`}>{post.title}</Link>
-        </h2>
-        <p>{post.excerpt}</p>
-        <Link className="mag-read" href={`/blog/${post.slug}`}>{copy.cta.readArticle}</Link>
-      </div>
-    </article>
+    <p className="journal-byline">
+      {post.publishedAt ? <time dateTime={post.publishedAt}>{formatDate(post.publishedAt)}</time> : null}
+      {author ? (
+        <Link className="journal-author" href={`/team/${author.slug}`}>
+          <img src={author.portrait.src} alt="" width={22} height={22} />
+          {author.name}
+        </Link>
+      ) : null}
+    </p>
   );
 }
 
-export function ArticleCard({ post, category, categorySlug = "", filterable = false, variant = "inset" }: { post: BlogPost; category?: string; categorySlug?: string; filterable?: boolean; variant?: "inset" | "magazine" }) {
-  if (variant === "magazine") {
-    return (
-      <article className="mag-card" {...(filterable ? { "fs-list-element": "item" } : {})}>
-        <Link className="mag-media" href={`/blog/${post.slug}`} tabIndex={-1} aria-hidden="true">
-          <img src={post.image.src} alt="" width={1200} height={800} />
+export function JournalSpotlight({ latest, reads }: { latest: BlogPost; reads: BlogPost[] }) {
+  return (
+    <section className="journal-spotlight" aria-label={copy.blog.latest}>
+      <article className="journal-latest">
+        <h2>{copy.blog.latest}</h2>
+        <Link className="journal-latest-media" href={`/blog/${latest.slug}`}>
+          <img src={latest.image.src} alt={latest.image.alt} width={1200} height={760} />
         </Link>
-        <div className="mag-copy">
-          <h3><Link href={`/blog/${post.slug}`}>{post.title}</Link></h3>
-          <p>{post.excerpt}</p>
-          <p className="mag-meta">
-            {post.demo ? <span>{copy.sample}</span> : null}
-            {category ? <Link href={`/blog/category/${categorySlug}`}>{category}</Link> : null}
-            {post.publishedAt ? <span>{formatDate(post.publishedAt)}</span> : null}
-          </p>
-          {filterable ? <span className="visually-hidden" aria-hidden="true" fs-list-field="category">{categorySlug}</span> : null}
+        <h3><Link href={`/blog/${latest.slug}`}>{latest.title}</Link></h3>
+        <JournalByline post={latest} />
+        <p>{latest.excerpt}</p>
+        <Link className="journal-more" href={`/blog/${latest.slug}`}>{copy.blog.readMore}</Link>
+      </article>
+      {reads.length ? (
+        <div className="journal-reads">
+          <h2>{copy.blog.topReads}</h2>
+          <ul>
+            {reads.map((post) => (
+              <li key={post.id}>
+                <Link href={`/blog/${post.slug}`} aria-label={post.title}>
+                  <img src={post.image.src} alt="" width={160} height={112} />
+                </Link>
+                <div>
+                  <h3><Link href={`/blog/${post.slug}`}>{post.title}</Link></h3>
+                  <JournalByline post={post} />
+                </div>
+              </li>
+            ))}
+          </ul>
         </div>
+      ) : null}
+    </section>
+  );
+}
+
+export function ArticleCard({ post, category, categorySlug = "", filterable = false, variant = "inset" }: { post: BlogPost; category?: string; categorySlug?: string; filterable?: boolean; variant?: "inset" | "journal" }) {
+  if (variant === "journal") {
+    const author = authorById(post.authorId);
+    return (
+      <article className="journal-card" {...(filterable ? { "fs-list-element": "item" } : {})}>
+        <Link className="journal-card-media" href={`/blog/${post.slug}`}>
+          <img src={post.image.src} alt={post.image.alt} width={800} height={520} />
+          {category ? <span className="journal-chip">{category}</span> : null}
+        </Link>
+        <h3><Link href={`/blog/${post.slug}`}>{post.title}</Link></h3>
+        <p className="journal-excerpt">{post.excerpt}</p>
+        <div className="journal-card-foot">
+          <p>
+            {post.publishedAt ? <time dateTime={post.publishedAt}>{formatDate(post.publishedAt)}</time> : null}
+            {author ? <span>{author.name}</span> : null}
+          </p>
+          <Link className="journal-more" href={`/blog/${post.slug}`}>{copy.blog.readMore}</Link>
+        </div>
+        {filterable ? (
+          <>
+            <span className="visually-hidden" aria-hidden="true" fs-list-field="search">{`${post.title} ${post.excerpt} ${category ?? ""}`}</span>
+            <span className="visually-hidden" aria-hidden="true" fs-list-field="category">{categorySlug}</span>
+          </>
+        ) : null}
       </article>
     );
   }
