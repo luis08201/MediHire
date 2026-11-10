@@ -41,14 +41,14 @@ export default function HomePage() {
     <>
       <JsonLd data={[websiteJsonLd(), breadcrumbJsonLd([{ name: "Home", path: "/" }])]} />
       <div className="wrap">
-        <section className="hero">
+        <section className="haltha-hero">
           <div>
             <p className="eyebrow">{text("heroEyebrow")}</p>
             <h1>{text("heroTitle")}</h1>
             <p className="lede">{text("heroBody")}</p>
             <div className="cta-row">
-              <Link className="button primary" href="/contact">{copy.cta.requestStaff}</Link>
-              <Link className="button ghost" href="/careers">{copy.cta.browseJobs}</Link>
+              <Link className="button mint" href="/contact">{copy.cta.requestStaff}</Link>
+              <Link className="button lilac" href="/careers">{copy.cta.browseJobs}</Link>
             </div>
             <div className="trust-row">
               <div className="avatar-stack">

@@ -101,9 +101,9 @@ export function SiteHeader() {
       <div className="header-inner">
         <Link href="/" className="logo" aria-label={copy.brand}>
           <svg className="logo-mark" viewBox="0 0 32 32" aria-hidden="true">
-            <rect width="32" height="32" rx="8" fill="#1D4ED8" />
-            <path d="M8 21.5c2.4-6 4.4-8.5 8-8.5s5.6 2.5 8 8.5" stroke="#8ED4CF" strokeWidth="2.2" strokeLinecap="round" fill="none" />
-            <circle cx="16" cy="11.2" r="2.1" fill="#F6F1E8" />
+            <rect width="32" height="32" rx="8" fill="#7EE0C4" />
+            <path d="M8 21.5c2.4-6 4.4-8.5 8-8.5s5.6 2.5 8 8.5" stroke="#123F48" strokeWidth="2.2" strokeLinecap="round" fill="none" />
+            <circle cx="16" cy="11.2" r="2.1" fill="#CBBAFC" />
           </svg>
           {copy.brand}
         </Link>
@@ -114,8 +114,8 @@ export function SiteHeader() {
           <Link href="/blog" aria-current={current(pathname, "/blog") ? "page" : undefined}>{copy.nav.blog}</Link>
         </nav>
         <div className="header-actions">
-          <Link className="text-button" href="/careers">{copy.cta.browseJobs}</Link>
-          <Link className="button primary" href="/contact">{copy.cta.requestStaff}</Link>
+          <Link className="button mint" href="/contact">{copy.cta.requestStaff}</Link>
+          <Link className="button lilac" href="/careers">{copy.cta.browseJobs}</Link>
         </div>
         <button
           className="menu-button"
@@ -136,8 +136,8 @@ export function SiteHeader() {
             <Link href="/blog" aria-current={current(pathname, "/blog") ? "page" : undefined}>{copy.nav.blog}</Link>
           </nav>
           <div className="cta-row">
-            <Link className="button ghost" href="/careers">{copy.cta.browseJobs}</Link>
-            <Link className="button primary" href="/contact">{copy.cta.requestStaff}</Link>
+            <Link className="button mint" href="/contact">{copy.cta.requestStaff}</Link>
+            <Link className="button lilac" href="/careers">{copy.cta.browseJobs}</Link>
           </div>
           <form className="header-search" action="/search" method="get" role="search">
             <label className="visually-hidden" htmlFor="mobile-search">{copy.search.label}</label>
