@@ -134,6 +134,8 @@ export const copy = {
     articles: "articles",
     by: "By",
     related: "Related reading",
+    latest: "Latest articles",
+    featured: "Featured",
     emptyCategory: "No published articles are in this category yet.",
     sampleNote: "Sample article for the demonstration journal.",
   },

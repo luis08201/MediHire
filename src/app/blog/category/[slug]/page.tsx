@@ -37,9 +37,9 @@ export default async function BlogCategoryPage({ params }: { params: Promise<{ s
       <p className="lede">{category.summary}</p>
       <Markdown source={category.description} />
       {posts.length ? (
-        <div className="article-grid">
+        <div className="mag-feed">
           {posts.map((post) => (
-            <ArticleCard key={post.id} post={post} category={categoryById(post.categoryId)?.name} />
+            <ArticleCard key={post.id} post={post} category={categoryById(post.categoryId)?.name} categorySlug={category.slug} variant="magazine" />
           ))}
         </div>
       ) : <p>{copy.blog.emptyCategory}</p>}
