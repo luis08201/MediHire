@@ -145,7 +145,41 @@ export function PersonCard({ member, department, departmentSlug = "", filterable
   );
 }
 
-export function ArticleCard({ post, category, categorySlug = "", filterable = false }: { post: BlogPost; category?: string; categorySlug?: string; filterable?: boolean }) {
+export function ArticleHero({ post }: { post: BlogPost }) {
+  return (
+    <article className="mag-hero">
+      <img src={post.image.src} alt={post.image.alt} width={1600} height={900} />
+      <div className="mag-hero-copy">
+        <h2>
+          <Link href={`/blog/${post.slug}`}>{post.title}</Link>
+        </h2>
+        <p>{post.excerpt}</p>
+        <Link className="mag-read" href={`/blog/${post.slug}`}>{copy.cta.readArticle}</Link>
+      </div>
+    </article>
+  );
+}
+
+export function ArticleCard({ post, category, categorySlug = "", filterable = false, variant = "inset" }: { post: BlogPost; category?: string; categorySlug?: string; filterable?: boolean; variant?: "inset" | "magazine" }) {
+  if (variant === "magazine") {
+    return (
+      <article className="mag-card" {...(filterable ? { "fs-list-element": "item" } : {})}>
+        <Link className="mag-media" href={`/blog/${post.slug}`} tabIndex={-1} aria-hidden="true">
+          <img src={post.image.src} alt="" width={1200} height={800} />
+        </Link>
+        <div className="mag-copy">
+          <h3><Link href={`/blog/${post.slug}`}>{post.title}</Link></h3>
+          <p>{post.excerpt}</p>
+          <p className="mag-meta">
+            {post.demo ? <span>{copy.sample}</span> : null}
+            {category ? <Link href={`/blog/category/${categorySlug}`}>{category}</Link> : null}
+            {post.publishedAt ? <span>{formatDate(post.publishedAt)}</span> : null}
+          </p>
+          {filterable ? <span className="visually-hidden" aria-hidden="true" fs-list-field="category">{categorySlug}</span> : null}
+        </div>
+      </article>
+    );
+  }
   return (
     <article className="article-card inset-card" {...(filterable ? { "fs-list-element": "item" } : {})}>
       <img src={post.image.src} alt={post.image.alt} width={1200} height={800} />

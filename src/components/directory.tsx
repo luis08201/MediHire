@@ -15,6 +15,7 @@ export function FilteredDirectory({
   emptyBody,
   total,
   listClassName,
+  lead,
   children,
 }: {
   instance: string;
@@ -27,6 +28,7 @@ export function FilteredDirectory({
   emptyBody: string;
   total: number;
   listClassName?: string;
+  lead?: ReactNode;
   children: ReactNode;
 }) {
   const listId = `${instance}-list`;
@@ -76,6 +78,7 @@ export function FilteredDirectory({
         <span fs-list-element="results-count" fs-list-instance={instance}>{total}</span>{" "}
         {noun}
       </p>
+      {lead}
       <div
         className={listClassName ? `list ${listClassName}` : "list"}
         id={listId}
