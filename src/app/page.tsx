@@ -72,17 +72,41 @@ export default function HomePage() {
           ))}
         </section>
 
-        <section className="section split">
-          <article className="panel">
-            <p className="kicker">{copy.footer.forHospitals}</p>
+        <section className="section audience-board">
+          <article className="metric-card">
+            <div className="metric-head">
+              <span className="metric-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M4 19V5M4 19h16" /><path d="M8 16v-4M12 16V8M16 16v-6" /></svg>
+              </span>
+              <p>{copy.footer.forHospitals}</p>
+            </div>
             <h2>{text("hospitalTitle")}</h2>
             <p>{text("hospitalBody")}</p>
+            <p className="metric-figure">{jobs.length}</p>
+            <p className="metric-caption">{copy.home.countRoles}</p>
+            <div className="metric-notes">
+              <p><strong>{services.length}</strong><span>{copy.home.countServices}</span></p>
+              <p><strong>{locations.length}</strong><span>{copy.home.countAreas}</span></p>
+            </div>
             <Link className="button primary" href="/services">{copy.nav.services}</Link>
           </article>
-          <article className="panel">
-            <p className="kicker">{copy.footer.forClinicians}</p>
+          <article className="metric-card">
+            <div className="metric-head">
+              <span className="metric-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><circle cx="9" cy="9" r="2.2" /><circle cx="16" cy="9.5" r="1.8" /><path d="M4.5 17.5c.6-2.2 2.2-3.3 4.5-3.3s3.9 1.1 4.5 3.3M13.2 14.4c1.6-.2 3 .6 3.8 2.1" /></svg>
+              </span>
+              <p>{copy.footer.forClinicians}</p>
+            </div>
             <h2>{text("clinicianTitle")}</h2>
             <p>{text("clinicianBody")}</p>
+            <div className="metric-people">
+              <div className="avatar-stack">
+                {members.slice(0, 4).map((member) => (
+                  <img key={member.id} src={member.portrait.src} alt="" width={40} height={40} />
+                ))}
+              </div>
+              <p><strong>{members.length}</strong><span>{copy.home.countPeople}</span></p>
+            </div>
             <Link className="button secondary" href="/careers">{copy.cta.browseJobs}</Link>
           </article>
         </section>

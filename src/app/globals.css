@@ -779,6 +779,55 @@ article.person-card .card-action {
 }
 article.person-card .verified { width: 1.28rem; height: 1.28rem; background: #22a34a; }
 
+.audience-board { display: grid; gap: 1.15rem; align-items: stretch; }
+.metric-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  background: #fff;
+  border: 0;
+  border-radius: 1.8rem;
+  padding: 1.45rem 1.45rem 1.3rem;
+  box-shadow: 0 18px 46px rgba(86, 112, 168, 0.12);
+}
+.metric-head { display: flex; align-items: center; gap: 0.7rem; margin-bottom: 0.7rem; }
+.metric-head p { margin: 0; color: #171a1f; font-weight: 800; font-size: 1.05rem; letter-spacing: -0.03em; }
+.metric-icon {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.55rem;
+  background: #e8f1ff;
+  color: #2f6fe4;
+}
+.metric-icon svg { width: 1.15rem; height: 1.15rem; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.metric-card h2 { margin: 0 0 0.35rem; font-size: clamp(1.55rem, 2.4vw, 2rem); }
+.metric-card > p { margin: 0; color: #8b919a; }
+.metric-figure {
+  margin: 1rem 0 0;
+  color: #121417;
+  font-size: clamp(2.8rem, 5vw, 3.6rem);
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  line-height: 1;
+}
+.metric-caption { margin: 0.35rem 0 0; color: #8b919a; font-size: 0.95rem; }
+.metric-notes, .metric-people {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  margin-top: 1rem;
+}
+.metric-notes p, .metric-people p { display: grid; gap: 0.1rem; margin: 0; }
+.metric-notes strong, .metric-people strong { color: #171a1f; font-size: 1.15rem; }
+.metric-notes span, .metric-people span { color: #8b919a; font-size: 0.88rem; }
+.metric-notes, .metric-people { margin-bottom: 1.15rem; }
+.metric-card .button { margin-top: auto; align-self: flex-start; }
+@media (min-width: 840px) {
+  .audience-board { grid-template-columns: 1fr 1fr; }
+}
+
 article.role-card {
   display: flex;
   flex-direction: column;
