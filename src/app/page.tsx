@@ -127,7 +127,10 @@ export default function HomePage() {
                     <h3>{service.name}</h3>
                     <p>{service.summary}</p>
                     <div className="card-foot">
-                      <Link className="card-action" href={`/contact?service=${service.slug}`}>{copy.cta.requestStaff}</Link>
+                      <Link className="card-link" href={`/contact?service=${service.slug}`}>
+                        <span>{copy.cta.requestStaff}</span>
+                        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M11.5 4.5H6.5M11.5 4.5V9.5" /></svg>
+                      </Link>
                     </div>
                   </div>
                 </article>
